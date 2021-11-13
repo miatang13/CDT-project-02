@@ -4,7 +4,7 @@ import data from "./data/bechdel-test-selected.json";
 function App() {
   const btnRef = useRef();
   const [downloadHref, setDownloadHref] = useState();
-  const [dataJson, setData] = useState([{ hi: "okay" }]);
+  const [dataJson, setData] = useState([]);
 
   const outputJson = () => {
     //https://stackoverflow.com/questions/65903776/how-to-read-and-write-to-local-json-files-from-react-js
