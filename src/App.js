@@ -1,17 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import data from "./data/bechdel-test-selected.json";
+import data from "./data/bechdel-test-test.json";
 
 function App() {
   const btnRef = useRef();
   const [downloadHref, setDownloadHref] = useState();
   const [dataJson, setData] = useState([]);
+  const [fetchedNum, setFetchedNum] = useState(0);
 
   const outputJson = () => {
     //https://stackoverflow.com/questions/65903776/how-to-read-and-write-to-local-json-files-from-react-js
     const TextFile = () => {
       const textFile = new Blob([[JSON.stringify(dataJson)]], {
         type: "application/json",
-      }); //pass data from localStorage API to blob
+      });
       setDownloadHref(URL.createObjectURL(textFile));
       btnRef.current.download = "data.json";
     };
@@ -41,6 +42,7 @@ function App() {
         let orig = dataJson;
         orig.push(data);
         setData(orig);
+        setFetchedNum(fetchedNum + 1);
       })
       .catch((err) => {
         console.error(err);
@@ -48,8 +50,16 @@ function App() {
   };
 
   const fetchAllData = () => {
-    fetchData("0199753");
+    data.forEach((val) => {
+      fetchData(val.imdbid);
+    });
   };
+
+  useEffect(() => {
+    if (fetchedNum === data.length) {
+      console.log("Finished fetching data");
+    }
+  }, [fetchedNum]);
 
   /*
   useEffect(() => {
