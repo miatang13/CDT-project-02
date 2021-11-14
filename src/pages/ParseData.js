@@ -18,17 +18,21 @@ export default function ParseData() {
         console.log("Couldn't find bechdel", queryId);
         continue;
       }
-      console.log("Titles", movie.Title, bechdel.title);
       if (bechdel.rating !== 3) {
         continue;
       }
       let director = movie.Director;
+      console.log(director);
+      if (director === "N/A") {
+        continue;
+      }
       if (!directors[director]) {
         directors[director] = {
           movieCnt: 0,
           movies: [],
           ratingSum: 0,
           avgRating: 0,
+          name: director,
         };
       }
       directors[director].movieCnt += 1;
@@ -45,10 +49,11 @@ export default function ParseData() {
     }
 
     directorArr.sort((dir1, dir2) => {
-      return dir1.avgRating < dir2.avgRating;
+      let ret = dir1.movieCnt > dir2.movieCnt ? -1 : 1;
+      return ret; // all movies with rating of 3
     });
 
-    //console.log(directorArr);
+    console.log(directorArr);
     /*
 	mainCast = API_call_get_cast(movie);
 	for (var j = 0; j < mainCast.length; j ++){ 
