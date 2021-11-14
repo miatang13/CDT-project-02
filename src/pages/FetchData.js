@@ -50,8 +50,8 @@ export default function FetchData() {
   };
 
   const fetchAllData = () => {
-    const startIdx = 1500;
-    const endIdx = Math.min(2500, data.length);
+    const startIdx = 2500;
+    const endIdx = Math.min(3516, data.length);
     for (let i = startIdx; i < endIdx; i++) {
       fetchData(data[i].imdbid);
     }
