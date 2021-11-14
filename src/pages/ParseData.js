@@ -1,8 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import movie_data from "../data/response(all).json";
 import bechdel_data from "../data/bechdel-test-2010-onwards.json";
 
 export default function ParseData() {
+  const btnRef = useRef();
+  const [downloadHref, setDownloadHref] = useState();
+  const [directorJson, setDirectorJson] = useState([]);
+
+  const outputJson = () => {
+    //https://stackoverflow.com/questions/65903776/how-to-read-and-write-to-local-json-files-from-react-js
+    const TextFile = () => {
+      const textFile = new Blob([[JSON.stringify(directorJson)]], {
+        type: "application/json",
+      });
+      setDownloadHref(URL.createObjectURL(textFile));
+      btnRef.current.download = "data.json";
+    };
+
+    TextFile();
+  };
+
   const parseData = () => {
     let directors = {}; // each entry contains {name: ..., movies: [], ratings: 0};
     let actors = {}; // each entry contains {name: ..., movies: []};
@@ -53,6 +70,7 @@ export default function ParseData() {
     });
 
     console.log(directorArr);
+    setDirectorJson(directorArr);
     /*
 	mainCast = API_call_get_cast(movie);
 	for (var j = 0; j < mainCast.length; j ++){ 
@@ -62,7 +80,9 @@ export default function ParseData() {
   };
   return (
     <div>
-      {" "}
+      <a ref={btnRef} href={downloadHref} onClick={outputJson}>
+        Download file
+      </a>
       <button onClick={parseData}> Parse Data</button>
     </div>
   );
