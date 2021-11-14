@@ -9,7 +9,15 @@ export default function ParseData() {
     let movies = movie_data;
     for (var i = 0; i < movies.length; i++) {
       let movie = movie_data[i];
-      let bechdel = bechdel_data[i];
+      if (!movie.imdbID) {
+        continue;
+      }
+      let queryId = movie["imdbID"].slice(2);
+      let bechdel = bechdel_data.find((b) => b.imdbid === queryId);
+      if (!bechdel) {
+        console.log("Couldn't find bechdel", queryId);
+        continue;
+      }
       console.log("Titles", movie.Title, bechdel.title);
       if (bechdel.rating !== 3) {
         continue;
@@ -40,7 +48,7 @@ export default function ParseData() {
       return dir1.avgRating < dir2.avgRating;
     });
 
-    console.log(directorArr);
+    //console.log(directorArr);
     /*
 	mainCast = API_call_get_cast(movie);
 	for (var j = 0; j < mainCast.length; j ++){ 
