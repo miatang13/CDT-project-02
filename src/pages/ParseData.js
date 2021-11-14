@@ -3,7 +3,7 @@ import movie_data from "../data/response(all).json";
 import bechdel_data from "../data/bechdel-test-2010-onwards.json";
 
 export default function ParseData() {
-  useEffect(() => {
+  const parseData = () => {
     let directors = {}; // each entry contains {name: ..., movies: [], ratings: 0};
     let actors = {}; // each entry contains {name: ..., movies: []};
     let movies = movie_data;
@@ -22,7 +22,6 @@ export default function ParseData() {
         continue;
       }
       let director = movie.Director;
-      console.log(director);
       if (director === "N/A") {
         continue;
       }
@@ -60,6 +59,11 @@ export default function ParseData() {
 		actors[mainCast[j]] += 1;
 		actors[mainCast[j]].movies.push(movie);
 		// accumulate rating too  */
-  }, []);
-  return <div> Parse Data</div>;
+  };
+  return (
+    <div>
+      {" "}
+      <button onClick={parseData}> Parse Data</button>
+    </div>
+  );
 }

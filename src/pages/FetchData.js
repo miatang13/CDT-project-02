@@ -7,7 +7,6 @@ export default function FetchData() {
   const btnRef = useRef();
   const [downloadHref, setDownloadHref] = useState();
   const [dataJson, setData] = useState([]);
-  const [sortedDataJson, setSorted] = useState([]);
 
   const outputJson = () => {
     //https://stackoverflow.com/questions/65903776/how-to-read-and-write-to-local-json-files-from-react-js
@@ -37,6 +36,10 @@ export default function FetchData() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        if (data.Response === "False") {
+          console.log("invalid data");
+          return;
+        }
         let orig = dataJson;
         orig.push(data);
         setData(orig);
@@ -47,9 +50,8 @@ export default function FetchData() {
   };
 
   const fetchAllData = () => {
-    // have done 0 - 200
-    const startIdx = 501;
-    const endIdx = Math.min(1500, data.length);
+    const startIdx = 1500;
+    const endIdx = Math.min(2500, data.length);
     for (let i = startIdx; i < endIdx; i++) {
       fetchData(data[i].imdbid);
     }
@@ -61,13 +63,15 @@ export default function FetchData() {
     //fetchData(data[i].imdbid);
   };
 
-  const sortData = () => {
+  const checkData = () => {
+    console.log("Bechdel data length", data.length);
+    console.log("Response data length", response_data.length);
     for (const response in response_data) {
       const query = response_data[response].Title;
       let f = data.find((d) => (d.title = query));
       // console.log(query, f);
       if (!f) {
-        console.log("Can't find title", query);
+        console.log("Can't find title", query, response_data[response]);
       }
     }
   };
@@ -77,9 +81,9 @@ export default function FetchData() {
       <a ref={btnRef} href={downloadHref} onClick={outputJson}>
         Download file
       </a>
-      <button onClick={fetchData}> fetch data</button>
+      <button onClick={fetchAllData}> fetch data</button>
       <button onClick={fetchSingleData}> fetch single data</button>
-      <button onClick={sortData}> check data</button>
+      <button onClick={checkData}> check data</button>
     </div>
   );
 }
