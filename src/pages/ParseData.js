@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import movie_data from "../data/response(0-200).json";
+import movie_data from "../data/response(all).json";
 import bechdel_data from "../data/bechdel-test-2010-onwards.json";
 
 export default function ParseData() {
@@ -10,20 +10,37 @@ export default function ParseData() {
     for (var i = 0; i < movies.length; i++) {
       let movie = movie_data[i];
       let bechdel = bechdel_data[i];
+      console.log("Titles", movie.Title, bechdel.title);
+      if (bechdel.rating !== 3) {
+        continue;
+      }
       let director = movie.Director;
       if (!directors[director]) {
         directors[director] = {
           movieCnt: 0,
           movies: [],
           ratingSum: 0,
+          avgRating: 0,
         };
-        console.log(director);
       }
       directors[director].movieCnt += 1;
       directors[director].movies.push(movie);
       directors[director].ratingSum += bechdel.rating; // divide by numMovies for avg rating
     }
-    console.log(directors);
+
+    let directorArr = [];
+
+    for (const director in directors) {
+      let directorObj = directors[director];
+      directorObj.avgRating = directorObj.ratingSum / directorObj.movies.length;
+      directorArr.push(directorObj);
+    }
+
+    directorArr.sort((dir1, dir2) => {
+      return dir1.avgRating < dir2.avgRating;
+    });
+
+    console.log(directorArr);
     /*
 	mainCast = API_call_get_cast(movie);
 	for (var j = 0; j < mainCast.length; j ++){ 
