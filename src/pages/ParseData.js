@@ -71,12 +71,6 @@ export default function ParseData() {
 
     console.log(directorArr);
     setDirectorJson(directorArr);
-    /*
-	mainCast = API_call_get_cast(movie);
-	for (var j = 0; j < mainCast.length; j ++){ 
-		actors[mainCast[j]] += 1;
-		actors[mainCast[j]].movies.push(movie);
-		// accumulate rating too  */
   };
   return (
     <div>
