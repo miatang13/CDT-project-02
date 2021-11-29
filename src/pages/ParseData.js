@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import movie_data from "../data/response(all).json";
 import bechdel_data from "../data/bechdel-test-2010-onwards.json";
+import directors_data from "../data/ranked-directors(>2).json";
 
 export default function ParseData() {
   const btnRef = useRef();
@@ -71,8 +72,18 @@ export default function ParseData() {
       return ret; // all movies with rating of 3
     });
 
-    console.log(directorArr);
-    setDirectorJson(directorArr);
+    // setDirectorJson(directorArr);
+
+    let missingBoxOffice = [];
+    directors_data.forEach((director) => {
+      director.movies.forEach((movie) => {
+        if (movie.BoxOffice === "N/A") {
+          missingBoxOffice.push(movie.Title);
+        }
+      });
+    });
+
+    setDirectorJson(missingBoxOffice);
   };
   return (
     <div>
