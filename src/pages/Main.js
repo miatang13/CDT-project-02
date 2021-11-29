@@ -45,6 +45,9 @@ export default function Main() {
       <div id="webgl" ref={containerRef}></div>
       <div id="over_gl">
         <span id="scrollY"> </span>
+        <div id="posters">
+          <img id="posterImg" src="" alt="movie"></img>
+        </div>
         <h1 id="directorSpan"> Initial </h1>
       </div>
       <div id="css" ref={cssContainerRef}></div>

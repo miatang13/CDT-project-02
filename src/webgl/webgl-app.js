@@ -14,7 +14,10 @@ import {
 } from "three";
 import { lerp, onWheel } from "./scroll";
 import anime from "animejs";
-import data from "../data/ranked-directors(>2).json";
+import comp_data from "../data/ranked-directors(>2).json";
+import test_data from "../data/test.json";
+
+let data = comp_data;
 
 export default class WebGLApp {
   constructor(htmlElem, cssElem, divContainer) {
@@ -27,6 +30,7 @@ export default class WebGLApp {
     this.numDirectors = data.length;
     this.animationDuration = this.singleDirectorDuration * this.numDirectors;
     this.directorNameSpan = document.getElementById("directorSpan");
+    this.posterDiv = document.getElementById("posters");
   }
 
   setup = () => {
@@ -101,14 +105,27 @@ export default class WebGLApp {
       0
     );
 
+    document.getElementById("posterImg").src = data[0].movies[0].Poster;
+
     // update director content
     data.forEach((directorObj, index) => {
-      console.log(index * that.singleDirectorDuration);
       that.timeline.add(
         {
           targets: that.directorNameSpan,
           textContent: directorObj.name,
           duration: that.singleDirectorDuration,
+          update: () => {
+            document.getElementById("posterImg").src =
+              directorObj.movies[0].Poster;
+
+            // let movieInnerHTML = "";
+            // directorObj.movies.forEach((movie) => {
+            //   movieInnerHTML = movieInnerHTML.concat(
+            //     "<img src=" + movie.Poster + "> </img>"
+            //   );
+            // });
+            // that.posterDiv.innerHTML = movieInnerHTML;
+          },
         },
         index * that.singleDirectorDuration
       );

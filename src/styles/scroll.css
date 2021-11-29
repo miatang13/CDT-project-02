@@ -21,7 +21,7 @@ body {
 
 #over_gl {
   position: fixed;
-  top: 50%;
+  top: 25%;
   left: 50%;
   width: 50vw;
   margin-left: -100px;
@@ -29,4 +29,8 @@ body {
   font-size: 24px;
   /* -webkit-text-stroke: 1px black; */
   font-weight: bold;
+}
+
+#posters {
+  height: 50vh;
 }
