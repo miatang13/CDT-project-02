@@ -3,12 +3,15 @@ import test_data from "../data/test.json";
 import data from "../data/ranked-directors(2&above).json";
 import { useEffect, useRef } from "react";
 import WebGLApp from "../webgl/webgl-app";
+import "../styles/scroll.css";
 
 export default function Main() {
   // webgl
   const containerRef = useRef(null);
   const webglApp = useRef(null);
   const cssContainerRef = useRef(null);
+  // scroll
+  const scrollContainerRef = useRef(null);
 
   useEffect(() => {
     if (containerRef.current === null) return;
@@ -21,7 +24,8 @@ export default function Main() {
 
     webglApp.current = new WebGLApp(
       containerRef.current,
-      cssContainerRef.current
+      cssContainerRef.current,
+      scrollContainerRef.current
     );
     webglApp.current.setup();
     webglApp.current.render(true);
@@ -37,7 +41,9 @@ export default function Main() {
     <div>
       <h1> Display all directors </h1>
       <div id="webgl" ref={containerRef}></div>
+      <span> </span>
       <div id="css" ref={cssContainerRef}></div>
+      <div id="container" ref={scrollContainerRef}></div>
       <div>
         {data.map((directorObj, i) => (
           <Director

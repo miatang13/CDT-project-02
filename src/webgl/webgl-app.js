@@ -13,10 +13,12 @@ import {
   TextureLoader,
 } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { lerp, onWheel } from "./scroll";
 
 export default class WebGLApp {
-  constructor(htmlElem, cssElem) {
+  constructor(htmlElem, cssElem, divContainer) {
     this.htmlElem = htmlElem;
+    this.divContainer = divContainer; // for scroll
     this.rafId = 0;
     this.isRendering = false;
   }
@@ -38,9 +40,33 @@ export default class WebGLApp {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.shadowMap.enabled = true;
     this.htmlElem.appendChild(this.renderer.domElement);
-    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.controls.update();
+    //this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    //this.controls.update();
     this.createCube();
+    this.setupScrolling();
+  };
+
+  setupScrolling = () => {
+    this.span = document.querySelector("span");
+    // for scrolling
+    this._event = {
+      y: 0,
+      deltaY: 0,
+    };
+    this.percentage = 0;
+
+    this.maxHeight =
+      (this.divContainer.clientHeight || this.divContainer.offsetHeight) -
+      window.innerHeight;
+
+    var that = this;
+    function onWheelHandler(e) {
+      onWheel(e, that._event, that.maxHeight);
+    }
+
+    this.divContainer.addEventListener("wheel", onWheelHandler, {
+      passive: false,
+    });
   };
 
   createGridHelper = () => {
@@ -97,7 +123,14 @@ export default class WebGLApp {
   update = () => {
     // this.sphere.rotation.x += 0.01;
     // this.sphere.rotation.z += 0.01;
-    this.controls.update();
+
+    this.percentage = lerp(this.percentage, -this._event.y, 0.07);
+    this.span.innerHTML =
+      "scroll Y : " + Math.round(this.percentage * 100) / 100;
+    this.cube.rotation.x += 0.01;
+    this.cube.rotation.y += 0.0125;
+    this.cube.rotation.z += 0.012;
+    //this.controls.update();
     this.rafId = requestAnimationFrame(this.update);
     this.renderScene();
   };

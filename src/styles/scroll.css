@@ -1,0 +1,31 @@
+html,
+body {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+#container {
+  height: 1200vh;
+}
+span {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  margin-left: -100px;
+  color: #fff;
+  font-size: 24px;
+  -webkit-text-stroke: 1px black;
+  font-weight: bold;
+}
