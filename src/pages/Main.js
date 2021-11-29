@@ -6,6 +6,9 @@ import WebGLApp from "../webgl/webgl-app";
 import "../styles/scroll.css";
 
 export default function Main() {
+  // testing
+  const displayDataJsx = false;
+
   // webgl
   const containerRef = useRef(null);
   const webglApp = useRef(null);
@@ -41,17 +44,21 @@ export default function Main() {
     <div>
       <h1> Display all directors </h1>
       <div id="webgl" ref={containerRef}></div>
-      <span> </span>
+      <div id="over_gl">
+        <span id="scrollY"> </span>
+        <h1 id="directorSpan"> Initial </h1>
+      </div>
       <div id="css" ref={cssContainerRef}></div>
       <div id="container" ref={scrollContainerRef}></div>
       <div>
-        {data.map((directorObj, i) => (
-          <Director
-            director_name={directorObj.name}
-            movies={directorObj.movies}
-            key={i}
-          />
-        ))}
+        {displayDataJsx &&
+          data.map((directorObj, i) => (
+            <Director
+              director_name={directorObj.name}
+              movies={directorObj.movies}
+              key={i}
+            />
+          ))}
       </div>
     </div>
   );

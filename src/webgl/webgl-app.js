@@ -14,6 +14,7 @@ import {
 } from "three";
 import { lerp, onWheel } from "./scroll";
 import anime from "animejs";
+import data from "../data/test.json";
 
 export default class WebGLApp {
   constructor(htmlElem, cssElem, divContainer) {
@@ -22,6 +23,8 @@ export default class WebGLApp {
     this.rafId = 0;
     this.isRendering = false;
     this.startTime = Date.now();
+    this.animationDuration = 4500;
+    this.directorNameSpan = document.getElementById("directorSpan");
   }
 
   setup = () => {
@@ -49,7 +52,7 @@ export default class WebGLApp {
   };
 
   setupScrolling = () => {
-    this.span = document.querySelector("span");
+    this.span = document.getElementById("scrollY");
     // for scrolling
     this._event = {
       y: 0,
@@ -76,7 +79,7 @@ export default class WebGLApp {
     console.log("here");
     this.timeline = anime.timeline({
       autoplay: false,
-      duration: 4500,
+      duration: this.animationDuration,
       easing: "easeOutSine",
     });
     this.timeline.add({
@@ -104,12 +107,29 @@ export default class WebGLApp {
         r: [initial.r, value.r],
         g: [initial.g, value.g],
         b: [initial.b, value.b],
-        duration: 4500,
+        duration: this.animationDuration,
         update: () => {
           that.renderer.setClearColor(initial);
         },
       },
       0
+    );
+    // update director content
+    this.timeline.add(
+      {
+        targets: this.directorNameSpan,
+        textContent: data[0].name,
+        duration: 2250,
+      },
+      0
+    );
+    this.timeline.add(
+      {
+        targets: this.directorNameSpan,
+        textContent: data[1].name,
+        duration: 2250,
+      },
+      2250
     );
   };
 
@@ -168,7 +188,9 @@ export default class WebGLApp {
     var dtime = Date.now() - this.startTime;
     // easing with treshold on 0.08 (should be between .14 & .2 for smooth animations)
     this.percentage = lerp(this.percentage, this.scrollY, 0.08);
-    this.timeline.seek(this.percentage * (4500 / this.maxHeight));
+    this.timeline.seek(
+      this.percentage * (this.animationDuration / this.maxHeight)
+    );
 
     this.span.innerHTML =
       "scroll Y : " + Math.round(this.percentage * 100) / 100;
