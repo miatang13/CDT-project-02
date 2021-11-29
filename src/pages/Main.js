@@ -16,7 +16,7 @@ export default function Main() {
     console.log("Initializing GL with: ", containerRef.current);
 
     function onWindowResize() {
-      webglApp.current.handleResize(window.innerWidth, window.innerHeight);
+      webglApp.current.handleResize();
     }
 
     webglApp.current = new WebGLApp(

@@ -8,7 +8,6 @@ import {
   Mesh,
   GridHelper,
   MeshPhongMaterial,
-  PointLight,
   AmbientLight,
   SphereGeometry,
   TextureLoader,
@@ -87,10 +86,12 @@ export default class WebGLApp {
     this.renderer.render(this.scene, this.camera);
   };
 
-  handleResize = (newWidth, newHeight) => {
-    this.camera.aspect = newWidth / newHeight;
+  handleResize = () => {
+    this.renderer.width = this.htmlElem.clientWidth;
+    this.renderer.height = this.htmlElem.clientHeight;
+    this.renderer.setSize(this.renderer.width, this.renderer.height);
+    this.camera.aspect = this.renderer.width / this.renderer.height;
     this.camera.updateProjectionMatrix();
-    this.renderer.setSize(newWidth, newHeight);
   };
 
   update = () => {
