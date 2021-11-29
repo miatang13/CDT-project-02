@@ -14,7 +14,7 @@ import {
 } from "three";
 import { lerp, onWheel } from "./scroll";
 import anime from "animejs";
-import data from "../data/test.json";
+import data from "../data/ranked-directors(>2).json";
 
 export default class WebGLApp {
   constructor(htmlElem, cssElem, divContainer) {
@@ -23,7 +23,9 @@ export default class WebGLApp {
     this.rafId = 0;
     this.isRendering = false;
     this.startTime = Date.now();
-    this.animationDuration = 4500;
+    this.singleDirectorDuration = 2000;
+    this.numDirectors = data.length;
+    this.animationDuration = this.singleDirectorDuration * this.numDirectors;
     this.directorNameSpan = document.getElementById("directorSpan");
   }
 
@@ -76,29 +78,13 @@ export default class WebGLApp {
   };
 
   setupTimeline = () => {
-    console.log("here");
     this.timeline = anime.timeline({
       autoplay: false,
       duration: this.animationDuration,
       easing: "easeOutSine",
     });
-    this.timeline.add({
-      targets: this.cube.position,
-      x: 100,
-      y: 25,
-      z: -50,
-      duration: 2250,
-      update: this.camera.updateProjectionMatrix(),
-    });
-    this.timeline.add({
-      targets: this.cube.position,
-      x: 0,
-      y: 0,
-      z: 50,
-      duration: 2250,
-      update: this.camera.updateProjectionMatrix(),
-    });
-    var value = new Color(0xfffcfc);
+
+    var value = new Color(0xffffff);
     var initial = new Color(0x161216);
     var that = this;
     this.timeline.add(
@@ -114,23 +100,45 @@ export default class WebGLApp {
       },
       0
     );
+
     // update director content
-    this.timeline.add(
-      {
-        targets: this.directorNameSpan,
-        textContent: data[0].name,
-        duration: 2250,
-      },
-      0
-    );
-    this.timeline.add(
-      {
-        targets: this.directorNameSpan,
-        textContent: data[1].name,
-        duration: 2250,
-      },
-      2250
-    );
+    data.forEach((directorObj, index) => {
+      console.log(index * that.singleDirectorDuration);
+      that.timeline.add(
+        {
+          targets: that.directorNameSpan,
+          textContent: directorObj.name,
+          duration: that.singleDirectorDuration,
+        },
+        index * that.singleDirectorDuration
+      );
+
+      if (index % 2 === 0) {
+        that.timeline.add(
+          {
+            targets: that.cube.position,
+            x: 0,
+            y: 0,
+            z: 50,
+            duration: that.singleDirectorDuration,
+            update: that.camera.updateProjectionMatrix(),
+          },
+          index * that.singleDirectorDuration
+        );
+      } else {
+        that.timeline.add(
+          {
+            targets: that.cube.position,
+            x: 0,
+            y: 0,
+            z: 0,
+            duration: that.singleDirectorDuration,
+            update: that.camera.updateProjectionMatrix(),
+          },
+          index * that.singleDirectorDuration
+        );
+      }
+    });
   };
 
   createGridHelper = () => {

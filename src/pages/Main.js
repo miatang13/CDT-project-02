@@ -19,7 +19,6 @@ export default function Main() {
   useEffect(() => {
     if (containerRef.current === null) return;
     if (webglApp.current !== null) return;
-    console.log("Initializing GL with: ", containerRef.current);
 
     function onWindowResize() {
       webglApp.current.handleResize();

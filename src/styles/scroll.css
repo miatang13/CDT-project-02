@@ -23,10 +23,10 @@ body {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 200px;
+  width: 50vw;
   margin-left: -100px;
   color: #fff;
   font-size: 24px;
-  -webkit-text-stroke: 1px black;
+  /* -webkit-text-stroke: 1px black; */
   font-weight: bold;
 }
