@@ -12,8 +12,8 @@ import {
   SphereGeometry,
   TextureLoader,
 } from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { lerp, onWheel } from "./scroll";
+import anime from "animejs";
 
 export default class WebGLApp {
   constructor(htmlElem, cssElem, divContainer) {
@@ -21,29 +21,31 @@ export default class WebGLApp {
     this.divContainer = divContainer; // for scroll
     this.rafId = 0;
     this.isRendering = false;
+    this.startTime = Date.now();
   }
 
   setup = () => {
     console.log("set up with DOM elem ", this.htmlElem);
     this.scene = new Scene();
-    this.scene.background = new Color(0xb6eafa);
+    // this.scene.background = new Color(0xb6eafa);
     this.camera = new PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
       1,
       1000
     );
-    this.camera.position.set(5, 5, 10);
+    this.camera.position.set(0, 10, 100);
     this.camera.lookAt(this.scene.position);
     this.tanFOV = Math.tan(((Math.PI / 180) * this.camera.fov) / 2);
     this.renderer = new WebGLRenderer({ antialias: true });
     this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setClearColor(0x161216);
     this.renderer.shadowMap.enabled = true;
     this.htmlElem.appendChild(this.renderer.domElement);
-    //this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    //this.controls.update();
     this.createCube();
     this.setupScrolling();
+    this.setupTimeline();
+    console.log("Finished set up");
   };
 
   setupScrolling = () => {
@@ -54,6 +56,7 @@ export default class WebGLApp {
       deltaY: 0,
     };
     this.percentage = 0;
+    this.scrollY = 0;
 
     this.maxHeight =
       (this.divContainer.clientHeight || this.divContainer.offsetHeight) -
@@ -61,12 +64,53 @@ export default class WebGLApp {
 
     var that = this;
     function onWheelHandler(e) {
-      onWheel(e, that._event, that.maxHeight);
+      that.scrollY = onWheel(e, that._event, that.maxHeight);
     }
 
     this.divContainer.addEventListener("wheel", onWheelHandler, {
       passive: false,
     });
+  };
+
+  setupTimeline = () => {
+    console.log("here");
+    this.timeline = anime.timeline({
+      autoplay: false,
+      duration: 4500,
+      easing: "easeOutSine",
+    });
+    this.timeline.add({
+      targets: this.cube.position,
+      x: 100,
+      y: 25,
+      z: -50,
+      duration: 2250,
+      update: this.camera.updateProjectionMatrix(),
+    });
+    this.timeline.add({
+      targets: this.cube.position,
+      x: 0,
+      y: 0,
+      z: 50,
+      duration: 2250,
+      update: this.camera.updateProjectionMatrix(),
+    });
+    var value = new Color(0xfffcfc);
+    var initial = new Color(0x161216);
+    var that = this;
+    this.timeline.add(
+      {
+        targets: initial,
+        r: [initial.r, value.r],
+        g: [initial.g, value.g],
+        b: [initial.b, value.b],
+        duration: 4500,
+        update: () => {
+          that.renderer.setClearColor(initial);
+        },
+      },
+      0
+    );
   };
 
   createGridHelper = () => {
@@ -76,7 +120,7 @@ export default class WebGLApp {
   };
 
   createCube = () => {
-    let geometry = new BoxGeometry(2, 2, 2);
+    let geometry = new BoxGeometry(50, 50, 50);
     let material = new MeshPhongMaterial({
       color: new Color("Orange"),
       wireframe: true,
@@ -121,10 +165,11 @@ export default class WebGLApp {
   };
 
   update = () => {
-    // this.sphere.rotation.x += 0.01;
-    // this.sphere.rotation.z += 0.01;
+    var dtime = Date.now() - this.startTime;
+    // easing with treshold on 0.08 (should be between .14 & .2 for smooth animations)
+    this.percentage = lerp(this.percentage, this.scrollY, 0.08);
+    this.timeline.seek(this.percentage * (4500 / this.maxHeight));
 
-    this.percentage = lerp(this.percentage, -this._event.y, 0.07);
     this.span.innerHTML =
       "scroll Y : " + Math.round(this.percentage * 100) / 100;
     this.cube.rotation.x += 0.01;

@@ -9,7 +9,7 @@ export function onWheel(e, _event, maxHeight) {
   // reduce by half the delta amount otherwise it scroll too fast
   evt.deltaY *= 0.5;
 
-  scroll(e, _event, maxHeight);
+  return scroll(e, _event, maxHeight);
 }
 
 function scroll(e, _event, maxHeight) {
@@ -23,4 +23,5 @@ function scroll(e, _event, maxHeight) {
   } else {
     evt.y += evt.deltaY;
   }
+  return -evt.y;
 }
