@@ -61,7 +61,7 @@ export default function ParseData() {
     for (const director in directors) {
       let directorObj = directors[director];
       directorObj.avgRating = directorObj.ratingSum / directorObj.movies.length;
-      if (directorObj.movies.length >= 2) {
+      if (directorObj.movies.length > 2) {
         directorArr.push(directorObj);
       }
     }
