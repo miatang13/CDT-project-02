@@ -1,6 +1,6 @@
 import Director from "../components/Director";
-import test_data from "../data/test.json";
-import data from "../data/ranked-directors(2&above).json";
+import test_data from "../data/test-ranked.json";
+import data from "../data/ranked-directors(>2).json";
 import { useEffect, useRef } from "react";
 import WebGLApp from "../webgl/webgl-app";
 import "../styles/scroll.css";

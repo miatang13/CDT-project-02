@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import data from "./data/response(0-200).json";
 import Data from "./pages/Data";
 import FetchData from "./pages/FetchData";
 //import FetchData from "./pages/FetchData";

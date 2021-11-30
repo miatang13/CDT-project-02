@@ -15,7 +15,7 @@ import {
 import { lerp, onWheel } from "./scroll";
 import anime from "animejs";
 import comp_data from "../data/ranked-directors(>2).json";
-import test_data from "../data/test.json";
+import test_data from "../data/test-ranked.json";
 
 let data = comp_data;
 

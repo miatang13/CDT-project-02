@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import data from "../data/bechdel-test-2010-onwards.json";
-import response_data from "../data/response(all).json";
+import data from "../data/not-using/bechdel-test-2010-onwards.json";
+import response_data from "../data/not-using/response(all).json";
 //import data from "./data/bechdel-test-test.json";
 
 export default function FetchData() {

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import movie_data from "../data/response(all).json";
-import bechdel_data from "../data/bechdel-test-2010-onwards.json";
+import movie_data from "../data/not-using/response(all).json";
+import bechdel_data from "../data/not-using/bechdel-test-2010-onwards.json";
 import directors_data from "../data/ranked-directors(>2).json";
 
 export default function ParseData() {
