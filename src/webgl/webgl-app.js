@@ -32,6 +32,7 @@ export default class WebGLApp {
     this.animationDuration = this.singleDirectorDuration * this.numDirectors;
     this.directorNameSpan = document.getElementById("directorSpan");
     this.posterDiv = document.getElementById("posters");
+    this.currentDirector = "";
   }
 
   setup = () => {
@@ -93,10 +94,11 @@ export default class WebGLApp {
 
     var that = this;
     function onWheelHandler(e) {
+      console.log("on wheel");
       that.scrollY = onWheel(e, that._event, that.maxHeight);
     }
 
-    this.divContainer.addEventListener("wheel", onWheelHandler, {
+    this.divContainer.addEventListener("scroll", onWheelHandler, {
       passive: false,
     });
   };
@@ -134,7 +136,12 @@ export default class WebGLApp {
           targets: that.directorNameSpan,
           textContent: directorObj.name,
           duration: that.singleDirectorDuration,
-          update: () => {
+          begin: () => {
+            if (that.currentDirector === directorObj.name) {
+              return;
+            }
+            that.currentDirector = directorObj.name;
+            console.log("Update to ", that.currentDirector);
             // document.getElementById("posterImg").src =
             //   directorObj.movies[0].Poster;
             // let movieInnerHTML = "";
