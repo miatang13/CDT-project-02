@@ -30,7 +30,7 @@ export default class WebGLApp {
     this.singleDirectorDuration = 2000;
     this.numDirectors = data.length;
     this.animationDuration = this.singleDirectorDuration * this.numDirectors;
-    this.directorNameSpan = document.getElementById("directorSpan");
+    this.directorNameSpan = document.getElementById("director_name");
     this.posterDiv = document.getElementById("posters");
     this.currentDirector = "";
   }

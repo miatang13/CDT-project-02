@@ -2,11 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Data from "./pages/Data";
 import FetchData from "./pages/FetchData";
-//import FetchData from "./pages/FetchData";
 import Landing from "./pages/Landing";
 import Main from "./pages/Main";
 import ParseData from "./pages/ParseData";
-//import data from "./data/bechdel-test-test.json";
+import "./App.css";
 
 function App() {
   return (
@@ -26,13 +25,3 @@ function App() {
 }
 
 export default App;
-
-/* 
-      <BrowserRouter>
-        <Route>
-          <Switch>
-            <Route exact path="/" component={Landing} />
-          </Switch>
-        </Route>
-      </BrowserRouter>
-      */

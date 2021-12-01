@@ -4,6 +4,7 @@ import data from "../data/ranked-directors(>2).json";
 import { useEffect, useRef } from "react";
 import WebGLApp from "../webgl/webgl-app";
 import "../styles/scroll.css";
+import "../styles/director.css";
 
 export default function Main() {
   // testing
@@ -48,7 +49,7 @@ export default function Main() {
         <div id="posters">
           <img id="posterImg" src="" alt="movie"></img>
         </div>
-        <h1 id="directorSpan"> Initial </h1>
+        <h1 id="director_name"> Initial </h1>
       </div>
       <div id="css" ref={cssContainerRef}></div>
       <div id="container" ref={scrollContainerRef}></div>
