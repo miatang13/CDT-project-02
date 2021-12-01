@@ -12,6 +12,7 @@ import {
   SphereGeometry,
   TextureLoader,
 } from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { lerp, onWheel } from "./scroll";
 import anime from "animejs";
 import comp_data from "../data/ranked-directors(>2).json";
@@ -54,7 +55,26 @@ export default class WebGLApp {
     this.createCube();
     this.setupScrolling();
     this.setupTimeline();
+    this.loader = new GLTFLoader();
+    this.loadModel("mountain");
     console.log("Finished set up");
+  };
+
+  loadModel = (fileName) => {
+    let that = this;
+    this.loader.load(
+      "assets/" + fileName + ".gltf",
+      function (loaded) {
+        that.testmodel = loaded.scenes[0];
+        that.scene.add(that.testmodel);
+        that.testmodel.scale.set(150, 150, 150);
+        console.log("Added model", loaded);
+      },
+      (load) => {},
+      (error) => {
+        console.log("error! ", error);
+      }
+    );
   };
 
   setupScrolling = () => {
@@ -105,7 +125,7 @@ export default class WebGLApp {
       0
     );
 
-    document.getElementById("posterImg").src = data[0].movies[0].Poster;
+    //document.getElementById("posterImg").src = data[0].movies[0].Poster;
 
     // update director content
     data.forEach((directorObj, index) => {
@@ -115,9 +135,8 @@ export default class WebGLApp {
           textContent: directorObj.name,
           duration: that.singleDirectorDuration,
           update: () => {
-            document.getElementById("posterImg").src =
-              directorObj.movies[0].Poster;
-
+            // document.getElementById("posterImg").src =
+            //   directorObj.movies[0].Poster;
             // let movieInnerHTML = "";
             // directorObj.movies.forEach((movie) => {
             //   movieInnerHTML = movieInnerHTML.concat(
