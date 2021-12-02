@@ -18,10 +18,14 @@ body {
 }
 
 #over_gl {
-  /* for center */
+  /* for center 
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: center;
-  justify-content: center;
+  justify-content: center;*/
+}
+
+#director_name {
+  font-size: 10vw;
 }

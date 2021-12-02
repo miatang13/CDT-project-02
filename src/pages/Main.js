@@ -14,13 +14,11 @@ export default function Main() {
     complete_data[currentDirectorIdx]
   );
 
-  // testing
-  const displayDataJsx = false;
-
   // webgl
   const containerRef = useRef(null);
   const webglApp = useRef(null);
-  const cssContainerRef = useRef(null);
+  const postersDivRef = useRef(null);
+  const directorNameRef = useRef(null);
 
   function updateDirector(e) {
     let new_index;
@@ -30,6 +28,7 @@ export default function Main() {
       new_index = Math.max(currentDirectorIdx - 1, 0);
     }
     currentDirectorIdx = new_index;
+    webglApp.current.updateState();
     setDirectorObj(complete_data[currentDirectorIdx]);
   }
 
@@ -43,7 +42,8 @@ export default function Main() {
 
     webglApp.current = new WebGLApp(
       containerRef.current,
-      cssContainerRef.current
+      postersDivRef.current,
+      directorNameRef.current
     );
     webglApp.current.setup();
     webglApp.current.render(true);
@@ -62,24 +62,14 @@ export default function Main() {
       <h1> Display all directors </h1>
       <div id="webgl" ref={containerRef}></div>
       <div id="over_gl">
-        <div id="posters">
+        <div id="posters" ref={postersDivRef}>
           {currentDirectorObj.movies.map((movieObj) => {
             return <img src={movieObj.Poster} alt={movieObj.Title}></img>;
           })}
-          <img id="posterImg" src="" alt="movie"></img>
         </div>
-        <h1 id="director_name"> {currentDirectorObj.name} </h1>
-      </div>
-      <div id="css" ref={cssContainerRef}></div>
-      <div>
-        {displayDataJsx &&
-          data.map((directorObj, i) => (
-            <Director
-              director_name={directorObj.name}
-              movies={directorObj.movies}
-              key={i}
-            />
-          ))}
+        <h1 id="director_name" ref={directorNameRef}>
+          {currentDirectorObj.name}
+        </h1>
       </div>
     </div>
   );
