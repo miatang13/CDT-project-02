@@ -15,23 +15,12 @@ import {
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { lerp, onWheel } from "./scroll";
 import anime from "animejs";
-import comp_data from "../data/ranked-directors(>2).json";
-import test_data from "../data/test-ranked.json";
-
-let data = comp_data;
 
 export default class WebGLApp {
-  constructor(htmlElem, cssElem, divContainer) {
+  constructor(htmlElem, cssElem) {
     this.htmlElem = htmlElem;
-    this.divContainer = divContainer; // for scroll
     this.rafId = 0;
     this.isRendering = false;
-    this.startTime = Date.now();
-    this.singleDirectorDuration = 2000;
-    this.numDirectors = data.length;
-    this.animationDuration = this.singleDirectorDuration * this.numDirectors;
-    this.directorNameSpan = document.getElementById("director_name");
-    this.posterDiv = document.getElementById("posters");
     this.currentDirector = "";
   }
 
@@ -50,12 +39,10 @@ export default class WebGLApp {
     this.tanFOV = Math.tan(((Math.PI / 180) * this.camera.fov) / 2);
     this.renderer = new WebGLRenderer({ antialias: true });
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.renderer.setClearColor(0x161216);
+    this.renderer.setClearColor(0xffffff);
     this.renderer.shadowMap.enabled = true;
     this.htmlElem.appendChild(this.renderer.domElement);
     this.createCube();
-    this.setupScrolling();
-    this.setupTimeline();
     this.loader = new GLTFLoader();
     this.loadModel("mountain");
     console.log("Finished set up");
@@ -76,112 +63,6 @@ export default class WebGLApp {
         console.log("error! ", error);
       }
     );
-  };
-
-  setupScrolling = () => {
-    this.span = document.getElementById("scrollY");
-    // for scrolling
-    this._event = {
-      y: 0,
-      deltaY: 0,
-    };
-    this.percentage = 0;
-    this.scrollY = 0;
-
-    this.maxHeight =
-      (this.divContainer.clientHeight || this.divContainer.offsetHeight) -
-      window.innerHeight;
-
-    var that = this;
-    function onWheelHandler(e) {
-      console.log("on wheel");
-      that.scrollY = onWheel(e, that._event, that.maxHeight);
-    }
-
-    this.divContainer.addEventListener("scroll", onWheelHandler, {
-      passive: false,
-    });
-  };
-
-  setupTimeline = () => {
-    this.timeline = anime.timeline({
-      autoplay: false,
-      duration: this.animationDuration,
-      easing: "easeOutSine",
-    });
-
-    var value = new Color(0xffffff);
-    var initial = new Color(0x161216);
-    var that = this;
-    this.timeline.add(
-      {
-        targets: initial,
-        r: [initial.r, value.r],
-        g: [initial.g, value.g],
-        b: [initial.b, value.b],
-        duration: this.animationDuration,
-        update: () => {
-          that.renderer.setClearColor(initial);
-        },
-      },
-      0
-    );
-
-    //document.getElementById("posterImg").src = data[0].movies[0].Poster;
-
-    // update director content
-    data.forEach((directorObj, index) => {
-      that.timeline.add(
-        {
-          targets: that.directorNameSpan,
-          textContent: directorObj.name,
-          duration: that.singleDirectorDuration,
-          begin: () => {
-            if (that.currentDirector === directorObj.name) {
-              return;
-            }
-            that.currentDirector = directorObj.name;
-            console.log("Update to ", that.currentDirector);
-            // document.getElementById("posterImg").src =
-            //   directorObj.movies[0].Poster;
-            // let movieInnerHTML = "";
-            // directorObj.movies.forEach((movie) => {
-            //   movieInnerHTML = movieInnerHTML.concat(
-            //     "<img src=" + movie.Poster + "> </img>"
-            //   );
-            // });
-            // that.posterDiv.innerHTML = movieInnerHTML;
-          },
-        },
-        index * that.singleDirectorDuration
-      );
-
-      if (index % 2 === 0) {
-        that.timeline.add(
-          {
-            targets: that.cube.position,
-            x: 0,
-            y: 0,
-            z: 50,
-            duration: that.singleDirectorDuration,
-            update: that.camera.updateProjectionMatrix(),
-          },
-          index * that.singleDirectorDuration
-        );
-      } else {
-        that.timeline.add(
-          {
-            targets: that.cube.position,
-            x: 0,
-            y: 0,
-            z: 0,
-            duration: that.singleDirectorDuration,
-            update: that.camera.updateProjectionMatrix(),
-          },
-          index * that.singleDirectorDuration
-        );
-      }
-    });
   };
 
   createGridHelper = () => {
@@ -236,15 +117,6 @@ export default class WebGLApp {
   };
 
   update = () => {
-    var dtime = Date.now() - this.startTime;
-    // easing with treshold on 0.08 (should be between .14 & .2 for smooth animations)
-    this.percentage = lerp(this.percentage, this.scrollY, 0.08);
-    this.timeline.seek(
-      this.percentage * (this.animationDuration / this.maxHeight)
-    );
-
-    this.span.innerHTML =
-      "scroll Y : " + Math.round(this.percentage * 100) / 100;
     this.cube.rotation.x += 0.01;
     this.cube.rotation.y += 0.0125;
     this.cube.rotation.z += 0.012;
