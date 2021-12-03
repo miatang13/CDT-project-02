@@ -19,8 +19,8 @@ export const createElemObject = (
   // console.log('Creating meshcss with dom ref', domRef, width, height);
 
   // styling the dom element
-  domRef.style.width = width + "px";
-  domRef.style.height = height + "px";
+  domRef.style.width = undefined;
+  domRef.style.height = undefined;
   domRef.style.opacity = 0.999;
   domRef.style.boxSizing = "border-box";
 
@@ -30,7 +30,6 @@ export const createElemObject = (
   var css3dObject = new CSS3DObject(domRef);
   obj.css3dObject = css3dObject;
   obj.add(css3dObject);
-  console.log(css3dObject);
 
   if (clipPlane) {
     // clip a WebGL geometry with it.

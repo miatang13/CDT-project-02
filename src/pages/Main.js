@@ -70,22 +70,15 @@ export default function Main() {
       <h1> Display all directors </h1>
       <div id="webgl" ref={containerRef}></div>
       <div id="css" ref={cssContainerRef}>
-        <div ref={posterImgRefs.current[0]}>
-          <img
-            src={currentDirectorObj.movies[0].Poster}
-            alt={currentDirectorObj.movies[0].Title}
-            className="indiv_poster"
-          ></img>{" "}
-        </div>
-
-        {/* {currentDirectorObj.movies.map((movieObj, index) => (
+        {currentDirectorObj.movies.map((movieObj, index) => (
+          <div ref={posterImgRefs.current[index]}>
             <img
               src={movieObj.Poster}
               alt={movieObj.Title}
-              ref={posterImgRefs.current[index]}
               className="indiv_poster"
-            ></img>
-          ))} */}
+            ></img>{" "}
+          </div>
+        ))}
       </div>
       <div id="over_gl">
         <h1 id="director_name" ref={directorNameRef}>

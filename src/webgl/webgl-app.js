@@ -89,31 +89,26 @@ export default class WebGLApp {
   createCssElem = () => {
     const w = 300;
     const h = w * 1.5;
-    const xOffset = 0;
-    const padding = 1;
+    const xOffset = -15;
+    const padding = 8;
     const yOffset = 0;
 
     console.log(this.posterImages);
-    let img = this.posterImages[0];
-    let imageObj = createElemObject(
-      img,
-      undefined,
-      undefined,
-      new Color(0xff0000),
-      1,
-      false
-    );
-    this.scene.add(imageObj);
-    this.posters.push(imageObj);
+    // let img = this.posterImages[0];
+    // let imageObj = createElemObject(img, w, h, new Color(0xff0000), 1, false);
+    // imageObj.rotation.set(0, 0.2, 0);
+    // this.scene.add(imageObj);
+    // this.posters.push(imageObj);
 
-    // for (let i = 0; i < this.posterImages.length; i++) {
-    //   let img = this.posterImages[i];
-    //   if (img === null) continue;
-    //   let imageObj = createElemObject(img, w, h, new Color(0xff0000), 1, true);
-    //   imageObj.position.set(xOffset + i * padding, yOffset, -1);
-    //   this.scene.add(imageObj);
-    //   this.posters.push(imageObj);
-    // }
+    for (let i = 0; i < this.posterImages.length; i++) {
+      let img = this.posterImages[i];
+      if (img === null) continue;
+      let imageObj = createElemObject(img, w, h, new Color(0xff0000), 1, false);
+      imageObj.rotation.set(0, 0.2, 0);
+      imageObj.position.set(xOffset + i * padding, yOffset, -1);
+      this.scene.add(imageObj);
+      this.posters.push(imageObj);
+    }
   };
 
   loadModel = (fileName) => {
