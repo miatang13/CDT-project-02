@@ -8,10 +8,11 @@ import { initRefArray } from "../webgl/helper/ref";
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import { add } from "../reducers/cart";
+import NavigationBar from "../components/Navbar";
 
 export default function Main() {
   const max_index = complete_data.length - 1;
-  let currentDirectorIdx = 0;
+  var currentDirectorIdx = 0;
   const [currentDirectorObj, setDirectorObj] = useState(
     complete_data[currentDirectorIdx]
   );
@@ -26,8 +27,27 @@ export default function Main() {
   const directorNameRef = useRef(null);
 
   // redux
-  const cart = useSelector((state) => state.cart.value);
+  let cart = useRef([]); //useSelector((state) => state.cart.value);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (localStorage.getItem("cart")) {
+      cart.current = JSON.parse(localStorage.getItem("cart"));
+    } else {
+      localStorage.setItem("cart", JSON.stringify([]));
+    }
+  }, []);
+
+  function updateCart(idx) {
+    let orig = JSON.parse(localStorage.getItem("cart"));
+    orig.push(currentDirectorObj);
+    localStorage.setItem("cart", JSON.stringify(orig));
+  }
+
+  function handleAddDirector() {
+    dispatch(add(currentDirectorIdx));
+    updateCart(currentDirectorIdx);
+  }
 
   function updateDirector(e) {
     let new_index;
@@ -37,7 +57,8 @@ export default function Main() {
       new_index = Math.max(currentDirectorIdx - 1, 0);
     }
     currentDirectorIdx = new_index;
-    setDirectorObj(complete_data[currentDirectorIdx]);
+    console.log(currentDirectorIdx);
+    setDirectorObj(complete_data[new_index]);
     webglApp.current.updateState(
       complete_data[currentDirectorIdx].movies.length
     );
@@ -86,13 +107,14 @@ export default function Main() {
           ))}
         </div>
       </div>
-      <div class="root center__container" ref={directorNameRef}>
-        <h1 id="director_name"> {currentDirectorObj.name} </h1>
-        <h1> Display all directors </h1>
-        <p> Cart: {cart}. </p>
-        <button onClick={() => dispatch(add(currentDirectorObj.name))}>
-          Add director
-        </button>
+      <div className="root" ref={directorNameRef}>
+        <NavigationBar />
+        <div className="center__container">
+          <h1 id="director_name"> {currentDirectorObj.name} </h1>
+          <h1> Display all directors </h1>
+          <p> Cart: {cart.current}. </p>
+          <button onClick={handleAddDirector}>Add director</button>
+        </div>
       </div>
     </div>
   );

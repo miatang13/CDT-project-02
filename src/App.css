@@ -2,8 +2,18 @@
   font-family: abril-text, serif;
   font-weight: 400;
   font-style: normal;
+  color: black;
 }
 
 .App {
   text-align: center;
+}
+
+a.nav-link {
+  color: black;
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+a.nav-link:hover {
+  color: gray;
 }
