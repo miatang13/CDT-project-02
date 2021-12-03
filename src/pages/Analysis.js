@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import NavigationBar from "../components/Navbar";
-import complete_data from "../data/ranked-directors(>2).json";
 
 export default function Analysis() {
   const cartData = JSON.parse(localStorage.getItem("cart"));

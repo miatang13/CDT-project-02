@@ -7,7 +7,6 @@ import Main from "./pages/Main";
 import ParseData from "./pages/ParseData";
 import "./App.css";
 import Analysis from "./pages/Analysis";
-import NavigationBar from "./components/Navbar";
 
 function App() {
   return (
