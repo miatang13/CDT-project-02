@@ -30,6 +30,7 @@ export const createElemObject = (
   var css3dObject = new CSS3DObject(domRef);
   obj.css3dObject = css3dObject;
   obj.add(css3dObject);
+  console.log(css3dObject);
 
   if (clipPlane) {
     // clip a WebGL geometry with it.

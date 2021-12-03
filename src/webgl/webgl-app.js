@@ -13,11 +13,14 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import anime from "animejs";
 import { createElemObject } from "./helper/css3d";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { CSS3DRenderer } from "three/examples/jsm/renderers/CSS3DRenderer";
 
 export default class WebGLApp {
-  constructor(container, postersDiv, nameSpan) {
+  constructor(container, cssContainer, postersDiv, posterImgRefs, nameSpan) {
     this.htmlElem = container;
+    this.cssElem = cssContainer;
     this.postersDiv = postersDiv;
+    this.posterImages = posterImgRefs.map((ref) => ref.current);
     this.nameSpan = nameSpan;
     this.rafId = 0;
     this.isRendering = false;
@@ -37,29 +40,34 @@ export default class WebGLApp {
       1,
       1000
     );
-    this.camera.position.set(0, 0, 0);
+    this.camera.position.set(0, 0, 15);
     this.camera.lookAt(this.scene.position);
     this.tanFOV = Math.tan(((Math.PI / 180) * this.camera.fov) / 2);
     this.renderer = new WebGLRenderer({ antialias: true });
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.setClearColor(0xffffff);
     this.renderer.shadowMap.enabled = true;
+    this.cssRenderer = new CSS3DRenderer();
+    this.cssRenderer.setSize(window.innerWidth, window.innerHeight);
+    this.cssRenderer.domElement.style.position = "absolute";
+    this.cssRenderer.domElement.style.top = 0;
+    this.cssElem.appendChild(this.cssRenderer.domElement);
     this.htmlElem.appendChild(this.renderer.domElement);
     this.loader = new GLTFLoader();
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.update();
     this.createCube();
     this.createLights();
+    this.createCssElem();
     this.loadModel("mountain");
     console.log("Finished set up");
   };
 
-  updateState = () => {
+  updateState = (numPosters) => {
+    console.log(numPosters);
     this.clearState();
     console.log("Updating state");
-    console.log("length", this.posters);
     this.createNewState();
-    console.log("after length", this.posters);
   };
 
   /***
@@ -67,7 +75,6 @@ export default class WebGLApp {
    */
 
   createNewState = () => {
-    console.log("New state");
     this.createCssElem();
   };
 
@@ -82,15 +89,31 @@ export default class WebGLApp {
   createCssElem = () => {
     const w = 300;
     const h = w * 1.5;
-    const xOffset = -10;
-    const padding = 2;
+    const xOffset = 0;
+    const padding = 1;
     const yOffset = 0;
-    [...this.postersDiv.children].forEach((img, index) => {
-      let imageObj = createElemObject(img, w, h, new Color(0xff0000), 1, true);
-      this.scene.add(imageObj);
-      imageObj.position.set(xOffset + index * padding, yOffset, -1);
-      this.posters.push(imageObj);
-    });
+
+    console.log(this.posterImages);
+    let img = this.posterImages[0];
+    let imageObj = createElemObject(
+      img,
+      undefined,
+      undefined,
+      new Color(0xff0000),
+      1,
+      false
+    );
+    this.scene.add(imageObj);
+    this.posters.push(imageObj);
+
+    // for (let i = 0; i < this.posterImages.length; i++) {
+    //   let img = this.posterImages[i];
+    //   if (img === null) continue;
+    //   let imageObj = createElemObject(img, w, h, new Color(0xff0000), 1, true);
+    //   imageObj.position.set(xOffset + i * padding, yOffset, -1);
+    //   this.scene.add(imageObj);
+    //   this.posters.push(imageObj);
+    // }
   };
 
   loadModel = (fileName) => {
@@ -100,7 +123,6 @@ export default class WebGLApp {
       function (loaded) {
         that.testmodel = loaded.scenes[0];
         that.scene.add(that.testmodel);
-        that.testmodel.scale.set(15, 15, 15);
         console.log("Added model", loaded);
       },
       (load) => {},
@@ -130,6 +152,7 @@ export default class WebGLApp {
 
   renderScene = () => {
     this.renderer.render(this.scene, this.camera);
+    this.cssRenderer.render(this.scene, this.camera);
   };
 
   handleResize = () => {

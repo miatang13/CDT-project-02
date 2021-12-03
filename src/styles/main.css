@@ -17,15 +17,10 @@ body {
   z-index: -1;
 }
 
-#over_gl {
-  /* for center 
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: center;*/
-}
-
 #director_name {
   font-size: 10vw;
+}
+
+.indiv_poster {
+  /* transform: scale3d(0.8, 0.8, 0.8); */
 }

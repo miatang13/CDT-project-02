@@ -6,6 +6,7 @@ import WebGLApp from "../webgl/webgl-app";
 import "../styles/main.css";
 import "../styles/director.css";
 import complete_data from "../data/ranked-directors(>2).json";
+import { initRefArray } from "../webgl/helper/ref";
 
 export default function Main() {
   const max_index = complete_data.length - 1;
@@ -16,8 +17,11 @@ export default function Main() {
 
   // webgl
   const containerRef = useRef(null);
+  const cssContainerRef = useRef(null);
   const webglApp = useRef(null);
   const postersDivRef = useRef(null);
+  const posterImgRefs = useRef([]);
+  initRefArray(posterImgRefs, 6); // max length
   const directorNameRef = useRef(null);
 
   function updateDirector(e) {
@@ -28,8 +32,10 @@ export default function Main() {
       new_index = Math.max(currentDirectorIdx - 1, 0);
     }
     currentDirectorIdx = new_index;
-    webglApp.current.updateState();
     setDirectorObj(complete_data[currentDirectorIdx]);
+    webglApp.current.updateState(
+      complete_data[currentDirectorIdx].movies.length
+    );
   }
 
   useEffect(() => {
@@ -42,7 +48,9 @@ export default function Main() {
 
     webglApp.current = new WebGLApp(
       containerRef.current,
+      cssContainerRef.current,
       postersDivRef.current,
+      posterImgRefs.current,
       directorNameRef.current
     );
     webglApp.current.setup();
@@ -61,12 +69,25 @@ export default function Main() {
     <div>
       <h1> Display all directors </h1>
       <div id="webgl" ref={containerRef}></div>
-      <div id="over_gl">
-        <div id="posters" ref={postersDivRef}>
-          {currentDirectorObj.movies.map((movieObj) => {
-            return <img src={movieObj.Poster} alt={movieObj.Title}></img>;
-          })}
+      <div id="css" ref={cssContainerRef}>
+        <div ref={posterImgRefs.current[0]}>
+          <img
+            src={currentDirectorObj.movies[0].Poster}
+            alt={currentDirectorObj.movies[0].Title}
+            className="indiv_poster"
+          ></img>{" "}
         </div>
+
+        {/* {currentDirectorObj.movies.map((movieObj, index) => (
+            <img
+              src={movieObj.Poster}
+              alt={movieObj.Title}
+              ref={posterImgRefs.current[index]}
+              className="indiv_poster"
+            ></img>
+          ))} */}
+      </div>
+      <div id="over_gl">
         <h1 id="director_name" ref={directorNameRef}>
           {currentDirectorObj.name}
         </h1>
