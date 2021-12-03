@@ -60,11 +60,14 @@ export default class WebGLApp {
     this.createLights();
     this.createCssElem();
     this.loadModel("mountain");
+    // this.nameSpanObj = createElemObject(this.nameSpan);
+    // this.nameSpanObj.position.set(0, 0, 15);
+    // this.scene.add(this.nameSpanObj);
     console.log("Finished set up");
   };
 
   updateState = (numPosters) => {
-    console.log(numPosters);
+    console.log("New director has # of poster: ", numPosters);
     this.clearState();
     console.log("Updating state");
     this.createNewState();
@@ -87,23 +90,16 @@ export default class WebGLApp {
   };
 
   createCssElem = () => {
-    const w = 300;
+    const w = 70;
     const h = w * 1.5;
-    const xOffset = -15;
-    const padding = 8;
+    const xOffset = -18;
+    const padding = w / 9;
     const yOffset = 0;
-
-    console.log(this.posterImages);
-    // let img = this.posterImages[0];
-    // let imageObj = createElemObject(img, w, h, new Color(0xff0000), 1, false);
-    // imageObj.rotation.set(0, 0.2, 0);
-    // this.scene.add(imageObj);
-    // this.posters.push(imageObj);
 
     for (let i = 0; i < this.posterImages.length; i++) {
       let img = this.posterImages[i];
       if (img === null) continue;
-      let imageObj = createElemObject(img, w, h, new Color(0xff0000), 1, false);
+      let imageObj = createElemObject(img, w, h, new Color(0xfc6b68), 1, true);
       imageObj.rotation.set(0, 0.2, 0);
       imageObj.position.set(xOffset + i * padding, yOffset, -1);
       this.scene.add(imageObj);

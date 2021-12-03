@@ -17,10 +17,31 @@ body {
   z-index: -1;
 }
 
+.center__container {
+  /* for center */
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.root {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+}
+
 #director_name {
-  font-size: 10vw;
+  font-size: 8vw;
+  font-family: abril-display, serif;
+  font-weight: 900;
+  font-style: normal;
 }
 
 .indiv_poster {
-  transform: scale3d(0.3, 0.3, 0.3);
+  transform: scale3d(0.2, 0.2, 0.2);
 }

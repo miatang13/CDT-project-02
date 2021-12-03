@@ -38,7 +38,7 @@ export const createElemObject = (
       color: planeColor,
       blending: NoBlending,
     });
-    var geometry = new BoxGeometry(width / 10, height / 10, 1);
+    var geometry = new BoxGeometry(width, height, 5);
     var mesh = new Mesh(geometry, material);
     mesh.castShadow = true;
     mesh.receiveShadow = true;
