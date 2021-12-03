@@ -1,12 +1,13 @@
-import Director from "../components/Director";
-import test_data from "../data/test-ranked.json";
-import data from "../data/ranked-directors(>2).json";
 import { useEffect, useRef, useState } from "react";
 import WebGLApp from "../webgl/webgl-app";
 import "../styles/main.css";
 import "../styles/director.css";
 import complete_data from "../data/ranked-directors(>2).json";
 import { initRefArray } from "../webgl/helper/ref";
+
+// redux
+import { useSelector, useDispatch } from "react-redux";
+import { add } from "../reducers/cart";
 
 export default function Main() {
   const max_index = complete_data.length - 1;
@@ -23,6 +24,10 @@ export default function Main() {
   const posterImgRefs = useRef([]);
   initRefArray(posterImgRefs, 6); // max length
   const directorNameRef = useRef(null);
+
+  // redux
+  const cart = useSelector((state) => state.cart.value);
+  const dispatch = useDispatch();
 
   function updateDirector(e) {
     let new_index;
@@ -67,7 +72,6 @@ export default function Main() {
 
   return (
     <div>
-      <h1> Display all directors </h1>
       <div id="webgl" ref={containerRef}></div>
       <div id="css" ref={cssContainerRef}>
         <div>
@@ -84,6 +88,11 @@ export default function Main() {
       </div>
       <div class="root center__container" ref={directorNameRef}>
         <h1 id="director_name"> {currentDirectorObj.name} </h1>
+        <h1> Display all directors </h1>
+        <p> Cart: {cart}. </p>
+        <button onClick={() => dispatch(add(currentDirectorObj.name))}>
+          Add director
+        </button>
       </div>
     </div>
   );
