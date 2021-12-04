@@ -9,6 +9,7 @@ import {
   AmbientLight,
   PointLight,
   Vector2,
+  TextureLoader,
 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import anime from "animejs";
@@ -36,6 +37,8 @@ export default class WebGLApp {
      * Dynamically changed elements
      */
     this.posters = [];
+    this.numPosters = 0;
+    this.prevNumPosters = 0;
   }
 
   setup = () => {
@@ -64,6 +67,7 @@ export default class WebGLApp {
     this.loader = new GLTFLoader();
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.update();
+    this.textureLoader = new TextureLoader();
     this.createCube();
     this.createLights();
     this.createCssElem();
@@ -72,10 +76,11 @@ export default class WebGLApp {
     console.log("Finished set up");
   };
 
-  updateState = (numPosters) => {
-    console.log("New director has # of poster: ", numPosters);
+  updateState = (imgLinks) => {
+    console.log(imgLinks);
     this.clearState();
     console.log("Updating state");
+    this.imgLinks = imgLinks;
     this.createNewState();
   };
 
@@ -84,13 +89,15 @@ export default class WebGLApp {
    */
 
   createNewState = () => {
-    this.createCssElem();
+    this.createPosters();
   };
 
   clearState = () => {
     let that = this;
     this.posters.forEach((obj) => {
-      that.scene.remove(obj);
+      if (obj) {
+        that.scene.remove(obj);
+      }
     });
     this.posters = [];
   };
@@ -113,15 +120,13 @@ export default class WebGLApp {
     this.composer.addPass(effectFXAA);
   };
 
-  createCssElem = () => {
-    for (let i = 0; i < this.posterImages.length; i++) {
-      let img = this.posterImages[i];
-      if (img === null) continue;
-      let poster = new Poster(img);
-      let imageObj = poster.init(i);
-      this.scene.add(imageObj);
-      this.posters.push(imageObj);
-    }
+  createPosters = () => {
+    this.imgLinks.forEach((link, index) => {
+      let poster = new Poster(link);
+      let obj = poster.init(index, this.textureLoader);
+      this.scene.add(obj);
+      this.posters.push(obj);
+    });
   };
 
   loadModel = (fileName) => {

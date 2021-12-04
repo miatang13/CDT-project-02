@@ -13,9 +13,7 @@ import NavigationBar from "../components/Navbar";
 export default function Main() {
   const max_index = complete_data.length - 1;
   var currentDirectorIdx = 0;
-  const [currentDirectorObj, setDirectorObj] = useState(
-    complete_data[currentDirectorIdx]
-  );
+  const [currentIdx, setIdx] = useState(0);
 
   // webgl
   const containerRef = useRef(null);
@@ -41,7 +39,7 @@ export default function Main() {
   function updateCart() {
     let orig = JSON.parse(localStorage.getItem("cart"));
     const MAX_DIRECTORS = 5;
-    orig.push(currentDirectorObj);
+    orig.push(complete_data[currentIdx]);
     if (orig.length > MAX_DIRECTORS) {
       alert("You can only select a maximum of 5 directors to compare. :-)");
       return;
@@ -54,7 +52,15 @@ export default function Main() {
     updateCart(currentDirectorIdx);
   }
 
+  function handleUpdateState() {
+    let imgLinks = complete_data[currentDirectorIdx].movies.map(
+      (movie) => movie.Poster
+    );
+    webglApp.current.updateState(imgLinks);
+  }
+
   function updateDirector(e) {
+    console.log("update director");
     let new_index;
     if (e.key === "ArrowDown") {
       new_index = Math.min(currentDirectorIdx + 1, max_index);
@@ -62,11 +68,8 @@ export default function Main() {
       new_index = Math.max(currentDirectorIdx - 1, 0);
     }
     currentDirectorIdx = new_index;
-    console.log(currentDirectorIdx);
-    setDirectorObj(complete_data[new_index]);
-    webglApp.current.updateState(
-      complete_data[currentDirectorIdx].movies.length
-    );
+    setIdx(new_index);
+    handleUpdateState();
   }
 
   useEffect(() => {
@@ -85,6 +88,7 @@ export default function Main() {
       directorNameRef.current
     );
     webglApp.current.setup();
+    handleUpdateState();
     webglApp.current.render(true);
     window.addEventListener("resize", onWindowResize, false);
     window.addEventListener("keydown", updateDirector, false);
@@ -96,26 +100,40 @@ export default function Main() {
     };
   }, []);
 
+  function posterJsx() {
+    const MAX_MOVIE = 6;
+    let jsx = [];
+    let data = complete_data[currentIdx].movies;
+    for (let i = 0; i < MAX_MOVIE; i++) {
+      if (data[i]) {
+        let movieObj = data[i];
+        let elem = (
+          <div key={movieObj.Title} ref={posterImgRefs.current[i]}>
+            <img
+              src={movieObj.Poster}
+              alt={movieObj.Title}
+              className="indiv_poster"
+            ></img>
+          </div>
+        );
+        jsx.push(elem);
+      } else {
+        jsx.push(<div ref={posterImgRefs.current[i]}></div>);
+      }
+    }
+    return jsx;
+  }
+
   return (
     <div>
       <div id="webgl" ref={containerRef}></div>
       <div id="css" ref={cssContainerRef}>
-        <div>
-          {currentDirectorObj.movies.map((movieObj, index) => (
-            <div ref={posterImgRefs.current[index]}>
-              <img
-                src={movieObj.Poster}
-                alt={movieObj.Title}
-                className="indiv_poster"
-              ></img>
-            </div>
-          ))}
-        </div>
+        {/* <div>{posterJsx()}</div> */}
       </div>
       <div className="root" ref={directorNameRef}>
         <NavigationBar />
         <div className="center__container min-vh-90">
-          <h1 id="director_name"> {currentDirectorObj.name} </h1>
+          <h1 id="director_name"> {complete_data[currentIdx].name} </h1>
         </div>
         <div id="footer">
           <button className="btn btn-light" onClick={handleAddDirector}>

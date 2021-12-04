@@ -5,7 +5,7 @@ const w = 45;
 const h = w * 1.5;
 const xOffset = -15;
 const padding = w / 9;
-const yOffset_bot = -6;
+const yOffset_bot = -5.5;
 const yOffset_top = 4.5;
 
 export default class Poster {
@@ -24,7 +24,13 @@ export default class Poster {
     );
     imageObj.lightShadowMesh.rotation.set(0, 0, 0.1);
     let yOffset = index % 2 === 0 ? yOffset_bot : yOffset_top;
-    imageObj.position.set(xOffset + index * padding, yOffset, -1);
+    let randX = Math.random() * 3;
+    let randY = Math.random() * 2;
+    imageObj.position.set(
+      xOffset + index * padding + randX,
+      yOffset - randY,
+      -1
+    );
     return imageObj;
   }
 }
