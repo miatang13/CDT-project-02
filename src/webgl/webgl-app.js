@@ -70,7 +70,6 @@ export default class WebGLApp {
     this.textureLoader = new TextureLoader();
     this.createCube();
     this.createLights();
-    this.createCssElem();
     this.loadModel("mountain");
     this.initPostprocessing();
     console.log("Finished set up");
@@ -123,7 +122,8 @@ export default class WebGLApp {
   createPosters = () => {
     this.imgLinks.forEach((link, index) => {
       let poster = new Poster(link);
-      let obj = poster.init(index, this.textureLoader);
+      let color = new Color(0xff0055);
+      let obj = poster.init(index, this.textureLoader, color);
       this.scene.add(obj);
       this.posters.push(obj);
     });

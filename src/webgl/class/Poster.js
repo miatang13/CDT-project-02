@@ -1,7 +1,15 @@
-import { Color } from "three";
-import { createElemObject } from "../helper/css3d";
+import {
+  BoxGeometry,
+  Color,
+  Mesh,
+  MeshPhongMaterial,
+  NoBlending,
+  Object3D,
+  Sprite,
+  SpriteMaterial,
+} from "three";
 
-const w = 45;
+const w = 4.5;
 const h = w * 1.5;
 const xOffset = -15;
 const padding = w / 9;
@@ -9,19 +17,34 @@ const yOffset_bot = -5.5;
 const yOffset_top = 4.5;
 
 export default class Poster {
-  constructor(imageDomRef) {
-    this.imageDomRef = imageDomRef;
+  constructor(link) {
+    this.imgLink = link;
   }
 
-  init(index) {
-    let imageObj = createElemObject(
-      this.imageDomRef,
-      w,
-      h,
-      new Color(0xfc6b68),
-      1,
-      true
-    );
+  init(index, loader, planeColor) {
+    let imageObj = new Object3D();
+
+    const map = loader.load(this.imgLink);
+    const material = new SpriteMaterial({ map: map });
+    const sprite = new Sprite(material);
+    sprite.scale.set(w, h, 1);
+    imageObj.sprite = sprite;
+    imageObj.add(sprite);
+
+    // clip a WebGL geometry with it.
+    const boxMaterial = new MeshPhongMaterial({
+      opacity: 1,
+      color: planeColor,
+      blending: NoBlending,
+    });
+    var geometry = new BoxGeometry(w, h, -1);
+    var mesh = new Mesh(geometry, boxMaterial);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    imageObj.lightShadowMesh = mesh;
+    imageObj.add(mesh);
+
+    // place it
     imageObj.lightShadowMesh.rotation.set(0, 0, 0.1);
     let yOffset = index % 2 === 0 ? yOffset_bot : yOffset_top;
     let randX = Math.random() * 3;
@@ -31,6 +54,7 @@ export default class Poster {
       yOffset - randY,
       -1
     );
+
     return imageObj;
   }
 }
