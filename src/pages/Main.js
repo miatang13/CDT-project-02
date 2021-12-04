@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import WebGLApp from "../webgl/webgl-app";
 import "../styles/main.css";
 import "../styles/director.css";
-import complete_data from "../data/ranked-directors(>2).json";
+import complete_data from "../data/main-data.json";
 import { initRefArray } from "../webgl/helper/ref";
 
 // redux
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { add } from "../reducers/cart";
 import NavigationBar from "../components/Navbar";
 
@@ -114,7 +114,7 @@ export default function Main() {
       </div>
       <div className="root" ref={directorNameRef}>
         <NavigationBar />
-        <div className="center__container min-vh-100">
+        <div className="center__container min-vh-90">
           <h1 id="director_name"> {currentDirectorObj.name} </h1>
         </div>
         <div id="footer">

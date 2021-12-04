@@ -36,18 +36,22 @@ body {
 }
 
 #director_name {
-  font-size: 8vw;
+  font-size: 5vw;
   font-family: abril-display, serif;
   font-weight: 900;
   font-style: normal;
 }
 
 .indiv_poster {
-  transform: scale3d(0.2, 0.2, 0.2);
+  transform: scale3d(0.13, 0.13, 0.13);
 }
 
 #footer {
   position: absolute;
   bottom: 30px;
   width: 100%;
+}
+
+.min-vh-90 {
+  min-height: 90vh;
 }

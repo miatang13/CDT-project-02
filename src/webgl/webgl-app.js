@@ -8,12 +8,20 @@ import {
   MeshPhongMaterial,
   AmbientLight,
   PointLight,
+  Vector2,
 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import anime from "animejs";
 import { createElemObject } from "./helper/css3d";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { CSS3DRenderer } from "three/examples/jsm/renderers/CSS3DRenderer";
+import Poster from "./class/Poster";
+
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
+import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass";
+import { FXAAShader } from "three/examples/jsm/shaders/FXAAShader";
+import { LuminosityShader } from "three/examples/jsm/shaders/LuminosityShader.js";
 
 export default class WebGLApp {
   constructor(container, cssContainer, postersDiv, posterImgRefs, nameSpan) {
@@ -60,9 +68,7 @@ export default class WebGLApp {
     this.createLights();
     this.createCssElem();
     this.loadModel("mountain");
-    // this.nameSpanObj = createElemObject(this.nameSpan);
-    // this.nameSpanObj.position.set(0, 0, 15);
-    // this.scene.add(this.nameSpanObj);
+    this.initPostprocessing();
     console.log("Finished set up");
   };
 
@@ -89,19 +95,30 @@ export default class WebGLApp {
     this.posters = [];
   };
 
-  createCssElem = () => {
-    const w = 70;
-    const h = w * 1.5;
-    const xOffset = -18;
-    const padding = w / 9;
-    const yOffset = 0;
+  /**
+   * Init scene
+   */
+  initPostprocessing = () => {
+    this.composer = new EffectComposer(this.renderer);
+    const renderPass = new RenderPass(this.scene, this.camera);
+    this.composer.addPass(renderPass);
+    const luminosityPass = new ShaderPass(LuminosityShader);
+    this.composer.addPass(luminosityPass);
+    const effectFXAA = new ShaderPass(FXAAShader);
+    effectFXAA.uniforms["resolution"].value.set(
+      1 / window.innerWidth,
+      1 / window.innerHeight
+    );
+    effectFXAA.renderToScreen = true;
+    this.composer.addPass(effectFXAA);
+  };
 
+  createCssElem = () => {
     for (let i = 0; i < this.posterImages.length; i++) {
       let img = this.posterImages[i];
       if (img === null) continue;
-      let imageObj = createElemObject(img, w, h, new Color(0xfc6b68), 1, true);
-      imageObj.rotation.set(0, 0.2, 0);
-      imageObj.position.set(xOffset + i * padding, yOffset, -1);
+      let poster = new Poster(img);
+      let imageObj = poster.init(i);
       this.scene.add(imageObj);
       this.posters.push(imageObj);
     }
@@ -142,6 +159,7 @@ export default class WebGLApp {
   };
 
   renderScene = () => {
+    this.composer.render();
     this.renderer.render(this.scene, this.camera);
     this.cssRenderer.render(this.scene, this.camera);
   };
