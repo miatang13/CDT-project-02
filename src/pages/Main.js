@@ -114,7 +114,7 @@ export default function Main() {
       </div>
       <div className="root" ref={directorNameRef}>
         <NavigationBar />
-        <div className="center__container">
+        <div className="center__container min-vh-100">
           <h1 id="director_name"> {currentDirectorObj.name} </h1>
         </div>
         <div id="footer">
