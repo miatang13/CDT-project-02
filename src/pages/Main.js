@@ -27,7 +27,7 @@ export default function Main() {
   const directorNameRef = useRef(null);
 
   // redux
-  let cart = useRef([]); //useSelector((state) => state.cart.value);
+  let cart = useRef([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,9 +38,14 @@ export default function Main() {
     }
   }, []);
 
-  function updateCart(idx) {
+  function updateCart() {
     let orig = JSON.parse(localStorage.getItem("cart"));
+    const MAX_DIRECTORS = 5;
     orig.push(currentDirectorObj);
+    if (orig.length > MAX_DIRECTORS) {
+      alert("You can only select a maximum of 5 directors to compare. :-)");
+      return;
+    }
     localStorage.setItem("cart", JSON.stringify(orig));
   }
 
@@ -111,9 +116,11 @@ export default function Main() {
         <NavigationBar />
         <div className="center__container">
           <h1 id="director_name"> {currentDirectorObj.name} </h1>
-          <h1> Display all directors </h1>
-          <p> Cart: {cart.current}. </p>
-          <button onClick={handleAddDirector}>Add director</button>
+        </div>
+        <div id="footer">
+          <button className="btn btn-light" onClick={handleAddDirector}>
+            Add director
+          </button>
         </div>
       </div>
     </div>

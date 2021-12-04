@@ -45,3 +45,9 @@ body {
 .indiv_poster {
   transform: scale3d(0.2, 0.2, 0.2);
 }
+
+#footer {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+}
