@@ -190,13 +190,13 @@ export default class WebGLApp {
     this.cube.rotation.z += 0.012;
     this.controls.update();
 
-    // if (this.movieObj) {
-    //   this.movieObj.posters.forEach((poster) => {
-    //     if (poster.material.uniforms) {
-    //       poster.material.uniforms.uTime.value = this.clock.getElapsedTime();
-    //     }
-    //   });
-    // }
+    if (this.movieObj) {
+      this.movieObj.posters.forEach((poster) => {
+        if (poster.material.uniforms) {
+          poster.material.uniforms.uTime.value = this.clock.getElapsedTime();
+        }
+      });
+    }
 
     //this.controls.update();
     this.rafId = requestAnimationFrame(this.update);

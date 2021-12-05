@@ -1,6 +1,5 @@
 export const vshader = `
 varying vec2 v_uv;
-varying vec3 v_position;
 varying float v_wave;
 uniform float u_time;
 
@@ -109,12 +108,10 @@ float snoise(vec3 v) {
 
 void main() {	
   v_uv = uv;
-  v_position = position;
-
   vec3 pos = position;
-  float noiseFreq = 0.05;
-  float noiseAmp = 0.01; 
-  vec3 noisePos = vec3(pos.x* noiseFreq + u_time , pos.y , pos.z);
+  float noiseFreq = 3.5;
+  float noiseAmp = 1.0; 
+  vec3 noisePos = vec3(pos.x * noiseFreq + u_time, pos.y, pos.z);
   pos.z += snoise(noisePos) * noiseAmp;
   v_wave = pos.z;
 
