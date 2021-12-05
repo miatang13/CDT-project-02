@@ -54,9 +54,10 @@ export default function Main() {
 
   function handleUpdateState() {
     let movieObjs = complete_data[currentDirectorIdx].movies.map((movie) => {
+      let first_genre = movie.Genre.substr(0, movie.Genre.indexOf(","));
       return {
         imgLink: movie.Poster,
-        imgGenre: movie.Genre,
+        imgGenre: first_genre === "" ? movie.Genre : first_genre,
         /* need to add NYT article */
       };
     });
