@@ -6,6 +6,7 @@
   width: auto;
   max-height: 95%;
   white-space: nowrap;
+  margin-bottom: 2vh;
 }
 
 #analysis__content {
