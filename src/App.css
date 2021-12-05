@@ -12,3 +12,8 @@ a.nav-link {
 a.nav-link:hover {
   color: gray;
 }
+
+svg:hover {
+  fill: gray;
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
