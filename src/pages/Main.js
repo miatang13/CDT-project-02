@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import WebGLApp from "../webgl/webgl-app";
 import "../styles/main.css";
 import "../styles/director.css";
-import complete_data from "../data/main-data.json";
+import complete_data from "../data/final-data.json";
 import { initRefArray } from "../webgl/helper/ref";
 
 // redux

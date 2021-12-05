@@ -2371,36 +2371,6 @@
     ]
   },
   {
-    "name": "Lars Von Trier",
-    "stories": [
-      {
-        "abstract": "Mr. von Trier, the Danish director who was declared persona non grata in 2011, will make a festival comeback this year with “The House That Jack Built.”",
-        "web_url": "https://www.nytimes.com/2018/04/19/movies/cannes-festival-lars-von-trier-hitler-ban.html",
-        "snippet": "Mr. von Trier, the Danish director who was declared persona non grata in 2011, will make a festival comeback this year with “The House That Jack Built.”"
-      },
-      {
-        "abstract": "Lars von Trier says that although he apologized for saying at a Cannes Film Festival press conference that he was a Nazi, he isn’t sorry about the remark, only that he didn’t make it clear that it was a joke.",
-        "web_url": "https://artsbeat.blogs.nytimes.com/2011/09/21/lars-von-trier-says-actually-he-isnt-sorry/",
-        "snippet": "Lars von Trier says that although he apologized for saying at a Cannes Film Festival press conference that he was a Nazi, he isn’t sorry about the remark, only that he didn’t make it clear that it was a joke."
-      },
-      {
-        "abstract": "“My problem is really that I’m a crowd-pleaser,” or so says the director, who has a new movie — and a new scandal — at the Cannes Film Festival.",
-        "web_url": "https://www.nytimes.com/2018/05/16/movies/lars-von-trier-the-house-that-jack-built-cannes-film-festival.html",
-        "snippet": "“My problem is really that I’m a crowd-pleaser,” or so says the director, who has a new movie — and a new scandal — at the Cannes Film Festival."
-      },
-      {
-        "abstract": "Entrants for the project, called Gesamt, are asked to create short films or recordings inspired by one of six existing works, including James Joyce’s “Ulysses,” August Strindberg’s “The Family” and the Zeppelinfield in Nuremberg, created by Hitler’s main architect, Albert Speer.",
-        "web_url": "https://artsbeat.blogs.nytimes.com/2012/08/13/lars-von-trier-seeks-film-submissions-for-user-generated-project/",
-        "snippet": "Entrants for the project, called Gesamt, are asked to create short films or recordings inspired by one of six existing works, including James Joyce’s “Ulysses,” August Strindberg’s “The Family” and the Zeppelinfield in Nuremberg, created by Hitler..."
-      },
-      {
-        "abstract": "A specially cut diamond designed by the Danish filmmaker has gone on show in Antwerp, Belgium. It’s the first in a series of precious stones based on his films.",
-        "web_url": "https://www.nytimes.com/2019/02/11/arts/design/lars-von-trier-diamond-melancholia.html",
-        "snippet": "A specially cut diamond designed by the Danish filmmaker has gone on show in Antwerp, Belgium. It’s the first in a series of precious stones based on his films."
-      }
-    ]
-  },
-  {
     "name": "Nicolas Winding Refn",
     "stories": [
       {
@@ -2667,6 +2637,36 @@
         "abstract": "USA’s 10-episode series takes the raw material of the gleefully violent, politically charged “Purge” films and makes it safe for basic cable.",
         "web_url": "https://www.nytimes.com/2018/09/03/arts/television/the-purge-review-usa.html",
         "snippet": "USA’s 10-episode series takes the raw material of the gleefully violent, politically charged “Purge” films and makes it safe for basic cable."
+      }
+    ]
+  },
+  {
+    "name": "Phillip Noyce",
+    "stories": [
+      {
+        "abstract": "Ms. Lowry, whose novel “The Giver” helped spawn the young adult science fiction genre, says seeing the film version opened her eyes to things left unsaid in the book.",
+        "web_url": "https://artsbeat.blogs.nytimes.com/2014/07/24/comic-con-2014-literary-pioneer-finally-sees-her-novel-on-screen/",
+        "snippet": "Ms. Lowry, whose novel “The Giver” helped spawn the young adult science fiction genre, says seeing the film version opened her eyes to things left unsaid in the book."
+      },
+      {
+        "abstract": "In “Salt,” Angelina Jolie is a reminder that even in an era of technological overkill, movie stars matter.",
+        "web_url": "https://www.nytimes.com/2010/07/23/movies/23salt.html",
+        "snippet": "In “Salt,” Angelina Jolie is a reminder that even in an era of technological overkill, movie stars matter."
+      },
+      {
+        "abstract": "Recycled scares and a slew of visual clichés trap Emily Mortimer and Gary Oldman in this standard-issue possession tale.",
+        "web_url": "https://www.nytimes.com/2019/10/10/movies/mary-review.html",
+        "snippet": "Recycled scares and a slew of visual clichés trap Emily Mortimer and Gary Oldman in this standard-issue possession tale."
+      },
+      {
+        "abstract": "“Lights Out,” a new FX series, is a first-rate tale about a boxer’s comeback that includes sly, convoluted twists on family politics, class and New Jersey corruption.",
+        "web_url": "https://www.nytimes.com/2011/01/11/arts/television/11lights.html",
+        "snippet": "“Lights Out,” a new FX series, is a first-rate tale about a boxer’s comeback that includes sly, convoluted twists on family politics, class and New Jersey corruption."
+      },
+      {
+        "abstract": "“The Sapphires” chronicles a female quartet of Aboriginal singers on the way to stardom in the 1960s and the obstacles they face.",
+        "web_url": "https://www.nytimes.com/2013/03/22/movies/the-sapphires-chronicles-4-australian-singers-in-the-1960s.html",
+        "snippet": "“The Sapphires” chronicles a female quartet of Aboriginal singers on the way to stardom in the 1960s and the obstacles they face."
       }
     ]
   }

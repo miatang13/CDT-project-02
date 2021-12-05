@@ -8,7 +8,6 @@ import {
   MeshPhongMaterial,
   AmbientLight,
   PointLight,
-  Vector2,
   TextureLoader,
   Clock,
 } from "three";

@@ -2,16 +2,19 @@ import { useEffect, useRef, useState } from "react";
 import movie_data from "../data/not-using/response(all).json";
 import bechdel_data from "../data/not-using/bechdel-test-2010-onwards.json";
 import directors_data from "../data/ranked-directors(>2).json";
+// merge
+import final_directors from "../data/main-data.json";
+import NYT_data from "../data/NYT-articles.json";
 
 export default function ParseData() {
   const btnRef = useRef();
   const [downloadHref, setDownloadHref] = useState();
-  const [directorJson, setDirectorJson] = useState([]);
+  const [outputJson, setOutputJson] = useState([]);
 
-  const outputJson = () => {
+  const compileOutput = () => {
     //https://stackoverflow.com/questions/65903776/how-to-read-and-write-to-local-json-files-from-react-js
     const TextFile = () => {
-      const textFile = new Blob([[JSON.stringify(directorJson)]], {
+      const textFile = new Blob([[JSON.stringify(outputJson)]], {
         type: "application/json",
       });
       setDownloadHref(URL.createObjectURL(textFile));
@@ -72,7 +75,7 @@ export default function ParseData() {
       return ret; // all movies with rating of 3
     });
 
-    // setDirectorJson(directorArr);
+    // setOutputJson(directorArr);
 
     let missingBoxOffice = [];
     directors_data.forEach((director) => {
@@ -83,14 +86,36 @@ export default function ParseData() {
       });
     });
 
-    setDirectorJson(missingBoxOffice);
+    setOutputJson(missingBoxOffice);
   };
+
+  function mergeData() {
+    console.log(NYT_data.length, final_directors.length);
+    let finalData = [];
+
+    for (let i = 0; i < final_directors.length; i++) {
+      let dirObj = final_directors[i];
+      let NYT_articles = NYT_data.find((el) => el.name === dirObj.name);
+      if (!NYT_articles) {
+        console.log("could not find article for ", dirObj.name);
+        continue;
+      }
+      let new_obj = dirObj;
+      new_obj.NYT_articles = NYT_articles.stories;
+      finalData.push(new_obj);
+    }
+
+    console.log(finalData);
+    setOutputJson(finalData);
+  }
+
   return (
     <div>
-      <a ref={btnRef} href={downloadHref} onClick={outputJson}>
+      <a ref={btnRef} href={downloadHref} onClick={compileOutput}>
         Download file
       </a>
       <button onClick={parseData}> Parse Data</button>
+      <button onClick={mergeData}> Merge Data</button>
     </div>
   );
 }
