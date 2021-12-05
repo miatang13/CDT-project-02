@@ -5,7 +5,6 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  color: black;
 }
 
 #webgl {
@@ -36,12 +35,12 @@ body {
 }
 
 #director_name {
-  font-size: 5vw;
+  font-size: 6vw;
   font-family: abril-display, serif;
   font-weight: 900;
   font-style: normal;
-  color: white;
-  animation: pulsate 2.5s infinite alternate;
+  color: rgb(241, 229, 229);
+  animation: pulsate 5s infinite alternate;
 }
 
 .indiv_poster {
@@ -87,12 +86,12 @@ body {
 @keyframes pulsate {
   100% {
     /* Larger blur radius */
-    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #0fa,
-      0 0 50px #0fa, 0 0 60px #0fa, 0 0 70px #0fa, 0 0 80px #0fa;
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 10px #0fa,
+      0 0 10px #0fa, 0 0 20px #0fa, 0 0 10px #0fa, 0 0 10px #0fa;
   }
   0% {
     /* Smaller blur radius */
-    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff, 0 0 10px #0fa,
-      0 0 45px #0fa, 0 0 55px #0fa, 0 0 70px #0fa, 0 0 80px #0fa;
+    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff, 0 0 5px #0fa,
+      0 0 15px #0fa, 0 0 20px #0fa, 0 0 30px #0fa, 0 0 10px #0fa;
   }
 }

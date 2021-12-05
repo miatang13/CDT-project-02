@@ -1,6 +1,8 @@
 import { Nav, Navbar } from "react-bootstrap";
 
-export default function NavigationBar() {
+export default function NavigationBar(props) {
+  console.log(props);
+
   return (
     <Navbar className="border-bottom">
       <Nav.Item>
@@ -16,9 +18,9 @@ export default function NavigationBar() {
         <Nav.Link href="/">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
+            width="25"
+            height="25"
+            fill={props.color}
             className="bi bi-key"
             viewBox="0 0 16 16"
           >
@@ -31,9 +33,9 @@ export default function NavigationBar() {
         <Nav.Link href="/analysis">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
+            width="25"
+            height="25"
+            fill={props.color}
             className="bi bi-cart4"
             viewBox="0 0 16 16"
           >

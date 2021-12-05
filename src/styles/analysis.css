@@ -2,10 +2,14 @@
   color: black;
 }
 
-#analysis__root {
+#directors__wrapper {
   width: auto;
-  height: 95%;
+  max-height: 95%;
   white-space: nowrap;
+}
+
+#analysis__content {
+  padding: 2vh;
 }
 
 #analysis__root a.nav-link {
@@ -13,13 +17,26 @@
 }
 
 #title {
-  font-size: 3.5vw;
+  font-size: 2.5vw;
   font-family: abril-display, serif;
   font-weight: 900;
   font-style: normal;
   color: rgb(0, 0, 0);
+  margin-bottom: 2vh;
 }
 
 .directorName {
   font-family: abril-display, serif;
+}
+
+.movieTitle {
+  font-family: abril-display, serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 1.5vw;
+}
+
+.roundedBg {
+  background-color: rgb(241, 241, 241);
+  border-radius: 15px;
 }

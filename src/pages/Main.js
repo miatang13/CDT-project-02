@@ -115,7 +115,7 @@ export default function Main() {
       <div id="webgl" ref={containerRef}></div>
       <div id="css" ref={cssContainerRef}></div>
       <div className="root" ref={directorNameRef}>
-        <NavigationBar />
+        <NavigationBar color="white" />
         <div className="center__container min-vh-90">
           <h1 id="director_name">{complete_data[currentIdx].name}</h1>
         </div>
