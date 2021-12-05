@@ -12,7 +12,6 @@ a.nav-link {
 a.nav-link.active {
   background-color: rgb(251, 137, 255);
   border: 1px white solid;
-  animation: pulsate 5s infinite alternate;
 }
 
 a.nav-link:hover {

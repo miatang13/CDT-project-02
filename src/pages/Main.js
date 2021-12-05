@@ -114,11 +114,16 @@ export default function Main() {
     <div id="main__wrapper">
       <div id="webgl" ref={containerRef}></div>
       <div id="css" ref={cssContainerRef}></div>
-      <div className="root" ref={directorNameRef}>
+      <div className="root" id="vis__text" ref={directorNameRef}>
         <NavigationBar activeKey={1} color="white" />
         <div className="center__container min-vh-90">
+          <div className="vline" id="y__axis">
+            <span>Latest Release</span>
+          </div>
           <h1 id="director_name">{complete_data[currentIdx].name}</h1>
+          <hr id="x__axis" /> <span> Box Office (Least to Greatest) </span>
         </div>
+
         <div id="footer">
           <button className="btn btn-light" onClick={handleAddDirector}>
             Add director
