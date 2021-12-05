@@ -65,7 +65,7 @@ export default class Movie {
 
       let plane = this.initPlane(movie);
       plane.position.set(x, y, -1);
-      // this.posterObjs.add(plane);
+      this.posterObjs.add(plane);
 
       let genreObj = this.genreObjs["comedy"].clone(); // TO CHANGE
       let displaceX = rand(displaceRand);

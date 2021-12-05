@@ -115,7 +115,7 @@ void main() {
   pos.z += snoise(noisePos) * noiseAmp;
   v_wave = pos.z;
 
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0 );
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0 );
 }
 `;
 
