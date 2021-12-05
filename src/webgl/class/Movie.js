@@ -15,6 +15,7 @@ import {
 import { rated_colors } from "../constants/colors";
 import { rand } from "../helper/rand";
 import { vshader, fshader } from "../glsl/bg.glsl";
+import { box_fshader, box_vshader } from "../glsl/box.glsl";
 
 const w = 5.5;
 const h = w * 1.5;
@@ -50,6 +51,7 @@ export default class Movie {
   initPosters() {
     this.posterObjs = new Object3D();
     this.posterObjs.posters = [];
+    this.posterObjs.planes = [];
     this.movieObjs.forEach((movie, index) => {
       let yOffset = index % 2 === 0 ? yOffset_bot : yOffset_top;
       let randX = Math.random() * 3;
@@ -66,6 +68,7 @@ export default class Movie {
       let plane = this.initPlane(movie);
       plane.position.set(x, y, -1);
       this.posterObjs.add(plane);
+      this.posterObjs.planes.push(plane);
 
       let genreObj = this.genreObjs["comedy"].clone(); // TO CHANGE
       let displaceX = rand(displaceRand);
@@ -121,17 +124,26 @@ export default class Movie {
   initPlane(movie) {
     // clip a WebGL geometry with it.
     let planeColor = rated_colors[movie.rated];
-    const boxMaterial = new MeshPhongMaterial({
-      opacity: 1,
-      color: planeColor,
-      blending: NoBlending,
+    if (!planeColor) {
+      planeColor = new Color(0xffffff);
+    }
+    let material = new ShaderMaterial({
+      vertexShader: box_vshader,
+      fragmentShader: box_fshader,
+      uniforms: {
+        u_time: { value: 0.1 },
+        u_color_r: { value: planeColor.r },
+        u_color_g: { value: planeColor.g },
+        u_color_b: { value: planeColor.b },
+      },
     });
-    var geometry = new BoxGeometry(w * 1.2, h * 1.2, 1);
-    var mesh = new Mesh(geometry, boxMaterial);
+    var geometry = new PlaneGeometry(w * 1.2, h * 1.2);
+    var mesh = new Mesh(geometry, material);
     mesh.castShadow = true;
     mesh.receiveShadow = true;
     mesh.position.set(0, 0, -1);
-    mesh.rotation.set(0, 0, 0.1);
+    let rotationDir = rand([-1, 1]);
+    mesh.rotation.set(0, 0, 0.1 * rotationDir);
 
     return mesh;
   }

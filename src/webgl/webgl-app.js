@@ -23,6 +23,7 @@ import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass";
 import { FXAAShader } from "three/examples/jsm/shaders/FXAAShader";
 import { LuminosityShader } from "three/examples/jsm/shaders/LuminosityShader.js";
 import Movie from "./class/Movie";
+import { wiggleMesh } from "./helper/animation";
 
 const models = ["biography", "comedy"];
 
@@ -47,7 +48,7 @@ export default class WebGLApp {
     this.movieObjs = movieObjs;
     console.log("set up", this.movieObjs);
     this.scene = new Scene();
-    // this.scene.background = new Color(0xb6eafa);
+    this.scene.background = new Color(0x000514);
     this.camera = new PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
@@ -152,7 +153,7 @@ export default class WebGLApp {
   };
 
   createCube = () => {
-    const boxSize = 20;
+    const boxSize = 50;
     let geometry = new BoxGeometry(boxSize, boxSize, boxSize);
     let material = new MeshPhongMaterial({
       color: new Color("Orange"),
@@ -191,11 +192,16 @@ export default class WebGLApp {
     this.controls.update();
 
     if (this.movieObj) {
-      this.movieObj.posters.forEach((poster) => {
+      this.movieObj.posters.forEach((poster, index) => {
         if (poster.material.uniforms) {
           poster.material.uniforms.u_time.value = this.clock.getElapsedTime();
         }
+        if (this.movieObj.planes[index].material.uniforms) {
+          this.movieObj.planes[index].material.uniforms.u_time.value =
+            this.clock.getElapsedTime();
+        }
       });
+      //this.movieObj.planes.forEach((plane) => wiggleMesh(plane));
     }
 
     //this.controls.update();

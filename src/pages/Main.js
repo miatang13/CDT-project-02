@@ -117,7 +117,7 @@ export default function Main() {
       <div className="root" ref={directorNameRef}>
         <NavigationBar />
         <div className="center__container min-vh-90">
-          <h1 id="director_name"> {complete_data[currentIdx].name} </h1>
+          <h1 id="director_name">{complete_data[currentIdx].name}</h1>
         </div>
         <div id="footer">
           <button className="btn btn-light" onClick={handleAddDirector}>
