@@ -54,7 +54,7 @@ export default class Movie {
       posterObjs.add(imageObj);
 
       let genreObj = this.genreObjs["comedy"].clone(); // TO CHANGE
-      genreObj.position.set(x, y, 2);
+      genreObj.position.set(x, y, 1);
       posterObjs.add(genreObj);
     });
 
@@ -68,7 +68,7 @@ export default class Movie {
     const map = this.loaders.textureLoader.load(imgLink);
     const material = new SpriteMaterial({ map: map });
     const sprite = new Sprite(material);
-    sprite.scale.set(w, h, 1);
+    sprite.scale.set(w, h, 0);
     imageObj.sprite = sprite;
     imageObj.add(sprite);
 
@@ -79,10 +79,11 @@ export default class Movie {
       color: planeColor,
       blending: NoBlending,
     });
-    var geometry = new BoxGeometry(w, h, -1);
+    var geometry = new BoxGeometry(w * 1.2, h * 1.2, 1);
     var mesh = new Mesh(geometry, boxMaterial);
     mesh.castShadow = true;
     mesh.receiveShadow = true;
+    mesh.position.set(0, 0, -1);
     imageObj.lightShadowMesh = mesh;
     imageObj.add(mesh);
 

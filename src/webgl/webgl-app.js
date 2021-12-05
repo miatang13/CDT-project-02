@@ -151,7 +151,8 @@ export default class WebGLApp {
   };
 
   createCube = () => {
-    let geometry = new BoxGeometry(10, 10, 10);
+    const boxSize = 20;
+    let geometry = new BoxGeometry(boxSize, boxSize, boxSize);
     let material = new MeshPhongMaterial({
       color: new Color("Orange"),
       wireframe: true,
@@ -162,7 +163,7 @@ export default class WebGLApp {
   };
 
   createLights = () => {
-    this.ambientLight = new AmbientLight(0x404040);
+    this.ambientLight = new AmbientLight(0xffffff);
     this.scene.add(this.ambientLight);
     this.pointLight = new PointLight(0xffffff);
     this.scene.add(this.pointLight);
