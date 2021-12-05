@@ -1,7 +1,6 @@
 export const vshader = `
 varying vec2 v_uv;
 varying vec3 v_position;
-varying vec3 v_normal;
 varying float v_wave;
 uniform float u_time;
 
@@ -111,7 +110,6 @@ float snoise(vec3 v) {
 void main() {	
   v_uv = uv;
   v_position = position;
-  v_normal = normal;
 
   vec3 pos = position;
   float noiseFreq = 0.05;
@@ -126,18 +124,20 @@ void main() {
 
 export const fshader = `
 uniform sampler2D uTexture;
-uniform sampler2D u_tex2;
-uniform vec2 u_resolution;
-uniform float u_useTexLerp;
-uniform float u_time;
 varying vec2 v_uv;
-varying vec3 v_position;
-varying vec3 v_normal;
 varying float v_wave;
 
 void main (void)
 {
-  vec3 mapped = texture2D(uTexture, v_uv ).rgb;
-  gl_FragColor = vec4(mapped, 1); 
+  // these 2 lines work
+  // vec3 mapped = texture2D(uTexture, v_uv ).rgb;
+  // gl_FragColor = vec4(mapped, 1); 
+
+  float wave = v_wave * 0.25;
+  float r = texture2D(uTexture, v_uv).r;
+  float g = texture2D(uTexture, v_uv).g;
+  float b = texture2D(uTexture, v_uv + wave).b;
+  vec3 texture = vec3(r, g, b);
+  gl_FragColor = vec4(texture, 1.);
 }
 `;
