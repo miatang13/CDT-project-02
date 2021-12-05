@@ -78,7 +78,7 @@ export default class WebGLApp {
 
   updateState = (objs) => {
     this.clearState();
-    console.log("Updating state");
+    console.log("Updating state", objs);
     this.movieObjs = objs;
     this.createNewState();
   };
