@@ -193,7 +193,7 @@ export default class WebGLApp {
     if (this.movieObj) {
       this.movieObj.posters.forEach((poster) => {
         if (poster.material.uniforms) {
-          poster.material.uniforms.uTime.value = this.clock.getElapsedTime();
+          poster.material.uniforms.u_time.value = this.clock.getElapsedTime();
         }
       });
     }

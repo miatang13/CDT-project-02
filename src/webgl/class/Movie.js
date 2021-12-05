@@ -14,8 +14,6 @@ import {
 } from "three";
 import { rated_colors } from "../constants/colors";
 import { rand } from "../helper/rand";
-import vertex_shader from "../glsl/vertex.glsl.js";
-import fragment_shader from "../glsl/fragment.glsl.js";
 import { vshader, fshader } from "../glsl/bg.glsl";
 
 const w = 5.5;
@@ -84,7 +82,6 @@ export default class Movie {
   }
 
   initPoster(movie) {
-    console.log("Init shader poster");
     return this.initShaderPoster(movie);
   }
 
@@ -92,13 +89,12 @@ export default class Movie {
     let imgLink = movie.imgLink;
     let geometry = new PlaneGeometry(w, h);
     let texture = this.loaders.textureLoader.load(imgLink);
-    // let material = new MeshBasicMaterial({ map: texture });
 
     let material = new ShaderMaterial({
       vertexShader: vshader,
       fragmentShader: fshader,
       uniforms: {
-        uTime: { value: 0.1 },
+        u_time: { value: 0.1 },
         uTexture: { value: texture },
       },
       side: DoubleSide,
