@@ -1,0 +1,25 @@
+* {
+  color: black;
+}
+
+#analysis__root {
+  width: auto;
+  height: 95%;
+  white-space: nowrap;
+}
+
+#analysis__root a.nav-link {
+  color: black;
+}
+
+#title {
+  font-size: 3.5vw;
+  font-family: abril-display, serif;
+  font-weight: 900;
+  font-style: normal;
+  color: rgb(0, 0, 0);
+}
+
+.directorName {
+  font-family: abril-display, serif;
+}
