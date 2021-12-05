@@ -16,13 +16,14 @@ import anime from "animejs";
 import { createElemObject } from "./helper/css3d";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { CSS3DRenderer } from "three/examples/jsm/renderers/CSS3DRenderer";
-import Poster from "./class/Poster";
+import Poster from "./class/Movie";
 
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass";
 import { FXAAShader } from "three/examples/jsm/shaders/FXAAShader";
 import { LuminosityShader } from "three/examples/jsm/shaders/LuminosityShader.js";
+import Movie from "./class/Movie";
 
 export default class WebGLApp {
   constructor(container, cssContainer, postersDiv, posterImgRefs, nameSpan) {
@@ -75,11 +76,10 @@ export default class WebGLApp {
     console.log("Finished set up");
   };
 
-  updateState = (imgLinks) => {
-    console.log(imgLinks);
+  updateState = (objs) => {
     this.clearState();
     console.log("Updating state");
-    this.imgLinks = imgLinks;
+    this.movieObjs = objs;
     this.createNewState();
   };
 
@@ -88,17 +88,16 @@ export default class WebGLApp {
    */
 
   createNewState = () => {
-    this.createPosters();
+    let movieObj = new Movie(this.movieObjs);
+    let obj = movieObj.init(this.textureLoader);
+    this.scene.add(obj);
+    this.movieObj = obj;
   };
 
   clearState = () => {
-    let that = this;
-    this.posters.forEach((obj) => {
-      if (obj) {
-        that.scene.remove(obj);
-      }
-    });
-    this.posters = [];
+    if (this.movieObj) {
+      this.scene.remove(this.movieObj);
+    }
   };
 
   /**
@@ -117,16 +116,6 @@ export default class WebGLApp {
     );
     effectFXAA.renderToScreen = true;
     this.composer.addPass(effectFXAA);
-  };
-
-  createPosters = () => {
-    this.imgLinks.forEach((link, index) => {
-      let poster = new Poster(link);
-      let color = new Color(0xff0055);
-      let obj = poster.init(index, this.textureLoader, color);
-      this.scene.add(obj);
-      this.posters.push(obj);
-    });
   };
 
   loadModel = (fileName) => {

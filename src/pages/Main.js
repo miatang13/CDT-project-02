@@ -53,20 +53,24 @@ export default function Main() {
   }
 
   function handleUpdateState() {
-    let imgLinks = complete_data[currentDirectorIdx].movies.map(
-      (movie) => movie.Poster
-    );
-    webglApp.current.updateState(imgLinks);
+    let movieObjs = complete_data[currentDirectorIdx].movies.map((movie) => {
+      return {
+        imgLink: movie.Poster,
+        imgGenre: movie.Genre,
+        /* need to add NYT article */
+      };
+    });
+    webglApp.current.updateState(movieObjs);
   }
 
   function updateDirector(e) {
-    console.log("update director");
     let new_index;
     if (e.key === "ArrowDown") {
       new_index = Math.min(currentDirectorIdx + 1, max_index);
     } else {
       new_index = Math.max(currentDirectorIdx - 1, 0);
     }
+    if (new_index === currentDirectorIdx) return;
     currentDirectorIdx = new_index;
     setIdx(new_index);
     handleUpdateState();
@@ -100,36 +104,10 @@ export default function Main() {
     };
   }, []);
 
-  function posterJsx() {
-    const MAX_MOVIE = 6;
-    let jsx = [];
-    let data = complete_data[currentIdx].movies;
-    for (let i = 0; i < MAX_MOVIE; i++) {
-      if (data[i]) {
-        let movieObj = data[i];
-        let elem = (
-          <div key={movieObj.Title} ref={posterImgRefs.current[i]}>
-            <img
-              src={movieObj.Poster}
-              alt={movieObj.Title}
-              className="indiv_poster"
-            ></img>
-          </div>
-        );
-        jsx.push(elem);
-      } else {
-        jsx.push(<div ref={posterImgRefs.current[i]}></div>);
-      }
-    }
-    return jsx;
-  }
-
   return (
     <div>
       <div id="webgl" ref={containerRef}></div>
-      <div id="css" ref={cssContainerRef}>
-        {/* <div>{posterJsx()}</div> */}
-      </div>
+      <div id="css" ref={cssContainerRef}></div>
       <div className="root" ref={directorNameRef}>
         <NavigationBar />
         <div className="center__container min-vh-90">
