@@ -10,6 +10,7 @@ import {
   PointLight,
   Vector2,
   TextureLoader,
+  Clock,
 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import anime from "animejs";
@@ -70,6 +71,7 @@ export default class WebGLApp {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.update();
     this.textureLoader = new TextureLoader();
+    this.clock = new Clock();
     this.createCube();
     this.createLights();
     this.loadMovieGenreObjs();
@@ -96,6 +98,7 @@ export default class WebGLApp {
     let obj = movieObj.init();
     this.scene.add(obj);
     this.movieObj = obj;
+    console.log("Finished creating new state", this.movieObj);
   };
 
   clearState = () => {
@@ -168,7 +171,7 @@ export default class WebGLApp {
   };
 
   renderScene = () => {
-    this.composer.render();
+    // this.composer.render();
     this.renderer.render(this.scene, this.camera);
     this.cssRenderer.render(this.scene, this.camera);
   };
@@ -186,6 +189,15 @@ export default class WebGLApp {
     this.cube.rotation.y += 0.0125;
     this.cube.rotation.z += 0.012;
     this.controls.update();
+
+    // if (this.movieObj) {
+    //   this.movieObj.posters.forEach((poster) => {
+    //     if (poster.material.uniforms) {
+    //       poster.material.uniforms.uTime.value = this.clock.getElapsedTime();
+    //     }
+    //   });
+    // }
+
     //this.controls.update();
     this.rafId = requestAnimationFrame(this.update);
     this.renderScene();
