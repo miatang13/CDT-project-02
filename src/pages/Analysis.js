@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import NavigationBar from "../components/Navbar";
 
 export default function Analysis() {
@@ -6,7 +5,7 @@ export default function Analysis() {
   console.log(cartData);
 
   return (
-    <div>
+    <div className="root">
       <NavigationBar />
       {cartData.map((item, index) => (
         <div key={item.name + index}>

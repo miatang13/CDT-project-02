@@ -38,8 +38,6 @@ export default class WebGLApp {
      * Dynamically changed elements
      */
     this.posters = [];
-    this.numPosters = 0;
-    this.prevNumPosters = 0;
     this.movieGenreObjs = {};
     this.hasSetup = false;
   }
@@ -55,7 +53,7 @@ export default class WebGLApp {
       1,
       1000
     );
-    this.camera.position.set(0, 0, 15);
+    this.camera.position.set(0, 0, 20);
     this.camera.lookAt(this.scene.position);
     this.tanFOV = Math.tan(((Math.PI / 180) * this.camera.fov) / 2);
     this.renderer = new WebGLRenderer({ antialias: true });

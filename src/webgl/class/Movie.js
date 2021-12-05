@@ -9,13 +9,16 @@ import {
   SpriteMaterial,
 } from "three";
 import { rated_colors } from "../constants/colors";
+import { rand } from "../helper/rand";
 
-const w = 4.5;
+const w = 5.5;
 const h = w * 1.5;
-const xOffset = -15;
-const padding = w;
-const yOffset_bot = -5.5;
-const yOffset_top = 6;
+const xOffset = -w * 4.5;
+const padding = w * 1.5;
+const yOffset_bot = -6.5;
+const yOffset_top = 6.5;
+
+const displaceRand = [-1, 1];
 
 /**
  * Class for the entire movie object
@@ -54,7 +57,14 @@ export default class Movie {
       posterObjs.add(imageObj);
 
       let genreObj = this.genreObjs["comedy"].clone(); // TO CHANGE
-      genreObj.position.set(x, y, 1);
+      let displaceX = rand(displaceRand);
+      let displaceY = rand(displaceRand);
+      console.log("rands", displaceX, displaceY);
+      genreObj.position.set(
+        x - (w / 2) * displaceX,
+        y - (h / 2) * displaceY,
+        0
+      );
       posterObjs.add(genreObj);
     });
 
@@ -66,7 +76,7 @@ export default class Movie {
     let imageObj = new Object3D();
 
     const map = this.loaders.textureLoader.load(imgLink);
-    const material = new SpriteMaterial({ map: map });
+    const material = new SpriteMaterial({ map: map, color: 0xffffff });
     const sprite = new Sprite(material);
     sprite.scale.set(w, h, 0);
     imageObj.sprite = sprite;
