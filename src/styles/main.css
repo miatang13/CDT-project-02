@@ -52,7 +52,7 @@ body {
   font-family: abril-display, serif;
   font-weight: 900;
   font-style: normal;
-  color: rgb(241, 229, 229);
+  color: rgb(255, 178, 13);
   animation: pulsate 5s infinite alternate;
   position: absolute;
 }
