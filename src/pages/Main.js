@@ -52,16 +52,21 @@ export default function Main() {
     updateCart(currentDirectorIdx);
   }
 
-  function handleUpdateState() {
+  function getWebglParams() {
     let movieObjs = complete_data[currentDirectorIdx].movies.map((movie) => {
       let first_genre = movie.Genre.substr(0, movie.Genre.indexOf(","));
       return {
         imgLink: movie.Poster,
-        imgGenre: first_genre === "" ? movie.Genre : first_genre,
+        genre: first_genre === "" ? movie.Genre : first_genre,
+        rated: movie.Rated,
         /* need to add NYT article */
       };
     });
-    webglApp.current.updateState(movieObjs);
+    return movieObjs;
+  }
+
+  function handleUpdateState() {
+    webglApp.current.updateState(getWebglParams());
   }
 
   function updateDirector(e) {
@@ -92,8 +97,8 @@ export default function Main() {
       posterImgRefs.current,
       directorNameRef.current
     );
-    webglApp.current.setup();
-    handleUpdateState();
+    webglApp.current.setup(getWebglParams());
+    //handleUpdateState();
     webglApp.current.render(true);
     window.addEventListener("resize", onWindowResize, false);
     window.addEventListener("keydown", updateDirector, false);

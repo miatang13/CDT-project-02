@@ -13,10 +13,8 @@ import {
 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import anime from "animejs";
-import { createElemObject } from "./helper/css3d";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { CSS3DRenderer } from "three/examples/jsm/renderers/CSS3DRenderer";
-import Poster from "./class/Movie";
 
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
@@ -24,6 +22,8 @@ import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass";
 import { FXAAShader } from "three/examples/jsm/shaders/FXAAShader";
 import { LuminosityShader } from "three/examples/jsm/shaders/LuminosityShader.js";
 import Movie from "./class/Movie";
+
+const models = ["biography", "comedy"];
 
 export default class WebGLApp {
   constructor(container, cssContainer, postersDiv, posterImgRefs, nameSpan) {
@@ -40,10 +40,13 @@ export default class WebGLApp {
     this.posters = [];
     this.numPosters = 0;
     this.prevNumPosters = 0;
+    this.movieGenreObjs = {};
+    this.hasSetup = false;
   }
 
-  setup = () => {
-    console.log("set up with DOM elem ", this.htmlElem);
+  setup = (movieObjs) => {
+    this.movieObjs = movieObjs;
+    console.log("set up", this.movieObjs);
     this.scene = new Scene();
     // this.scene.background = new Color(0xb6eafa);
     this.camera = new PerspectiveCamera(
@@ -71,7 +74,7 @@ export default class WebGLApp {
     this.textureLoader = new TextureLoader();
     this.createCube();
     this.createLights();
-    this.loadModel("mountain");
+    this.loadMovieGenreObjs();
     this.initPostprocessing();
     console.log("Finished set up");
   };
@@ -88,8 +91,11 @@ export default class WebGLApp {
    */
 
   createNewState = () => {
-    let movieObj = new Movie(this.movieObjs);
-    let obj = movieObj.init(this.textureLoader);
+    let loaders = {
+      textureLoader: this.textureLoader,
+    };
+    let movieObj = new Movie(this.movieObjs, loaders, this.movieGenreObjs);
+    let obj = movieObj.init();
     this.scene.add(obj);
     this.movieObj = obj;
   };
@@ -103,6 +109,10 @@ export default class WebGLApp {
   /**
    * Init scene
    */
+  loadMovieGenreObjs = () => {
+    models.forEach((mod) => this.loadModel(mod));
+  };
+
   initPostprocessing = () => {
     this.composer = new EffectComposer(this.renderer);
     const renderPass = new RenderPass(this.scene, this.camera);
@@ -119,13 +129,19 @@ export default class WebGLApp {
   };
 
   loadModel = (fileName) => {
+    const scl = 15;
     let that = this;
     this.loader.load(
       "assets/" + fileName + ".gltf",
       function (loaded) {
-        that.testmodel = loaded.scenes[0];
-        that.scene.add(that.testmodel);
+        let model = loaded.scenes[0];
+        model.scale.set(scl, scl, scl);
+        that.movieGenreObjs[fileName] = model;
         console.log("Added model", loaded);
+        if (Object.keys(that.movieGenreObjs).length === models.length) {
+          that.updateState(that.movieObjs);
+          that.hasSetup = true;
+        }
       },
       (load) => {},
       (error) => {
