@@ -52,9 +52,13 @@ export default class Movie {
       let x = xOffset + index * padding + randX;
       let y = yOffset - randY;
 
-      let imageObj = this.initPosterImageAndPlane(movie);
-      imageObj.position.set(x, y, -1);
+      let imageObj = this.initPoster(movie);
+      imageObj.position.set(x, y, 0);
       posterObjs.add(imageObj);
+
+      let plane = this.initPlane(movie);
+      plane.position.set(x, y, -1);
+      posterObjs.add(plane);
 
       let genreObj = this.genreObjs["comedy"].clone(); // TO CHANGE
       let displaceX = rand(displaceRand);
@@ -63,7 +67,7 @@ export default class Movie {
       genreObj.position.set(
         x - (w / 2) * displaceX,
         y - (h / 2) * displaceY,
-        0
+        0.5
       );
       posterObjs.add(genreObj);
     });
@@ -71,17 +75,21 @@ export default class Movie {
     return posterObjs;
   }
 
-  initPosterImageAndPlane(movie) {
+  initPoster(movie) {
+    let obj = new Object3D();
     let imgLink = movie.imgLink;
-    let imageObj = new Object3D();
-
     const map = this.loaders.textureLoader.load(imgLink);
     const material = new SpriteMaterial({ map: map, color: 0xffffff });
     const sprite = new Sprite(material);
-    sprite.scale.set(w, h, 0);
-    imageObj.sprite = sprite;
-    imageObj.add(sprite);
+    sprite.scale.set(w, h, 1);
+    obj.add(sprite);
+    return obj;
+  }
 
+  /**
+   * Init the background plane
+   */
+  initPlane(movie) {
     // clip a WebGL geometry with it.
     let planeColor = rated_colors[movie.rated];
     const boxMaterial = new MeshPhongMaterial({
@@ -94,11 +102,8 @@ export default class Movie {
     mesh.castShadow = true;
     mesh.receiveShadow = true;
     mesh.position.set(0, 0, -1);
-    imageObj.lightShadowMesh = mesh;
-    imageObj.add(mesh);
+    mesh.rotation.set(0, 0, 0.1);
 
-    // place it
-    imageObj.lightShadowMesh.rotation.set(0, 0, 0.1);
-    return imageObj;
+    return mesh;
   }
 }
