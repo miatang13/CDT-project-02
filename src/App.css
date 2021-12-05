@@ -9,6 +9,12 @@ a.nav-link {
   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
+a.nav-link.active {
+  background-color: rgb(251, 137, 255);
+  border: 1px white solid;
+  animation: pulsate 5s infinite alternate;
+}
+
 a.nav-link:hover {
   color: gray;
 }
@@ -16,4 +22,26 @@ a.nav-link:hover {
 svg:hover {
   fill: gray;
   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+hr {
+  color: rgb(251, 137, 255);
+  animation: pulsate 5s infinite alternate;
+}
+
+@keyframes pulsate {
+  100% {
+    /* Larger blur radius */
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff,
+      0 0 10px rgb(251, 137, 255), 0 0 10px rgb(251, 137, 255),
+      0 0 20px rgb(251, 137, 255), 0 0 10px rgb(251, 137, 255),
+      0 0 10px rgb(251, 137, 255);
+  }
+  0% {
+    /* Smaller blur radius */
+    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff,
+      0 0 5px rgb(251, 137, 255), 0 0 15px rgb(251, 137, 255),
+      0 0 20px rgb(251, 137, 255), 0 0 30px rgb(251, 137, 255),
+      0 0 10px rgb(251, 137, 255);
+  }
 }

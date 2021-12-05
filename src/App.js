@@ -7,6 +7,7 @@ import Main from "./pages/Main";
 import ParseData from "./pages/ParseData";
 import "./App.css";
 import Analysis from "./pages/Analysis";
+import Info from "./pages/Info";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Main} />
             <Route path="/analysis" component={Analysis} />
+            <Route path="/info" component={Info} />
             <Route path="/data" component={Data} />
             <Route path="/fetch-data" component={FetchData} />
             <Route path="/parse-data" component={ParseData} />

@@ -33,6 +33,20 @@ body {
   height: 100%;
 }
 
+#main__wrapper.a#nav-dropdown {
+  color: white;
+  background-color: black;
+}
+
+#main__wrapper.dropdown-menu.show {
+  background-color: black;
+}
+
+.dropdown-item:hover {
+  background-color: rgb(251, 137, 255);
+  border: 1px white solid;
+}
+
 #director_name {
   font-size: 6vw;
   font-family: abril-display, serif;

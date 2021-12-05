@@ -111,11 +111,11 @@ export default function Main() {
   }, []);
 
   return (
-    <div>
+    <div id="main__wrapper">
       <div id="webgl" ref={containerRef}></div>
       <div id="css" ref={cssContainerRef}></div>
       <div className="root" ref={directorNameRef}>
-        <NavigationBar color="white" />
+        <NavigationBar activeKey={1} color="white" />
         <div className="center__container min-vh-90">
           <h1 id="director_name">{complete_data[currentIdx].name}</h1>
         </div>
