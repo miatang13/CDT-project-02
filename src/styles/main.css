@@ -6,6 +6,11 @@ body {
   bottom: 0;
 }
 
+#main__wrapper html,
+body {
+  position: absolute;
+}
+
 #webgl {
   position: fixed;
   top: 0;

@@ -65,6 +65,7 @@ svg:hover {
 .roundedBg {
   background-color: rgb(242, 244, 255);
   border-radius: 18px;
+  overflow-x: scroll;
 }
 
 .content__wrapper {

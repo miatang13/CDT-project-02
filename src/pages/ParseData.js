@@ -7,6 +7,8 @@ import final_directors from "../data/main-data.json";
 import NYT_data from "../data/NYT-articles.json";
 // get box office
 import dir_w_NYT from "../data/directors-w-NYT.json";
+// add index
+import final_data from "../data/final-data.json";
 
 export default function ParseData() {
   const btnRef = useRef();
@@ -143,6 +145,16 @@ export default function ParseData() {
     setOutputJson(new_data);
   }
 
+  function addIndex() {
+    let new_data = [];
+    final_data.forEach((dir, index) => {
+      let newObj = dir;
+      newObj.unsortedIndex = index;
+      new_data.push(newObj);
+    });
+    setOutputJson(new_data);
+  }
+
   return (
     <div>
       <a ref={btnRef} href={downloadHref} onClick={compileOutput}>
@@ -151,6 +163,7 @@ export default function ParseData() {
       <button onClick={parseData}> Parse Data</button>
       <button onClick={mergeData}> Merge Data</button>
       <button onClick={analyzeBoxOffice}> Count Box Office</button>
+      <button onClick={addIndex}> Add Index </button>
     </div>
   );
 }

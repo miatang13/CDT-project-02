@@ -9,10 +9,13 @@ import { add } from "../reducers/cart";
 import NavigationBar from "../components/Navbar";
 import { snippetPositions } from "../utility/snippetPositions";
 
-export default function Main() {
+export default function Main(props) {
   const max_index = complete_data.length - 1;
   var directorIdx = 0; // actual reference to number
-  if (localStorage.getItem("directorIdx")) {
+  console.log(props);
+  if (props.location.directorIdx) {
+    directorIdx = props.location.directorIdx;
+  } else if (localStorage.getItem("directorIdx")) {
     directorIdx = JSON.parse(localStorage.getItem("directorIdx"));
   }
 

@@ -7,11 +7,14 @@ import {
   ButtonGroup,
   ToggleButton,
 } from "react-bootstrap";
+import { Router } from "react-router";
+import { Link } from "react-router-dom";
 import NavigationBar from "../components/Navbar";
 import complete_data from "../data/final-data.json";
 import "../styles/catalog.css";
 
 export default function Catalog() {
+  const boxOfficeBucket = 20;
   const [sortByBO, setSort] = useState(false);
   const [displayData, setData] = useState(complete_data);
   let sortedData = [...complete_data].sort(function (a, b) {
@@ -36,7 +39,7 @@ export default function Catalog() {
       <div id="catalog__content" className="content__wrapper">
         <h1 className="title">Catalog</h1>
         <p className="page__description">
-          This is as comprehensive catalog of {complete_data.length} directors
+          This is a comprehensive catalog of {complete_data.length} directors
           displayed on this website.
           <br /> You can sort the list of directors by their movies' average box
           office.
@@ -61,29 +64,37 @@ export default function Catalog() {
           </Row>
           <Row>
             {displayData.map((director, index) => {
+              let newTo = {
+                pathname: "/",
+                directorIdx: director.unsortedIndex,
+              };
               let nameJsx = (
                 <Col md={4}>
-                  <span className="directorName">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      className="bi bi-file-person"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M12 1a1 1 0 0 1 1 1v10.755S12 11 8 11s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z" />
-                      <path d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                    </svg>{" "}
-                    {director.name}
-                  </span>
+                  <Link to={newTo} key={director.name + "_name"}>
+                    <span className="directorName">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        className="bi bi-arrow-right"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+                        />
+                      </svg>{" "}
+                      {director.name}
+                    </span>
+                  </Link>
                 </Col>
               );
               let finalJsx = nameJsx;
               if (sortByBO) {
-                if (index % 11 === 0) {
+                if (index % boxOfficeBucket === 0) {
                   let label = (
-                    <div>
+                    <div key={index + "_label"}>
                       <hr style={{ color: "rgb(130, 75, 219)" }} />
                       <h3 className="section__title">
                         Directors with average box office over $
@@ -97,7 +108,7 @@ export default function Catalog() {
                 if (director.movieCnt !== lastMovieCnt) {
                   lastMovieCnt = director.movieCnt;
                   let label = (
-                    <div>
+                    <div key={index + "_label"}>
                       <hr style={{ color: "rgb(130, 75, 219)" }} />
                       <h3 className="section__title">
                         Directors with {lastMovieCnt} movies:
