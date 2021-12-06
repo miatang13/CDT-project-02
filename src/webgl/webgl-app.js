@@ -43,10 +43,12 @@ export default class WebGLApp {
 
   setup = (movieObjs) => {
     const darkBlue = 0x000514;
+    const lightOrange = 0xffc48a;
+    const violet = 0xb18cff;
     this.movieObjs = movieObjs;
     console.log("set up", this.movieObjs);
     this.scene = new Scene();
-    this.scene.background = new Color(0xffc48a);
+    this.scene.background = new Color(violet);
     this.camera = new PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,

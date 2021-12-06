@@ -3,7 +3,6 @@ import { Card, Carousel, Col, Container, Row, Button } from "react-bootstrap";
 import EmptyAnalysis from "../components/EmptyAnalysis";
 import NavigationBar from "../components/Navbar";
 import "../styles/analysis.css";
-import "../styles/feature.css";
 import complete_data from "../data/main-data.json";
 
 export default function Analysis() {

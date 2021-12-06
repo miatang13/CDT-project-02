@@ -52,7 +52,7 @@ body {
   font-family: abril-display, serif;
   font-weight: 900;
   font-style: normal;
-  color: rgb(255, 178, 13);
+  color: #9227ff;
   animation: pulsate 5s infinite alternate;
   position: absolute;
 }
@@ -63,8 +63,8 @@ body {
 
 #footer {
   position: absolute;
-  bottom: 30px;
-  margin-left: 90vw;
+  top: 10%;
+  left: 90%;
   width: 100%;
 }
 
@@ -72,46 +72,28 @@ body {
   background-color: rgb(0, 0, 0);
   color: white;
   border: 1px solid white;
-  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  font-size: 0.8vw;
 }
 
 #footer button:hover {
-  border: 3px dashed #0fa;
+  border: 1px dashed #0fa;
 }
 
 .min-vh-90 {
   min-height: 90vh;
 }
 
-.neonText {
-  color: #fff;
-  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
-    0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
-}
-
-@keyframes pulsateBorder {
-  100% {
-    /* Larger blur radius */
-    border-color: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 10px #0fa,
-      0 0 10px #0fa, 0 0 20px #0fa, 0 0 10px #0fa, 0 0 10px #0fa;
-  }
-  0% {
-    /* Smaller blur radius */
-    border-color: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff, 0 0 5px #0fa,
-      0 0 15px #0fa, 0 0 20px #0fa, 0 0 30px #0fa, 0 0 10px #0fa;
-  }
-}
-
 @keyframes pulsate {
   100% {
     /* Larger blur radius */
-    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 10px #0fa,
-      0 0 10px #0fa, 0 0 20px #0fa, 0 0 10px #0fa, 0 0 10px #0fa;
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 10px #ff9a24,
+      0 0 10px #ff9a24, 0 0 20px #ff9a24, 0 0 15px #ff9a24, 0 0 20px #ff9a24;
   }
   0% {
     /* Smaller blur radius */
-    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff, 0 0 5px #0fa,
-      0 0 15px #0fa, 0 0 20px #0fa, 0 0 30px #0fa, 0 0 10px #0fa;
+    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff, 0 0 5px #ff9a24,
+      0 0 15px #ff9a24, 0 0 20px #ff9a24, 0 0 30px #ff9a24, 0 0 20px #ff9a24;
   }
 }
 
@@ -124,6 +106,7 @@ body {
 
 .vline span {
   margin-left: 25px;
+  font-size: 0.8vw;
 }
 
 #x__axis {
@@ -131,8 +114,48 @@ body {
   border: 0.5px white solid;
   width: 95vw;
   margin-top: 85vh;
+  position: absolute;
+}
+
+#x__axis__label {
+  margin-top: 90vh;
+  position: absolute;
+  font-size: 0.8vw;
 }
 
 #vis__text span {
-  color: white;
+  color: rgb(255, 255, 255);
+}
+
+.article__snippet {
+  width: 18%;
+  position: absolute;
+  background-color: rgba(220, 200, 255, 0.288);
+  border: 1px rgba(255, 255, 255, 0.137) solid;
+  padding: 0.5vw;
+  font-size: 0.9vw;
+  display: block;
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.article__snippet:hover {
+  border: 1px rgb(255, 255, 255) dashed;
+  background-color: rgba(255, 255, 255, 0.733);
+}
+
+.article__snippet p {
+  color: rgba(127, 104, 141, 0.596);
+}
+
+.article__snippet p:hover {
+  color: rgb(119, 83, 122);
+}
+
+.article__snippet a {
+  color: rgba(127, 104, 141, 0.596);
+  font-size: 0.8vw;
+}
+
+.article__snippet a:hover {
+  color: rgb(121, 66, 126);
 }

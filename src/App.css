@@ -2,6 +2,7 @@
   font-family: proxima-nova, sans-serif;
   font-weight: 400;
   font-style: normal;
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 a.nav-link {
