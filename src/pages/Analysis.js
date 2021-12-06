@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Card, Carousel, Col, Container, Row, Button } from "react-bootstrap";
+import {
+  Card,
+  Carousel,
+  Col,
+  Container,
+  Row,
+  Button,
+  Accordion,
+} from "react-bootstrap";
 import EmptyAnalysis from "../components/EmptyAnalysis";
 import NavigationBar from "../components/Navbar";
 import "../styles/analysis.css";
@@ -42,35 +50,52 @@ export default function Analysis() {
         {cartData.length !== 0 && (
           <div>
             <Container id="directors__wrapper" fluid>
-              <Row className="justify-content-md-center">
+              <Row>
                 {cartData.map((item, index) => (
-                  <Col key={item.name + index}>
-                    <Card style={{ width: "15rem" }} bg="light">
+                  <Col sm={3} key={item.name + index}>
+                    <Card bg="light">
                       <Card.Body>
                         <Card.Title className="directorName">
                           {item.name}
                         </Card.Title>
-                        <Card.Text>{item.movieCnt} passing movies</Card.Text>
-                        <Carousel variant="dark" indicators={false}>
+                        <Card.Text>✔️ {item.movieCnt} passing movies</Card.Text>
+                        <Card.Text>
+                          💰 Avg box office: ${item.boxOfficeAvg}
+                        </Card.Text>
+                        <Carousel
+                          interval={5000000}
+                          variant="dark"
+                          indicators={false}
+                        >
                           {item.movies.map((movieObj) => (
                             <Carousel.Item key={movieObj.Title}>
                               <img
                                 className="d-block w-100"
                                 src={movieObj.Poster}
                                 alt="First slide"
-                                style={{ marginBottom: "1vh", height: "350px" }}
+                                style={{ marginBottom: "1vh" }}
                               />
-                              <h4 className="movieTitle">{movieObj.Title}</h4>
-                              <p className="movieBoxoffice roundedBg">
-                                💰 {movieObj.BoxOffice}
-                              </p>
-                              <p className="movieAwards roundedBg">
-                                🏆 {movieObj.Awards}
-                              </p>
-                              <p className="roundedBg">
-                                🎬 {movieObj.Released}
-                              </p>
-                              <p className="movieGenre">{movieObj.Genre}</p>
+                              <Accordion>
+                                <Accordion.Item eventKey="0">
+                                  <Accordion.Header className="movieTitle">
+                                    {movieObj.Title}
+                                  </Accordion.Header>
+                                  <Accordion.Body>
+                                    <p className="movieBoxoffice roundedBg">
+                                      💰 {movieObj.BoxOffice}
+                                    </p>
+                                    <p className="movieAwards roundedBg">
+                                      🏆 {movieObj.Awards}
+                                    </p>
+                                    <p className="roundedBg">
+                                      🎬 {movieObj.Released}
+                                    </p>
+                                    <p className="movieGenre">
+                                      {movieObj.Genre}
+                                    </p>
+                                  </Accordion.Body>
+                                </Accordion.Item>
+                              </Accordion>
                             </Carousel.Item>
                           ))}
                         </Carousel>
@@ -99,7 +124,7 @@ export default function Analysis() {
           <h1 className="sub__title">You May Also Like: </h1>
           <Row>
             {recommendations.map((rec) => (
-              <Col>
+              <Col key={rec.name}>
                 <span className="rec__name"> 📽️ {rec.name}</span>
               </Col>
             ))}

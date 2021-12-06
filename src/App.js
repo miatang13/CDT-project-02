@@ -6,6 +6,7 @@ import Landing from "./pages/Landing";
 import Main from "./pages/Main";
 import ParseData from "./pages/ParseData";
 import "./App.css";
+import "./styles/typeface.css";
 import Analysis from "./pages/Analysis";
 import Info from "./pages/Info";
 

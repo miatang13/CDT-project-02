@@ -5,6 +5,18 @@
   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
+p {
+  font-size: 1vw;
+}
+
+button.btn {
+  font-size: 1vw;
+}
+
+button.accordion {
+  font-size: 1vw;
+}
+
 a.nav-link {
   color: rgb(255, 255, 255);
   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
