@@ -12,7 +12,7 @@ export default function NavigationBar(props) {
       className="justify-content-end"
       style={{ borderBottom: "1px solid rgb(130, 75, 219)" }}
       activeKey={props.activeKey}
-      onSelect={handleSelect}
+      // onSelect={handleSelect}
     >
       <Nav.Item>
         <Nav.Link style={{ color: props.color }} eventKey="1" href="/">

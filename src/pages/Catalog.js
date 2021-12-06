@@ -1,13 +1,6 @@
 import Button from "@restart/ui/esm/Button";
 import { useState } from "react";
-import {
-  Col,
-  Row,
-  Container,
-  ButtonGroup,
-  ToggleButton,
-} from "react-bootstrap";
-import { Router } from "react-router";
+import { Col, Row, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import NavigationBar from "../components/Navbar";
 import complete_data from "../data/final-data.json";
