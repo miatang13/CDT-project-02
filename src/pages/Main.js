@@ -120,8 +120,8 @@ export default function Main() {
   const snippetPositions = [
     { marginLeft: "-60vw", marginTop: "-40vh" },
     { marginLeft: "-50vw", marginTop: "30vh" },
-    { marginLeft: "50vw", marginTop: "-70vh" },
-    { marginLeft: "20vw", marginTop: "-30vh" },
+    { marginLeft: "50vw", marginTop: "-65vh" },
+    { marginLeft: "10vw", marginTop: "-40vh" },
     { marginLeft: "65vw", marginTop: "55vh" },
   ];
 
@@ -147,7 +147,7 @@ export default function Main() {
                   style={snippetPositions[index]}
                   key={index}
                 >
-                  <p>"{article.snippet} "</p>
+                  <p>{article.snippet}</p>
                   <a
                     className="btn"
                     target="_blank"

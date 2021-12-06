@@ -131,7 +131,7 @@ body {
 .article__snippet {
   width: 18%;
   position: absolute;
-  background-color: rgba(220, 200, 255, 0.288);
+  background-color: rgba(220, 200, 255, 0.705);
   border: 1px rgba(255, 255, 255, 0.137) solid;
   padding: 0.5vw;
   font-size: 0.9vw;
@@ -141,11 +141,11 @@ body {
 
 .article__snippet:hover {
   border: 1px rgb(255, 255, 255) dashed;
-  background-color: rgba(255, 255, 255, 0.733);
+  background-color: rgba(255, 255, 255, 0.952);
 }
 
 .article__snippet p {
-  color: rgba(127, 104, 141, 0.596);
+  color: rgba(120, 93, 138, 0.829);
 }
 
 .article__snippet p:hover {
