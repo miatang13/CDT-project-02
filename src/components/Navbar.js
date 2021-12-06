@@ -45,21 +45,11 @@ export default function NavigationBar(props) {
           View All
         </Nav.Link>
       </Nav.Item>
-      <NavDropdown
-        style={{ color: dropdownColor }}
-        title="Sort"
-        id="nav-dropdown"
-      >
-        <NavDropdown.Item style={{ color: props.color }} eventKey="2.1">
-          Box Office 1
-        </NavDropdown.Item>
-        <NavDropdown.Item style={{ color: props.color }} eventKey="2.2">
-          Box Office 2
-        </NavDropdown.Item>
-        <NavDropdown.Item style={{ color: props.color }} eventKey="2.3">
-          Box Office 3
-        </NavDropdown.Item>
-      </NavDropdown>
+      <Nav.Item>
+        <Nav.Link style={{ color: props.color }} eventKey="2" href="/">
+          By Box Office
+        </Nav.Link>
+      </Nav.Item>
       <Nav.Item>
         <Nav.Link href="/info" eventKey="3" title="Item">
           <svg

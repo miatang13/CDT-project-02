@@ -73,7 +73,7 @@ export default class Movie {
     };
 
     const pos_5 = {
-      xPositions: [-15, -7, -3, 5, 14],
+      xPositions: [-15, -7, 0, 7, 14],
       yPositions: [-7, -3, 0, 2, 5],
     };
 
@@ -105,8 +105,8 @@ export default class Movie {
 
       // let x = xOffset + index * padding + randX;
       // let y = yOffset - randY;
-      let xIndex = sortByBoxOffice.findIndex((el) => el.name === movie.name);
-      let yIndex = sortByTime.findIndex((el) => el.name === movie.name);
+      let yIndex = sortByBoxOffice.findIndex((el) => el.name === movie.name);
+      let xIndex = sortByTime.findIndex((el) => el.name === movie.name);
 
       let x = xPositions[xIndex]; // + randX;
       let y = yPositions[yIndex] + randY;
@@ -224,7 +224,7 @@ export default class Movie {
     // clip a WebGL geometry with it.
     let planeColor = rated_colors[movie.rated];
     if (!planeColor) {
-      planeColor = new Color(0xffffff);
+      planeColor = rated_colors.Default;
     }
     let material = new ShaderMaterial({
       vertexShader: box_vshader,

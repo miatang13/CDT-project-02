@@ -7,4 +7,6 @@ export const rated_colors = {
   R: new Color(0x33cfde),
   "NC-17": new Color(0x67d0fd),
   "TV-MA": new Color(0x30aade),
+  "TV-G": new Color(0xbcebff),
+  Default: new Color(0x7c71fe),
 };
