@@ -72,8 +72,10 @@ export default function Main() {
     let new_index;
     if (e.key === "ArrowDown") {
       new_index = Math.min(currentDirectorIdx + 1, max_index);
-    } else {
+    } else if (e.key === "ArrowUp") {
       new_index = Math.max(currentDirectorIdx - 1, 0);
+    } else {
+      return;
     }
     if (new_index === currentDirectorIdx) return;
     currentDirectorIdx = new_index;
