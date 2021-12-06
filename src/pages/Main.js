@@ -4,19 +4,24 @@ import "../styles/main.css";
 import complete_data from "../data/final-data.json";
 
 // redux
-import { useDispatch } from "react-redux";
-import { add } from "../reducers/cart";
 import NavigationBar from "../components/Navbar";
 import { snippetPositions } from "../utility/snippetPositions";
 
 export default function Main(props) {
   const max_index = complete_data.length - 1;
   var directorIdx = 0; // actual reference to number
-  console.log(props);
-  if (props.location.directorIdx) {
+  console.log(props.location);
+  if (
+    props.location.directorIdx !== null &&
+    props.location.directorIdx !== undefined
+  ) {
+    console.log("setting directorIdx");
     directorIdx = props.location.directorIdx;
+    localStorage.setItem("directorIdx", JSON.stringify(directorIdx));
   } else if (localStorage.getItem("directorIdx")) {
     directorIdx = JSON.parse(localStorage.getItem("directorIdx"));
+  } else {
+    localStorage.setItem("directorIdx", JSON.stringify(directorIdx));
   }
 
   const [currentIdx, setIdx] = useState(directorIdx); // used to trigger re-render
@@ -29,7 +34,6 @@ export default function Main(props) {
 
   // redux
   let cart = useRef([]);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (localStorage.getItem("cart")) {
@@ -40,19 +44,41 @@ export default function Main(props) {
   }, []);
 
   function updateCart() {
+    // get current director idx from db
+    let idx = 0;
+    if (localStorage.getItem("directorIdx")) {
+      idx = JSON.parse(localStorage.getItem("directorIdx"));
+    } else {
+      localStorage.setItem("directorIdx", 0); // shouldn't happen
+    }
+    console.log("Update cart with director index", idx);
+
+    // create new cart
     let orig = JSON.parse(localStorage.getItem("cart"));
+    let newDirector = complete_data[idx];
+
+    // no dups
+    if (orig.find((el) => el.name === newDirector.name)) {
+      alert("Already selected! Find someone else. ;-)");
+      return;
+    }
+
+    let newCart = [...orig];
+    newCart.push(newDirector);
     const MAX_DIRECTORS = 4;
-    orig.push(complete_data[directorIdx]);
-    if (orig.length > MAX_DIRECTORS) {
+
+    // cap number
+    if (newCart.length > MAX_DIRECTORS) {
       alert("You can only select a maximum of 4 directors to compare. :-)");
       return;
     }
-    localStorage.setItem("cart", JSON.stringify(orig));
+
+    // update db
+    localStorage.setItem("cart", JSON.stringify(newCart));
   }
 
   function handleAddDirector() {
-    dispatch(add(directorIdx));
-    updateCart(directorIdx);
+    updateCart();
   }
 
   function getWebglParams(new_index) {
