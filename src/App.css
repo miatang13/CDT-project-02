@@ -1,8 +1,9 @@
 * {
-  font-family: proxima-nova, sans-serif;
+  font-family: halyard-display, sans-serif;
   font-weight: 400;
   font-style: normal;
   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  scroll-behavior: smooth;
 }
 
 p {
@@ -41,36 +42,17 @@ svg:hover {
   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-hr {
-  color: rgb(251, 137, 255);
-  animation: pulsate 5s infinite alternate;
-}
-
-@keyframes pulsate {
-  100% {
-    /* Larger blur radius */
-    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff,
-      0 0 10px rgb(251, 137, 255), 0 0 10px rgb(251, 137, 255),
-      0 0 20px rgb(251, 137, 255), 0 0 10px rgb(251, 137, 255),
-      0 0 10px rgb(251, 137, 255);
-  }
-  0% {
-    /* Smaller blur radius */
-    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff,
-      0 0 5px rgb(251, 137, 255), 0 0 15px rgb(251, 137, 255),
-      0 0 20px rgb(251, 137, 255), 0 0 30px rgb(251, 137, 255),
-      0 0 10px rgb(251, 137, 255);
-  }
-}
-
 .title {
-  font-size: 2.5vw;
+  font-size: 3vw;
   font-family: GoshaSans-Bold, sans-serif;
   font-weight: 900;
   font-style: normal;
   color: rgb(130, 75, 219);
-  margin-bottom: 2vw;
   margin-left: 1vw;
+}
+
+#analysis__content .title {
+  margin-bottom: 1vw;
 }
 
 .sub__title {
@@ -78,4 +60,46 @@ hr {
   padding: 5vw;
   font-family: GoshaSans-Bold, sans-serif;
   color: rgb(130, 75, 219);
+}
+
+.roundedBg {
+  background-color: rgb(242, 244, 255);
+  border-radius: 18px;
+}
+
+.content__wrapper {
+  padding: 2vh;
+  padding-top: 2vh;
+}
+
+.directorName {
+  font-family: GoshaSans-Bold, sans-serif;
+  color: rgb(130, 75, 219);
+}
+
+#catalog__content .directorName {
+  font-family: GoshaSans-Regular, sans-serif;
+  font-size: 1vw;
+}
+
+.section__title {
+  font-family: GoshaSans-Bold, sans-serif;
+  font-size: 1.5vw;
+}
+
+hr {
+  color: rgb(75, 60, 100);
+}
+
+.page__description {
+  width: 48%;
+  margin-left: 1vw;
+  font-size: 1.2vw;
+}
+
+.btn-group button {
+  background-color: white;
+  border: 1px solid rgb(130, 75, 219);
+  color: rgb(130, 75, 219);
+  font-size: 1vw;
 }

@@ -6,35 +6,11 @@
 }
 
 #analysis__content {
-  padding: 2vh;
   color: rgb(124, 97, 168);
 }
 
 #analysis__root {
   padding-bottom: 5vw;
-  background-color: rgb(244, 236, 255);
-}
-
-.title {
-  font-size: 2.5vw;
-  font-family: GoshaSans-Bold, sans-serif;
-  font-weight: 900;
-  font-style: normal;
-  color: rgb(130, 75, 219);
-  margin-bottom: 2vw;
-  margin-left: 1vw;
-}
-
-.sub__title {
-  font-size: 1.5vw;
-  padding: 5vw;
-  font-family: GoshaSans-Bold, sans-serif;
-  color: rgb(130, 75, 219);
-}
-
-.directorName {
-  font-family: GoshaSans-Bold, sans-serif;
-  color: rgb(130, 75, 219);
 }
 
 .movieTitle {
@@ -42,11 +18,6 @@
   font-weight: 900;
   font-size: 1.5vw;
   color: rgb(130, 75, 219);
-}
-
-.roundedBg {
-  background-color: rgb(242, 244, 255);
-  border-radius: 18px;
 }
 
 .rec__name {
