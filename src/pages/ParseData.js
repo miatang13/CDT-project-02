@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import movie_data from "../data/not-using/response(all).json";
 import bechdel_data from "../data/not-using/bechdel-test-2010-onwards.json";
-import directors_data from "../data/ranked-directors(>2).json";
+import directors_data from "../data/directors-w-NYT.json";
 // merge
 import final_directors from "../data/main-data.json";
 import NYT_data from "../data/NYT-articles.json";
+// get box office
+import dir_w_NYT from "../data/directors-w-NYT.json";
 
 export default function ParseData() {
   const btnRef = useRef();
@@ -109,6 +111,38 @@ export default function ParseData() {
     setOutputJson(finalData);
   }
 
+  function analyzeBoxOffice() {
+    let new_data = [];
+    dir_w_NYT.forEach((dir) => {
+      let avg = 0;
+      let movieCnt = 0;
+      let new_obj = dir;
+      new_obj.movies.forEach((mov, index) => {
+        let str = mov.BoxOffice; // sample:  "BoxOffice": "$74,262,031"
+        let removeComma = str.replace(/,/g, "");
+        let finalStr = removeComma.substring(1);
+        let num = parseInt(finalStr);
+        new_obj.movies[index].BoxOfficeInt = num;
+        avg += num;
+        movieCnt++;
+      });
+      avg /= movieCnt;
+      new_obj.boxOfficeAvg = Math.floor(avg);
+      let sortedByYear = [...new_obj.movies].sort(function (e1, e2) {
+        return parseInt(e1.Year) - parseInt(e2.Year);
+      });
+      let sortedByBoxOffice = [...new_obj.movies].sort(function (e1, e2) {
+        return parseInt(e1.BoxOfficeInt) - parseInt(e2.BoxOfficeInt);
+      });
+      new_obj.sortedMovies = {};
+      new_obj.sortedMovies["sortedByYear"] = sortedByYear;
+      new_obj.sortedMovies["sortedByBoxOffice"] = sortedByBoxOffice;
+      new_data.push(new_obj);
+    });
+    console.log(new_data);
+    setOutputJson(new_data);
+  }
+
   return (
     <div>
       <a ref={btnRef} href={downloadHref} onClick={compileOutput}>
@@ -116,6 +150,7 @@ export default function ParseData() {
       </a>
       <button onClick={parseData}> Parse Data</button>
       <button onClick={mergeData}> Merge Data</button>
+      <button onClick={analyzeBoxOffice}> Count Box Office</button>
     </div>
   );
 }
