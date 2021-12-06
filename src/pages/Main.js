@@ -58,7 +58,10 @@ export default function Main() {
         imgLink: movie.Poster,
         genre: first_genre === "" ? movie.Genre : first_genre,
         rated: movie.Rated,
-        /* need to add NYT article */
+        year: movie.Year,
+        boxOffice: movie.BoxOffice,
+        boxOfficeInt: movie.BoxOfficeInt,
+        name: movie.Title,
       };
     });
     return movieObjs;

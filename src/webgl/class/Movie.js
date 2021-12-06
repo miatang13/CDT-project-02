@@ -4,6 +4,7 @@ import {
   DoubleSide,
   Mesh,
   MeshBasicMaterial,
+  MeshNormalMaterial,
   MeshPhongMaterial,
   NoBlending,
   Object3D,
@@ -11,11 +12,13 @@ import {
   ShaderMaterial,
   Sprite,
   SpriteMaterial,
+  TextGeometry,
 } from "three";
 import { rated_colors } from "../constants/colors";
 import { rand } from "../helper/rand";
 import { vshader, fshader } from "../glsl/bg.glsl";
 import { box_fshader, box_vshader } from "../glsl/box.glsl";
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
 
 const w = 5.5;
 const h = w * 1.5;
@@ -30,10 +33,12 @@ const displaceRand = [-1, 1];
  * Class for the entire movie object
  */
 export default class Movie {
-  constructor(movieObjs, loaders, genreObjs) {
+  constructor(movieObjs, loaders, genreObjs, font, scene) {
     this.movieObjs = movieObjs;
     this.loaders = loaders;
     this.genreObjs = genreObjs;
+    this.font = font;
+    this.scene = scene;
   }
 
   init() {
@@ -52,13 +57,33 @@ export default class Movie {
     this.posterObjs = new Object3D();
     this.posterObjs.posters = [];
     this.posterObjs.planes = [];
+
+    // sort movies by box office & release (ascending order)
+    let sortByBoxOffice = [...this.movieObjs].sort(function (a, b) {
+      return a.boxOfficeInt - b.boxOfficeInt;
+    });
+    let sortByTime = [...this.movieObjs].sort(function (a, b) {
+      return parseInt(a.year) - parseInt(b.year);
+    });
+    console.log(sortByTime);
+
+    const xPositions = [-21, -15, -5, 0.5, 9, 18];
+    const yPositions = [-7, -5, -3, 0, 2, 5];
+
     this.movieObjs.forEach((movie, index) => {
-      let yOffset = index % 2 === 0 ? yOffset_bot : yOffset_top;
-      let randX = Math.random() * 3;
+      // let yOffset = index % 2 === 0 ? yOffset_bot : yOffset_top;
+      let randX = Math.random() * 2;
       let randY = Math.random() * 2;
 
-      let x = xOffset + index * padding + randX;
-      let y = yOffset - randY;
+      // let x = xOffset + index * padding + randX;
+      // let y = yOffset - randY;
+      let xIndex = sortByBoxOffice.findIndex((el) => el.name === movie.name);
+      let yIndex = sortByTime.findIndex((el) => el.name === movie.name);
+
+      let x = xPositions[xIndex]; // + randX;
+      let y = yPositions[yIndex] + randY;
+
+      console.log("x, y: ", x, y);
 
       let posterMesh = this.initPoster(movie, x, y);
       this.posterObjs.add(posterMesh);
@@ -79,9 +104,57 @@ export default class Movie {
         0.5
       );
       this.posterObjs.add(genreObj);
+
+      // let coordinateText = this.createCoordText(movie);
+      // coordinateText.position.set(
+      //   x - (w / 2) * displaceX,
+      //   y - (h / 2) * displaceY,
+      //   1.5
+      // );
+      // coordinateText.scale.set(5, 5, 5);
+      // this.posterObjs.add(coordinateText);
     });
 
     return this.posterObjs;
+  }
+
+  createCoordText(movie) {
+    let that = this;
+
+    const loader = new FontLoader();
+    this.font = loader.load(
+      "assets/fonts/PPGoshaSans.json",
+      // onLoad callback
+      function (font) {
+        // do something with the font
+        console.log(font);
+        const geometry = new TextGeometry("Hello three.js!", {
+          font: font,
+          size: 80,
+          height: 5,
+          curveSegments: 12,
+          bevelEnabled: true,
+          bevelThickness: 10,
+          bevelSize: 8,
+          bevelOffset: 0,
+          bevelSegments: 5,
+        });
+        const material = new MeshNormalMaterial({ color: new Color("red") });
+        const mesh = new Mesh(geometry, material);
+        that.scene.add(mesh);
+      },
+
+      // onProgress callback
+      function (xhr) {
+        console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+      },
+
+      // onError callback
+      function (err) {
+        console.log("An error happened");
+      }
+    );
+    // return mesh;
   }
 
   initPoster(movie) {

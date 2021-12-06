@@ -10,11 +10,17 @@ import {
   PointLight,
   TextureLoader,
   Clock,
+  MeshNormalMaterial,
+  TextGeometry,
+  MeshBasicMaterial,
+  DoubleSide,
+  Group,
 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { CSS3DRenderer } from "three/examples/jsm/renderers/CSS3DRenderer";
-
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
+import helvetiker from "three/examples/fonts/helvetiker_regular.typeface.json";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass";
@@ -52,11 +58,18 @@ export default class WebGLApp {
     this.camera = new PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
-      1,
+      0.1,
       1000
     );
     this.camera.position.set(0, 0, 20);
     this.camera.lookAt(this.scene.position);
+    // this.camera = new PerspectiveCamera(
+    //   75,
+    //   window.innerWidth / window.innerHeight,
+    //   0.1,
+    //   1000
+    // );
+    // this.camera.position.z = 5;
     this.tanFOV = Math.tan(((Math.PI / 180) * this.camera.fov) / 2);
     this.renderer = new WebGLRenderer({ antialias: true });
     this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -75,8 +88,10 @@ export default class WebGLApp {
     this.clock = new Clock();
     this.createCube();
     this.createLights();
+    this.loadFont();
     this.loadMovieGenreObjs();
     this.initPostprocessing();
+    //this.test();
     console.log("Finished set up");
   };
 
@@ -95,7 +110,13 @@ export default class WebGLApp {
     let loaders = {
       textureLoader: this.textureLoader,
     };
-    let movieObj = new Movie(this.movieObjs, loaders, this.movieGenreObjs);
+    let movieObj = new Movie(
+      this.movieObjs,
+      loaders,
+      this.movieGenreObjs,
+      this.font,
+      this.scene
+    );
     let obj = movieObj.init();
     this.scene.add(obj);
     this.movieObj = obj;
@@ -108,9 +129,64 @@ export default class WebGLApp {
     }
   };
 
+  createText = (font) => {
+    console.log("In createText");
+    const textGeometry = new TextGeometry("Hello world!", {
+      font,
+      size: 0.8,
+      height: 0.3,
+      curveSegments: 4,
+      bevelEnabled: true,
+      bevelThickness: 0.05,
+      bevelSize: 0.05,
+      bevelOffset: -0.05,
+      bevelSegments: 5,
+    });
+    const material = new MeshNormalMaterial();
+    const text = new Mesh(textGeometry, material);
+    textGeometry.computeBoundingBox();
+    textGeometry.center();
+    this.textGroup.add(text);
+  };
+
+  /**
+   * Debug
+   */
+  test = () => {
+    this.textGroup = new Group();
+    this.scene.add(this.textGroup);
+    this.fontLoader.load(
+      "https://assets.codepen.io/85648/Luckiest+Guy_Regular.json",
+      this.createText
+    );
+  };
+
   /**
    * Init scene
    */
+  loadFont = () => {
+    this.fontLoader = new FontLoader();
+    return;
+    this.font = this.fontLoader.load(
+      "assets/fonts/PPGoshaSans.json",
+      // onLoad callback
+      function (font) {
+        // do something with the font
+        console.log(font);
+      },
+
+      // onProgress callback
+      function (xhr) {
+        console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+      },
+
+      // onError callback
+      function (err) {
+        console.log("An error happened");
+      }
+    );
+  };
+
   loadMovieGenreObjs = () => {
     models.forEach((mod) => this.loadModel(mod));
   };
