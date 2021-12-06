@@ -97,9 +97,15 @@ hr {
   font-size: 1.2vw;
 }
 
-.btn-group button {
+#catalog__content button {
   background-color: white;
   border: 1px solid rgb(130, 75, 219);
   color: rgb(130, 75, 219);
   font-size: 1vw;
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#catalog__content button:hover {
+  border: 1px dashed rgb(184, 98, 255);
+  background-color: rgb(233, 132, 236);
 }

@@ -1,11 +1,33 @@
 import Button from "@restart/ui/esm/Button";
-import { Col, Row, Container, ButtonGroup } from "react-bootstrap";
+import { useState } from "react";
+import {
+  Col,
+  Row,
+  Container,
+  ButtonGroup,
+  ToggleButton,
+} from "react-bootstrap";
 import NavigationBar from "../components/Navbar";
 import complete_data from "../data/final-data.json";
 import "../styles/catalog.css";
 
 export default function Catalog() {
+  const [sortByBO, setSort] = useState(false);
+  const [displayData, setData] = useState(complete_data);
+  let sortedData = [...complete_data].sort(function (a, b) {
+    return b.boxOfficeAvg - a.boxOfficeAvg;
+  }); // descending order
   let lastMovieCnt = 0;
+
+  const handleSort = () => {
+    const sort = !sortByBO;
+    setSort(sort);
+    if (sort) {
+      setData(sortedData);
+    } else {
+      setData(complete_data);
+    }
+  };
 
   return (
     <div>
@@ -15,23 +37,30 @@ export default function Catalog() {
         <h1 className="title">Catalog</h1>
         <p className="page__description">
           This is as comprehensive catalog of {complete_data.length} directors
-          displayed on this website. You can sort the list of directors by the
-          movie count and average box office criteria, and clicking on a
-          director's name brings you to the data visualization of that
-          particular director.
+          displayed on this website.
+          <br /> You can sort the list of directors by their movies' average box
+          office.
+          <br /> Clicking on a director's name brings you to the data
+          visualization of that particular director.
         </p>
 
         <Container fluid>
           <Row className="justify-content-md-center">
             <Col>
-              <ButtonGroup aria-label="Basic example">
-                <Button variant="secondary">Sort By Movie Count</Button>
-                <Button variant="secondary">Sort By Average Box Office</Button>
-              </ButtonGroup>
+              <Button
+                type="checkbox"
+                onClick={handleSort}
+                style={{
+                  backgroundColor: sortByBO ? "rgb(130, 75, 219)" : "white",
+                  color: sortByBO ? "white" : "rgb(130, 75, 219)",
+                }}
+              >
+                Sort By Average Box Office
+              </Button>
             </Col>
           </Row>
           <Row>
-            {complete_data.map((director, index) => {
+            {displayData.map((director, index) => {
               let nameJsx = (
                 <Col md={4}>
                   <span className="directorName">
@@ -50,20 +79,33 @@ export default function Catalog() {
                   </span>
                 </Col>
               );
-              let finalJsx;
-              if (director.movieCnt !== lastMovieCnt) {
-                lastMovieCnt = director.movieCnt;
-                let label = (
-                  <div>
-                    <hr style={{ color: "rgb(130, 75, 219)" }} />
-                    <h3 className="section__title">
-                      Directors with {lastMovieCnt} movies:
-                    </h3>
-                  </div>
-                );
-                finalJsx = [label, nameJsx];
+              let finalJsx = nameJsx;
+              if (sortByBO) {
+                if (index % 11 === 0) {
+                  let label = (
+                    <div>
+                      <hr style={{ color: "rgb(130, 75, 219)" }} />
+                      <h3 className="section__title">
+                        Directors with average box office over $
+                        {new Intl.NumberFormat().format(director.boxOfficeAvg)}:
+                      </h3>
+                    </div>
+                  );
+                  finalJsx = [label, nameJsx];
+                }
               } else {
-                finalJsx = nameJsx;
+                if (director.movieCnt !== lastMovieCnt) {
+                  lastMovieCnt = director.movieCnt;
+                  let label = (
+                    <div>
+                      <hr style={{ color: "rgb(130, 75, 219)" }} />
+                      <h3 className="section__title">
+                        Directors with {lastMovieCnt} movies:
+                      </h3>
+                    </div>
+                  );
+                  finalJsx = [label, nameJsx];
+                }
               }
               return finalJsx;
             })}
