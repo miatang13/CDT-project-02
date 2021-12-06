@@ -109,6 +109,14 @@ export default function Main() {
     };
   }, []);
 
+  // toggle NYT articles
+  const [showNYT, setShowNYT] = useState(false);
+
+  function handleToggleNYT() {
+    let orig = showNYT;
+    setShowNYT(!orig);
+  }
+
   const snippetPositions = [
     { marginLeft: "-60vw", marginTop: "-40vh" },
     { marginLeft: "-50vw", marginTop: "30vh" },
@@ -131,52 +139,72 @@ export default function Main() {
             <h1 id="director_name">{complete_data[currentIdx].name}</h1>
             <hr id="x__axis" />
             <span id="x__axis__label"> Box Office (Least to Greatest) </span>
-            {complete_data[currentIdx].NYT_articles.map((article, index) => (
-              <div
-                className="article__snippet"
-                style={snippetPositions[index]}
-                key={index}
-              >
-                <p>"{article.snippet} "</p>
-                <a
-                  className="btn"
-                  target="_blank"
-                  rel="noreferrer"
-                  href={article.web_url}
+
+            {showNYT &&
+              complete_data[currentIdx].NYT_articles.map((article, index) => (
+                <div
+                  className="article__snippet"
+                  style={snippetPositions[index]}
+                  key={index}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="white"
-                    className="bi bi-link-45deg"
-                    viewBox="0 0 16 16"
+                  <p>"{article.snippet} "</p>
+                  <a
+                    className="btn"
+                    target="_blank"
+                    rel="noreferrer"
+                    href={article.web_url}
                   >
-                    <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
-                    <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z" />
-                  </svg>{" "}
-                  Read More
-                </a>
-              </div>
-            ))}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="white"
+                      className="bi bi-link-45deg"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
+                      <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z" />
+                    </svg>{" "}
+                    Read More
+                  </a>
+                </div>
+              ))}
           </div>
         </div>
 
         <div id="footer">
-          <button className="btn btn-light" onClick={handleAddDirector}>
-            Add director{" "}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="white"
-              className="bi bi-bookmark-plus"
-              viewBox="0 0 16 16"
-            >
-              <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
-              <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z" />
-            </svg>
-          </button>
+          <div>
+            <button className="btn btn-light" onClick={handleAddDirector}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="white"
+                className="bi bi-bookmark-plus"
+                viewBox="0 0 16 16"
+              >
+                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z" />
+              </svg>{" "}
+              Add director{" "}
+            </button>
+          </div>
+          <div>
+            <button className="btn btn-light" onClick={handleToggleNYT}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="white"
+                className="bi bi-eye"
+                viewBox="0 0 16 16"
+              >
+                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+              </svg>{" "}
+              Toggle Articles
+            </button>{" "}
+          </div>
         </div>
       </div>
     </div>

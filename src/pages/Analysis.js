@@ -60,7 +60,8 @@ export default function Analysis() {
                         </Card.Title>
                         <Card.Text>✔️ {item.movieCnt} passing movies</Card.Text>
                         <Card.Text>
-                          💰 Avg box office: ${item.boxOfficeAvg}
+                          💰 Avg box office: $
+                          {new Intl.NumberFormat().format(item.boxOfficeAvg)}
                         </Card.Text>
                         <Carousel
                           interval={5000000}
