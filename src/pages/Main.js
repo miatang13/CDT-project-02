@@ -2,16 +2,21 @@ import { useEffect, useRef, useState } from "react";
 import WebGLApp from "../webgl/webgl-app";
 import "../styles/main.css";
 import complete_data from "../data/final-data.json";
-import { initRefArray } from "../webgl/helper/ref";
 
 // redux
 import { useDispatch } from "react-redux";
 import { add } from "../reducers/cart";
 import NavigationBar from "../components/Navbar";
+import { snippetPositions } from "../utility/snippetPositions";
 
 export default function Main() {
   const max_index = complete_data.length - 1;
-  const [currentIdx, setIdx] = useState(15);
+  var directorIdx = 0; // actual reference to number
+  if (localStorage.getItem("directorIdx")) {
+    directorIdx = JSON.parse(localStorage.getItem("directorIdx"));
+  }
+
+  const [currentIdx, setIdx] = useState(directorIdx); // used to trigger re-render
 
   // webgl
   const containerRef = useRef(null);
@@ -34,7 +39,7 @@ export default function Main() {
   function updateCart() {
     let orig = JSON.parse(localStorage.getItem("cart"));
     const MAX_DIRECTORS = 4;
-    orig.push(complete_data[currentIdx]);
+    orig.push(complete_data[directorIdx]);
     if (orig.length > MAX_DIRECTORS) {
       alert("You can only select a maximum of 4 directors to compare. :-)");
       return;
@@ -43,8 +48,8 @@ export default function Main() {
   }
 
   function handleAddDirector() {
-    dispatch(add(currentIdx));
-    updateCart(currentIdx);
+    dispatch(add(directorIdx));
+    updateCart(directorIdx);
   }
 
   function getWebglParams(new_index) {
@@ -65,20 +70,22 @@ export default function Main() {
   }
 
   function handleUpdateState(new_index) {
+    localStorage.setItem("directorIdx", new_index);
     webglApp.current.updateState(getWebglParams(new_index));
   }
 
   function updateDirector(e) {
     let new_index;
-    console.log("currentidx", currentIdx);
+    console.log("currentidx", directorIdx);
     if (e.key === "ArrowDown") {
-      new_index = Math.min(currentIdx + 1, max_index);
+      new_index = Math.min(directorIdx + 1, max_index);
     } else if (e.key === "ArrowUp") {
-      new_index = Math.max(currentIdx - 1, 0);
+      new_index = Math.max(directorIdx - 1, 0);
     } else {
       return;
     }
-    if (new_index === currentIdx) return;
+    if (new_index === directorIdx) return;
+    directorIdx = new_index;
     setIdx(new_index);
     handleUpdateState(new_index);
   }
@@ -116,14 +123,6 @@ export default function Main() {
     let orig = showNYT;
     setShowNYT(!orig);
   }
-
-  const snippetPositions = [
-    { marginLeft: "-60vw", marginTop: "-40vh" },
-    { marginLeft: "-50vw", marginTop: "30vh" },
-    { marginLeft: "50vw", marginTop: "-65vh" },
-    { marginLeft: "10vw", marginTop: "-40vh" },
-    { marginLeft: "65vw", marginTop: "55vh" },
-  ];
 
   return (
     <div id="main__wrapper">

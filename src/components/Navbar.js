@@ -1,10 +1,10 @@
-import { Dropdown, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Nav, NavDropdown } from "react-bootstrap";
 
 export default function NavigationBar(props) {
   const handleSelect = (eventKey) => console.log(`selected ${eventKey}`);
   const svgParams = {
-    width: 25,
-    height: 25,
+    width: 20,
+    height: 20,
   };
   const dropdownColor = props.color === "white" ? "black" : "white";
 

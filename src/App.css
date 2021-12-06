@@ -20,6 +20,7 @@ button.accordion {
 a.nav-link {
   color: rgb(255, 255, 255);
   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  font-size: 1vw;
 }
 
 a.nav-link.active {
