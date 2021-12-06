@@ -65,10 +65,38 @@ export default class Movie {
     let sortByTime = [...this.movieObjs].sort(function (a, b) {
       return parseInt(a.year) - parseInt(b.year);
     });
-    console.log(sortByTime);
 
-    const xPositions = [-21, -15, -5, 0.5, 9, 18];
-    const yPositions = [-7, -5, -3, 0, 2, 5];
+    // different positions for different numbers of posters
+    const pos_6 = {
+      xPositions: [-18, -12, -5, 0.5, 9, 18],
+      yPositions: [-7, -5, -3, 0, 2, 5],
+    };
+
+    const pos_5 = {
+      xPositions: [-15, -7, -3, 5, 14],
+      yPositions: [-7, -3, 0, 2, 5],
+    };
+
+    const pos_4 = {
+      xPositions: [-15, -5, 3, 14],
+      yPositions: [-7, -3, 2, 5],
+    };
+
+    const pos_3 = {
+      xPositions: [-15, 0, 14],
+      yPositions: [-7, 0, 5],
+    };
+
+    const pos_2 = {
+      xPositions: [-10, 14],
+      yPositions: [-7, 5],
+    };
+
+    const positions = [{}, {}, pos_2, pos_3, pos_4, pos_5, pos_6];
+
+    const curPos = positions[this.movieObjs.length];
+    const xPositions = curPos.xPositions;
+    const yPositions = curPos.yPositions;
 
     this.movieObjs.forEach((movie, index) => {
       // let yOffset = index % 2 === 0 ? yOffset_bot : yOffset_top;
@@ -82,8 +110,6 @@ export default class Movie {
 
       let x = xPositions[xIndex]; // + randX;
       let y = yPositions[yIndex] + randY;
-
-      console.log("x, y: ", x, y);
 
       let posterMesh = this.initPoster(movie, x, y);
       this.posterObjs.add(posterMesh);

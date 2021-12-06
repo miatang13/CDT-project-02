@@ -11,16 +11,12 @@ import NavigationBar from "../components/Navbar";
 
 export default function Main() {
   const max_index = complete_data.length - 1;
-  var currentDirectorIdx = 0;
-  const [currentIdx, setIdx] = useState(0);
+  const [currentIdx, setIdx] = useState(15);
 
   // webgl
   const containerRef = useRef(null);
   const cssContainerRef = useRef(null);
   const webglApp = useRef(null);
-  const postersDivRef = useRef(null);
-  const posterImgRefs = useRef([]);
-  initRefArray(posterImgRefs, 6); // max length
   const directorNameRef = useRef(null);
 
   // redux
@@ -47,12 +43,13 @@ export default function Main() {
   }
 
   function handleAddDirector() {
-    dispatch(add(currentDirectorIdx));
-    updateCart(currentDirectorIdx);
+    dispatch(add(currentIdx));
+    updateCart(currentIdx);
   }
 
-  function getWebglParams() {
-    let movieObjs = complete_data[currentDirectorIdx].movies.map((movie) => {
+  function getWebglParams(new_index) {
+    console.log("New index in getwebglparams:", new_index);
+    let movieObjs = complete_data[new_index].movies.map((movie) => {
       let first_genre = movie.Genre.substr(0, movie.Genre.indexOf(","));
       return {
         imgLink: movie.Poster,
@@ -67,23 +64,23 @@ export default function Main() {
     return movieObjs;
   }
 
-  function handleUpdateState() {
-    webglApp.current.updateState(getWebglParams());
+  function handleUpdateState(new_index) {
+    webglApp.current.updateState(getWebglParams(new_index));
   }
 
   function updateDirector(e) {
     let new_index;
+    console.log("currentidx", currentIdx);
     if (e.key === "ArrowDown") {
-      new_index = Math.min(currentDirectorIdx + 1, max_index);
+      new_index = Math.min(currentIdx + 1, max_index);
     } else if (e.key === "ArrowUp") {
-      new_index = Math.max(currentDirectorIdx - 1, 0);
+      new_index = Math.max(currentIdx - 1, 0);
     } else {
       return;
     }
-    if (new_index === currentDirectorIdx) return;
-    currentDirectorIdx = new_index;
+    if (new_index === currentIdx) return;
     setIdx(new_index);
-    handleUpdateState();
+    handleUpdateState(new_index);
   }
 
   useEffect(() => {
@@ -97,11 +94,9 @@ export default function Main() {
     webglApp.current = new WebGLApp(
       containerRef.current,
       cssContainerRef.current,
-      postersDivRef.current,
-      posterImgRefs.current,
       directorNameRef.current
     );
-    webglApp.current.setup(getWebglParams());
+    webglApp.current.setup(getWebglParams(currentIdx));
     //handleUpdateState();
     webglApp.current.render(true);
     window.addEventListener("resize", onWindowResize, false);

@@ -31,11 +31,9 @@ import Movie from "./class/Movie";
 const models = ["biography", "comedy"];
 
 export default class WebGLApp {
-  constructor(container, cssContainer, postersDiv, posterImgRefs, nameSpan) {
+  constructor(container, cssContainer, nameSpan) {
     this.htmlElem = container;
     this.cssElem = cssContainer;
-    this.postersDiv = postersDiv;
-    this.posterImages = posterImgRefs.map((ref) => ref.current);
     this.nameSpan = nameSpan;
     this.rafId = 0;
     this.isRendering = false;
@@ -120,7 +118,7 @@ export default class WebGLApp {
     let obj = movieObj.init();
     this.scene.add(obj);
     this.movieObj = obj;
-    console.log("Finished creating new state", this.movieObj);
+    console.log("Finished creating new state");
   };
 
   clearState = () => {

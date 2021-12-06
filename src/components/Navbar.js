@@ -1,7 +1,6 @@
 import { Dropdown, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 export default function NavigationBar(props) {
-  console.log(props);
   const handleSelect = (eventKey) => console.log(`selected ${eventKey}`);
   const svgParams = {
     width: 25,
