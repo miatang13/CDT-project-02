@@ -164,7 +164,6 @@ export default class WebGLApp {
    */
   loadFont = () => {
     this.fontLoader = new FontLoader();
-    return;
     this.font = this.fontLoader.load(
       "assets/fonts/PPGoshaSans.json",
       // onLoad callback
@@ -230,7 +229,7 @@ export default class WebGLApp {
     const boxSize = 50;
     let geometry = new BoxGeometry(boxSize, boxSize, boxSize);
     let material = new MeshPhongMaterial({
-      color: new Color("Orange"),
+      color: new Color(0x7c71fe),
       wireframe: true,
     });
     this.cube = new Mesh(geometry, material);

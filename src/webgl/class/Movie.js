@@ -19,6 +19,7 @@ import { rand } from "../helper/rand";
 import { vshader, fshader } from "../glsl/bg.glsl";
 import { box_fshader, box_vshader } from "../glsl/box.glsl";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
+import { posterPositions } from "../constants/positions";
 
 const w = 5.5;
 const h = w * 1.5;
@@ -65,50 +66,18 @@ export default class Movie {
     let sortByTime = [...this.movieObjs].sort(function (a, b) {
       return parseInt(a.year) - parseInt(b.year);
     });
-
-    // different positions for different numbers of posters
-    const pos_6 = {
-      xPositions: [-18, -12, -5, 0.5, 9, 18],
-      yPositions: [-7, -5, -3, 0, 2, 5],
-    };
-
-    const pos_5 = {
-      xPositions: [-15, -7, 0, 7, 14],
-      yPositions: [-7, -3, 0, 2, 5],
-    };
-
-    const pos_4 = {
-      xPositions: [-15, -5, 3, 14],
-      yPositions: [-7, -3, 2, 5],
-    };
-
-    const pos_3 = {
-      xPositions: [-15, 0, 14],
-      yPositions: [-7, 0, 5],
-    };
-
-    const pos_2 = {
-      xPositions: [-10, 14],
-      yPositions: [-7, 5],
-    };
-
-    const positions = [{}, {}, pos_2, pos_3, pos_4, pos_5, pos_6];
-
-    const curPos = positions[this.movieObjs.length];
+    const curPos = posterPositions[this.movieObjs.length];
     const xPositions = curPos.xPositions;
     const yPositions = curPos.yPositions;
 
     this.movieObjs.forEach((movie, index) => {
-      // let yOffset = index % 2 === 0 ? yOffset_bot : yOffset_top;
       let randX = Math.random() * 2;
       let randY = Math.random() * 2;
 
-      // let x = xOffset + index * padding + randX;
-      // let y = yOffset - randY;
       let yIndex = sortByBoxOffice.findIndex((el) => el.name === movie.name);
       let xIndex = sortByTime.findIndex((el) => el.name === movie.name);
 
-      let x = xPositions[xIndex]; // + randX;
+      let x = xPositions[xIndex] + randX;
       let y = yPositions[yIndex] + randY;
 
       let posterMesh = this.initPoster(movie, x, y);
@@ -131,56 +100,34 @@ export default class Movie {
       );
       this.posterObjs.add(genreObj);
 
-      // let coordinateText = this.createCoordText(movie);
-      // coordinateText.position.set(
-      //   x - (w / 2) * displaceX,
-      //   y - (h / 2) * displaceY,
-      //   1.5
-      // );
-      // coordinateText.scale.set(5, 5, 5);
-      // this.posterObjs.add(coordinateText);
+      let coordinateText = this.createCoordText(movie);
+      coordinateText.position.set(
+        x - (w / 2) * displaceX,
+        y - (h / 2) * displaceY,
+        1.5
+      );
+      coordinateText.scale.set(5, 5, 5);
+      this.posterObjs.add(coordinateText);
     });
 
     return this.posterObjs;
   }
 
   createCoordText(movie) {
-    let that = this;
-
-    const loader = new FontLoader();
-    this.font = loader.load(
-      "assets/fonts/PPGoshaSans.json",
-      // onLoad callback
-      function (font) {
-        // do something with the font
-        console.log(font);
-        const geometry = new TextGeometry("Hello three.js!", {
-          font: font,
-          size: 80,
-          height: 5,
-          curveSegments: 12,
-          bevelEnabled: true,
-          bevelThickness: 10,
-          bevelSize: 8,
-          bevelOffset: 0,
-          bevelSegments: 5,
-        });
-        const material = new MeshNormalMaterial({ color: new Color("red") });
-        const mesh = new Mesh(geometry, material);
-        that.scene.add(mesh);
-      },
-
-      // onProgress callback
-      function (xhr) {
-        console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-      },
-
-      // onError callback
-      function (err) {
-        console.log("An error happened");
-      }
-    );
-    // return mesh;
+    const geometry = new TextGeometry("Hello three.js!", {
+      font: this.font,
+      size: 80,
+      height: 5,
+      curveSegments: 12,
+      bevelEnabled: true,
+      bevelThickness: 10,
+      bevelSize: 8,
+      bevelOffset: 0,
+      bevelSegments: 5,
+    });
+    const material = new MeshNormalMaterial({ color: new Color("red") });
+    const mesh = new Mesh(geometry, material);
+    return mesh;
   }
 
   initPoster(movie) {

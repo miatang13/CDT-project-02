@@ -12,6 +12,7 @@ import EmptyAnalysis from "../components/EmptyAnalysis";
 import NavigationBar from "../components/Navbar";
 import "../styles/analysis.css";
 import complete_data from "../data/main-data.json";
+import { rand } from "../webgl/helper/rand";
 
 export default function Analysis() {
   let initialCart = JSON.parse(localStorage.getItem("cart"));
@@ -30,17 +31,14 @@ export default function Analysis() {
     setCart(newCart);
   }
 
-  let recommendationIdx =
-    Math.floor(Math.random() * complete_data.length - 3) + 2;
-  console.log(recommendationIdx);
   let recommendations = [];
   for (let i = 0; i < 3; i++) {
-    recommendations.push(complete_data[i + recommendationIdx]);
+    recommendations.push(rand(complete_data));
   }
 
   return (
     <div id="analysis__root">
-      <NavigationBar activeKey={4} color="0x000000" />
+      <NavigationBar activeKey={4} color="rgb(130, 75, 219)" />
 
       <div id="analysis__content" className="min-vh-100">
         <h1 className="title">Your top directors</h1>
@@ -53,7 +51,7 @@ export default function Analysis() {
               <Row>
                 {cartData.map((item, index) => (
                   <Col sm={3} key={item.name + index}>
-                    <Card bg="light">
+                    <Card style={{ borderColor: "rgb(130, 75, 219)" }}>
                       <Card.Body>
                         <Card.Title className="directorName">
                           {item.name}
@@ -92,7 +90,7 @@ export default function Analysis() {
                                       🎬 {movieObj.Released}
                                     </p>
                                     <p className="movieGenre">
-                                      {movieObj.Genre}
+                                      #{movieObj.Genre}
                                     </p>
                                   </Accordion.Body>
                                 </Accordion.Item>
@@ -101,9 +99,15 @@ export default function Analysis() {
                           ))}
                         </Carousel>
                       </Card.Body>
-                      <Card.Footer>
+                      <Card.Footer
+                        style={{ backgroundColor: " rgb(231, 206, 255)" }}
+                      >
                         <Button
-                          variant="outline-secondary"
+                          style={{
+                            borderColor: "rgb(130, 75, 219)",
+                            backgroundColor: "white",
+                            color: "rgb(130, 75, 219)",
+                          }}
                           onClick={() => handleRemove(item.name)}
                         >
                           Remove

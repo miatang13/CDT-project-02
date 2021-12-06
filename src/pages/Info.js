@@ -6,7 +6,7 @@ export default function Info() {
     <div>
       <NavigationBar color={"black"} activeKey={3} />
       <div>
-        <p> Info </p>
+        <h1 className="title">Info</h1>
       </div>
     </div>
   );

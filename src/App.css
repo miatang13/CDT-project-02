@@ -17,15 +17,19 @@ button.accordion {
   font-size: 1vw;
 }
 
+button.accordion-button {
+  color: rgb(106, 51, 194);
+}
+
 a.nav-link {
   color: rgb(255, 255, 255);
   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
   font-size: 1vw;
+  font-family: GoshaSans-Regular, sans-serif;
 }
 
 a.nav-link.active {
-  background-color: rgb(251, 137, 255);
-  border: 1px white solid;
+  background-color: rgb(130, 75, 219);
 }
 
 a.nav-link:hover {
@@ -57,4 +61,21 @@ hr {
       0 0 20px rgb(251, 137, 255), 0 0 30px rgb(251, 137, 255),
       0 0 10px rgb(251, 137, 255);
   }
+}
+
+.title {
+  font-size: 2.5vw;
+  font-family: GoshaSans-Bold, sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  color: rgb(130, 75, 219);
+  margin-bottom: 2vw;
+  margin-left: 1vw;
+}
+
+.sub__title {
+  font-size: 1.5vw;
+  padding: 5vw;
+  font-family: GoshaSans-Bold, sans-serif;
+  color: rgb(130, 75, 219);
 }

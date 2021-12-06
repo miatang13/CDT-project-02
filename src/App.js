@@ -9,6 +9,7 @@ import "./App.css";
 import "./styles/typeface.css";
 import Analysis from "./pages/Analysis";
 import Info from "./pages/Info";
+import Catalog from "./pages/Catalog";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Main} />
             <Route path="/analysis" component={Analysis} />
+            <Route path="/catalog" component={Catalog} />
             <Route path="/info" component={Info} />
             <Route path="/data" component={Data} />
             <Route path="/fetch-data" component={FetchData} />
