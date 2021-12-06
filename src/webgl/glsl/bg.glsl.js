@@ -131,10 +131,10 @@ void main (void)
   // gl_FragColor = vec4(mapped, 1); 
 
   float wave = v_wave * 0.25;
-  float r = texture2D(uTexture, v_uv).r;
-  float g = texture2D(uTexture, v_uv).g;
-  float b = texture2D(uTexture, v_uv + wave).b;
+  float r = texture2D(uTexture, v_uv).r * 0.7;
+  float g = texture2D(uTexture, v_uv + wave/2.0).g * 0.5;
+  float b = texture2D(uTexture, v_uv + wave).b * 2.0;
   vec3 texture = vec3(r, g, b);
-  gl_FragColor = vec4(texture, 1.);
+  gl_FragColor = vec4(texture, 1.0);
 }
 `;
