@@ -1,20 +1,21 @@
 {
   "files": {
-    "main.css": "/CDT-project-02/static/css/main.b4d1f760.chunk.css",
-    "main.js": "/CDT-project-02/static/js/main.4e80a8d1.chunk.js",
-    "main.js.map": "/CDT-project-02/static/js/main.4e80a8d1.chunk.js.map",
+    "main.css": "/CDT-project-02/static/css/main.c2da13c3.chunk.css",
+    "main.js": "/CDT-project-02/static/js/main.40dddb1f.chunk.js",
+    "main.js.map": "/CDT-project-02/static/js/main.40dddb1f.chunk.js.map",
     "runtime-main.js": "/CDT-project-02/static/js/runtime-main.1de895dc.js",
     "runtime-main.js.map": "/CDT-project-02/static/js/runtime-main.1de895dc.js.map",
-    "static/js/2.12f2bf67.chunk.js": "/CDT-project-02/static/js/2.12f2bf67.chunk.js",
-    "static/js/2.12f2bf67.chunk.js.map": "/CDT-project-02/static/js/2.12f2bf67.chunk.js.map",
+    "static/js/2.37daf74c.chunk.js": "/CDT-project-02/static/js/2.37daf74c.chunk.js",
+    "static/js/2.37daf74c.chunk.js.map": "/CDT-project-02/static/js/2.37daf74c.chunk.js.map",
     "index.html": "/CDT-project-02/index.html",
-    "static/css/main.b4d1f760.chunk.css.map": "/CDT-project-02/static/css/main.b4d1f760.chunk.css.map",
-    "static/js/2.12f2bf67.chunk.js.LICENSE.txt": "/CDT-project-02/static/js/2.12f2bf67.chunk.js.LICENSE.txt"
+    "static/css/main.c2da13c3.chunk.css.map": "/CDT-project-02/static/css/main.c2da13c3.chunk.css.map",
+    "static/js/2.37daf74c.chunk.js.LICENSE.txt": "/CDT-project-02/static/js/2.37daf74c.chunk.js.LICENSE.txt",
+    "static/media/typeface.css": "/CDT-project-02/static/media/PPGoshaSans-Regular.7d1757a0.otf"
   },
   "entrypoints": [
     "static/js/runtime-main.1de895dc.js",
-    "static/js/2.12f2bf67.chunk.js",
-    "static/css/main.b4d1f760.chunk.css",
-    "static/js/main.4e80a8d1.chunk.js"
+    "static/js/2.37daf74c.chunk.js",
+    "static/css/main.c2da13c3.chunk.css",
+    "static/js/main.40dddb1f.chunk.js"
   ]
 }
