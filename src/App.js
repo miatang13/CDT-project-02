@@ -5,6 +5,7 @@ import FetchData from "./pages/FetchData";
 import Landing from "./pages/Landing";
 import Main from "./pages/Main";
 import ParseData from "./pages/ParseData";
+import "./styles/reset.css";
 import "./App.css";
 import "./styles/typeface.css";
 import Analysis from "./pages/Analysis";

@@ -4,10 +4,39 @@
   font-style: normal;
   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
   scroll-behavior: smooth;
+  margin: 0.5vw;
+}
+
+h1 {
+  margin-bottom: 1vw;
+}
+
+h3 {
+  margin-bottom: 1vw;
+}
+
+span {
+  font-family: GoshaSans-Regular, sans-serif;
 }
 
 p {
   font-size: 1vw;
+  font-family: halyard-display, sans-serif;
+  line-height: 1.2em;
+}
+
+button {
+  font-family: halyard-display, sans-serif;
+  padding: 0.5vw;
+}
+
+img {
+  padding: 1vw;
+}
+
+svg {
+  padding: none;
+  margin: none;
 }
 
 button.btn {
@@ -96,6 +125,7 @@ hr {
   width: 48%;
   margin-left: 1vw;
   font-size: 1.2vw;
+  margin-bottom: 1vw;
 }
 
 #catalog__content button {
@@ -109,4 +139,39 @@ hr {
 #catalog__content button:hover {
   border: 1px dashed rgb(184, 98, 255);
   background-color: rgb(233, 132, 236);
+}
+
+#loading__screen {
+  transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.letters span {
+  font-family: GoshaSans-Bold, sans-serif;
+  color: rgb(127, 61, 233);
+  font-size: 5vw;
+}
+
+.load-text {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.load-text .text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.load-text .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+
+h1 {
+  font-family: GoshaSans-Bold, sans-serif;
+  font-size: 5vw;
 }

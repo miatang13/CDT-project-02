@@ -29,7 +29,7 @@ export default function Catalog() {
     <div>
       <NavigationBar activeKey={2} color="rgb(130, 75, 219)" />
 
-      <div id="catalog__content" className="content__wrapper">
+      <div id="catalog__content" className="content__wrapper page__root">
         <h1 className="title">Catalog</h1>
         <p className="page__description">
           This is a comprehensive catalog of {complete_data.length} directors

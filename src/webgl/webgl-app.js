@@ -28,15 +28,38 @@ import { FXAAShader } from "three/examples/jsm/shaders/FXAAShader";
 import { LuminosityShader } from "three/examples/jsm/shaders/LuminosityShader.js";
 import Movie from "./class/Movie";
 
-const models = ["biography", "comedy"];
+const models = [
+  "biography",
+  "comedy",
+  "action",
+  "animation",
+  "crime",
+  "documentary",
+  "drama",
+  "fantasy",
+  "filmnoir",
+  "history",
+  "horror",
+  "knife",
+  "mountain",
+  "musical",
+  "mystery",
+  "romance",
+  "short",
+  "superhero",
+  "ufo",
+  "warplan",
+  "western",
+];
 
 export default class WebGLApp {
-  constructor(container, cssContainer, nameSpan) {
+  constructor(container, cssContainer, nameSpan, callback) {
     this.htmlElem = container;
     this.cssElem = cssContainer;
     this.nameSpan = nameSpan;
     this.rafId = 0;
     this.isRendering = false;
+    this.onloadCallback = callback;
     /**
      * Dynamically changed elements
      */
@@ -169,17 +192,17 @@ export default class WebGLApp {
       // onLoad callback
       function (font) {
         // do something with the font
-        console.log(font);
+        //console.log(font);
       },
 
       // onProgress callback
       function (xhr) {
-        console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+        //console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
       },
 
       // onError callback
       function (err) {
-        console.log("An error happened");
+        //console.log("An error happened");
       }
     );
   };
@@ -212,10 +235,11 @@ export default class WebGLApp {
         let model = loaded.scenes[0];
         model.scale.set(scl, scl, scl);
         that.movieGenreObjs[fileName] = model;
-        console.log("Added model", loaded);
+        //console.log("Added model", loaded);
         if (Object.keys(that.movieGenreObjs).length === models.length) {
           that.updateState(that.movieObjs);
           that.hasSetup = true;
+          that.onloadCallback(false);
         }
       },
       (load) => {},

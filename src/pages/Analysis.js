@@ -46,7 +46,7 @@ export default function Analysis() {
     <div id="analysis__root">
       <NavigationBar activeKey={4} color="rgb(130, 75, 219)" />
 
-      <div id="analysis__content" className="content__wrapper">
+      <div id="analysis__content" className="content__wrapper page__root">
         <h1 className="title">Your top directors</h1>
 
         {cartData.length === 0 && <EmptyAnalysis />}

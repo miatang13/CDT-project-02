@@ -7,6 +7,7 @@ export default function Info() {
       <NavigationBar color="rgb(130, 75, 219)" activeKey={3} />
       <div className="content__wrapper">
         <h1 className="title">Info</h1>
+        <div className="page__root"> </div>
       </div>
     </div>
   );

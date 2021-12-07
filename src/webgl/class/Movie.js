@@ -90,7 +90,7 @@ export default class Movie {
       this.posterObjs.add(plane);
       this.posterObjs.planes.push(plane);
 
-      let genreObj = this.genreObjs["comedy"].clone(); // TO CHANGE
+      let genreObj = this.genreObjs["action"].clone(); // TO CHANGE
       let displaceX = rand(displaceRand);
       let displaceY = rand(displaceRand);
       genreObj.position.set(
@@ -99,15 +99,6 @@ export default class Movie {
         0.5
       );
       this.posterObjs.add(genreObj);
-
-      let coordinateText = this.createCoordText(movie);
-      coordinateText.position.set(
-        x - (w / 2) * displaceX,
-        y - (h / 2) * displaceY,
-        1.5
-      );
-      coordinateText.scale.set(5, 5, 5);
-      this.posterObjs.add(coordinateText);
     });
 
     return this.posterObjs;
