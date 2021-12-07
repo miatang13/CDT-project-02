@@ -28,29 +28,30 @@ import { LuminosityShader } from "three/examples/jsm/shaders/LuminosityShader.js
 import Movie from "./class/Movie";
 import anime from "animejs";
 import gsap from "gsap/all";
+// import BiographyModel from "assets/Biography.gltf";
 
 const models = [
   "Biography",
   "Comedy",
   "Action",
   "Animation",
-  // "Crime",
-  // "Documentary",
-  // "Drama",
-  // "Fantasy",
-  // "Filmnoir",
-  // "History",
-  // "Horror",
-  // "Knife",
-  // "Mountain",
-  // "Musical",
-  // "Mystery",
-  // "Romance",
-  // "Short",
-  // "Superhero",
-  // "Ufo",
-  // "Warplan",
-  // "Western",
+  "Crime",
+  "Documentary",
+  "Drama",
+  "Fantasy",
+  "Filmnoir",
+  "History",
+  "Horror",
+  "Knife",
+  "Mountain",
+  "Musical",
+  "Mystery",
+  "Romance",
+  "Short",
+  "Superhero",
+  "Ufo",
+  "Warplan",
+  "Western",
 ];
 
 export default class WebGLApp {
@@ -272,7 +273,7 @@ export default class WebGLApp {
       },
       (load) => {},
       (error) => {
-        console.log("error! ", error);
+        console.log("error with loading file: ", fileName, error);
       }
     );
   };

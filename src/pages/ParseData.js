@@ -155,6 +155,25 @@ export default function ParseData() {
     setOutputJson(new_data);
   }
 
+  function getMovieGenres() {
+    let genres = {};
+    final_data.forEach((dir) => {
+      dir.movies.forEach((movie) => {
+        let first_genre = movie.Genre.substr(0, movie.Genre.indexOf(","));
+        if (first_genre === "") {
+          first_genre = movie.Genre;
+        }
+        if (!genres[first_genre]) {
+          genres[first_genre] = { count: 1 };
+        } else {
+          genres[first_genre].count++;
+        }
+      });
+    });
+    console.log(genres);
+    setOutputJson(genres);
+  }
+
   return (
     <div>
       <a ref={btnRef} href={downloadHref} onClick={compileOutput}>
@@ -164,6 +183,7 @@ export default function ParseData() {
       <button onClick={mergeData}> Merge Data</button>
       <button onClick={analyzeBoxOffice}> Count Box Office</button>
       <button onClick={addIndex}> Add Index </button>
+      <button onClick={getMovieGenres}> Get Movie Genres </button>
     </div>
   );
 }
