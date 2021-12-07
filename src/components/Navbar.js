@@ -52,7 +52,7 @@ export default function NavigationBar(props) {
         <Nav.Link
           href="/analysis"
           eventKey="4"
-          style={{ color: props.activeKey === 3 ? "white" : props.color }}
+          style={{ color: props.activeKey === 4 ? "white" : props.color }}
         >
           Analysis
           {/* <svg

@@ -6,13 +6,13 @@ body {
   bottom: 0;
 }
 
-#main__wrapper html,
-body {
+#main__wrapper {
   position: absolute;
+  overflow: hidden;
+  position: fixed;
 }
 
 #webgl {
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -106,8 +106,9 @@ body {
 
 .vline {
   border-left: 0.5px solid rgb(255, 255, 255);
-  height: 85vh;
-  margin-left: -85%;
+  height: 90vh;
+  margin-left: 5vw;
+  margin-top: 3vh;
   position: absolute;
 }
 
@@ -119,13 +120,15 @@ body {
 #x__axis {
   color: white;
   border: 0.5px white solid;
-  width: 95vw;
-  margin-top: 85vh;
+  width: 96vw;
+  margin-top: 89vh;
+  margin-left: 2vw;
   position: absolute;
 }
 
 #x__axis__label {
   margin-top: 90vh;
+  margin-left: 45vw;
   position: absolute;
   font-size: 0.8vw;
 }

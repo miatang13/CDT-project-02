@@ -215,13 +215,13 @@ export default function Main(props) {
 
         {!isLoading && (
           <div className="min-vh-90" id="director__vis__content">
+            <div className="vline" id="y__axis">
+              <span>Box Office</span>
+            </div>
+            <hr id="x__axis" />
+            <span id="x__axis__label"> Time </span>
             <div className="center__container min-vh-90">
-              <div className="vline" id="y__axis">
-                <span>Box Office</span>
-              </div>
               <h1 id="director_name">{complete_data[currentIdx].name}</h1>
-              <hr id="x__axis" />
-              <span id="x__axis__label"> Time </span>
 
               {showNYT &&
                 complete_data[currentIdx].NYT_articles.map((article, index) => (
