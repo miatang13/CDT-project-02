@@ -27,29 +27,31 @@ import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass";
 import { FXAAShader } from "three/examples/jsm/shaders/FXAAShader";
 import { LuminosityShader } from "three/examples/jsm/shaders/LuminosityShader.js";
 import Movie from "./class/Movie";
+import anime from "animejs";
+import gsap from "gsap/all";
 
 const models = [
-  "biography",
-  "comedy",
-  "action",
-  "animation",
-  "crime",
-  "documentary",
-  "drama",
-  "fantasy",
-  "filmnoir",
-  "history",
-  "horror",
-  "knife",
-  "mountain",
-  "musical",
-  "mystery",
-  "romance",
-  "short",
-  "superhero",
-  "ufo",
-  "warplan",
-  "western",
+  "Biography",
+  "Comedy",
+  "Action",
+  "Animation",
+  "Crime",
+  "Documentary",
+  "Drama",
+  "Fantasy",
+  "Filmnoir",
+  "History",
+  "Horror",
+  "Knife",
+  "Mountain",
+  "Musical",
+  "Mystery",
+  "Romance",
+  "Short",
+  "Superhero",
+  "Ufo",
+  "Warplan",
+  "Western",
 ];
 
 export default class WebGLApp {
@@ -109,7 +111,6 @@ export default class WebGLApp {
     this.clock = new Clock();
     this.createCube();
     this.createLights();
-    this.loadFont();
     this.loadMovieGenreObjs();
     this.initPostprocessing();
     //this.test();
@@ -117,10 +118,8 @@ export default class WebGLApp {
   };
 
   updateState = (objs) => {
-    this.clearState();
-    console.log("Updating state", objs);
     this.movieObjs = objs;
-    this.createNewState();
+    this.clearState();
   };
 
   /***
@@ -139,14 +138,44 @@ export default class WebGLApp {
       this.scene
     );
     let obj = movieObj.init();
-    this.scene.add(obj);
     this.movieObj = obj;
+    this.movieObj.position.y = -30;
+    this.scene.add(obj);
+    gsap.to(this.movieObj.position, {
+      y: 0,
+      ease: "Power4.easeInOut",
+      duration: 1,
+    });
     console.log("Finished creating new state");
   };
 
   clearState = () => {
+    console.log("Clearing state");
     if (this.movieObj) {
-      this.scene.remove(this.movieObj);
+      let that = this;
+      const callBack = () => {
+        console.log("Complete clear state animation");
+        that.scene.remove(that.movieObj);
+        that.createNewState();
+      };
+
+      let tl = gsap.timeline({
+        onComplete: callBack,
+      });
+      this.movieObj.children.forEach((el, index) => {
+        let target = 50 - el.position.y;
+        tl.to(
+          el.position,
+          {
+            y: target,
+            duration: 0.7,
+            ease: "Power4.easeInOut",
+          },
+          index * 0.1
+        );
+      });
+    } else {
+      this.createNewState();
     }
   };
 

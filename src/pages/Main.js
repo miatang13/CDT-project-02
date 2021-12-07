@@ -29,7 +29,7 @@ export default function Main(props) {
       translateY: ["1.1em", 0],
       translateZ: 0,
       duration: 750,
-      delay: (el, i) => 120 * i,
+      delay: (el, i) => 80 * i,
     });
   }, []);
 
