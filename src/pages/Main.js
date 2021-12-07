@@ -15,6 +15,7 @@ export default function Main(props) {
   // loading
   const [isLoading, setLoad] = useState(true);
   const loadScreenRef = useRef(null);
+  const [hasSetupSnippets, setSnippets] = useState(false);
 
   useEffect(() => {
     var textWrapper = document.querySelector(".load-text .letters");
@@ -168,7 +169,7 @@ export default function Main(props) {
   }, []);
 
   // toggle NYT articles
-  const [showNYT, setShowNYT] = useState(true);
+  const [showNYT, setShowNYT] = useState(false);
 
   function handleToggleNYT() {
     let orig = showNYT;
@@ -188,6 +189,16 @@ export default function Main(props) {
         delay: (el, i) => 50 * i,
       });
   }
+
+  useEffect(() => {
+    let snippets = [...document.getElementsByClassName("article__snippet")];
+    if (snippets.length === 0) return;
+    if (hasSetupSnippets) return;
+    console.log(snippets);
+    let opacity = showNYT ? "100%" : 0;
+    snippets.forEach((snippet) => (snippet.style.opacity = opacity));
+    setSnippets(true);
+  });
 
   return (
     <div id="main__wrapper">
