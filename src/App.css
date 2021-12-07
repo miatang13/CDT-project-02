@@ -66,18 +66,24 @@ button.accordion-button {
   color: rgb(106, 51, 194);
 }
 
-a.nav-link {
+a {
   color: rgb(255, 255, 255);
   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
-  font-size: 1vw;
+  font-size: 1.2vw;
   font-family: GoshaSans-Regular, sans-serif;
+  padding-left: 0.5vw;
+  padding-right: 0.5vw;
+  padding-top: 0.1vw;
+  padding-bottom: 0.1vw;
+  margin: 1vw;
 }
 
-a.nav-link.active {
+a.active {
   background-color: rgb(130, 75, 219);
+  transform: rotate(0.5turn);
 }
 
-a.nav-link:hover {
+a:hover {
   background-color: rgb(147, 117, 255);
 }
 
