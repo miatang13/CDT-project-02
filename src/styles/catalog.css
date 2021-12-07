@@ -1,0 +1,19 @@
+.director__wrapper {
+  padding: 0.5vw;
+}
+
+.director__wrapper span:hover {
+  color: white;
+  background-color: rgb(147, 117, 255);
+  border: 30px;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+#catalog__content button:hover {
+  border-color: rgb(161, 103, 255);
+  background-color: rgb(194, 142, 255);
+  color: white;
+}

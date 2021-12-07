@@ -11,8 +11,9 @@ import {
 import EmptyAnalysis from "../components/EmptyAnalysis";
 import NavigationBar from "../components/Navbar";
 import "../styles/analysis.css";
-import complete_data from "../data/main-data.json";
+import complete_data from "../data/final-data.json";
 import { rand } from "../webgl/helper/rand";
+import { Link } from "react-router-dom";
 
 export default function Analysis() {
   let initialCart = JSON.parse(localStorage.getItem("cart"));
@@ -31,16 +32,29 @@ export default function Analysis() {
     setCart(newCart);
   }
 
-  let recommendations = [];
-  for (let i = 0; i < 3; i++) {
-    recommendations.push(rand(complete_data));
+  function getRecommendations() {
+    let recommendations = [];
+    for (let i = 0; i < 3; i++) {
+      recommendations.push(rand(complete_data));
+    }
+    return recommendations;
   }
+
+  let initialRecs = getRecommendations();
+  const [recs, setRecs] = useState(initialRecs);
+
+  function handleChangeRec() {
+    let new_recs = getRecommendations();
+    setRecs(new_recs);
+  }
+
   const size = "25px";
   const detailsSvgParams = {
     width: size,
     height: size,
     marginRight: ".5vw",
   };
+  const buttonStyle = {};
 
   return (
     <div id="analysis__root">
@@ -79,7 +93,9 @@ export default function Analysis() {
                               <Accordion>
                                 <Accordion.Item eventKey="0">
                                   <Accordion.Header className="movieTitle">
-                                    {movieObj.Title}
+                                    <span style={{ fontSize: "1vw" }}>
+                                      {movieObj.Title}
+                                    </span>
                                   </Accordion.Header>
                                   <Accordion.Body>
                                     <p className="movieBoxoffice roundedBg">
@@ -141,11 +157,7 @@ export default function Analysis() {
                         style={{ backgroundColor: " rgb(231, 206, 255)" }}
                       >
                         <Button
-                          style={{
-                            borderColor: "rgb(130, 75, 219)",
-                            backgroundColor: "white",
-                            color: "rgb(130, 75, 219)",
-                          }}
+                          style={buttonStyle}
                           onClick={() => handleRemove(item.name)}
                         >
                           <svg
@@ -176,27 +188,40 @@ export default function Analysis() {
               id="recommendation__wrapper"
               style={{ textAlign: "center" }}
             >
-              <h1 className="sub__title">You May Also Like: </h1>
+              <button style={buttonStyle} onClick={handleChangeRec}>
+                Get 3 Other Random Directors{" "}
+              </button>
+              <h1 className="sub__title">You May Also Like:</h1>
               <Row>
-                {recommendations.map((rec) => (
-                  <Col key={rec.name}>
-                    <span className="rec__name">
-                      {" "}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        style={detailsSvgParams}
-                        fill="currentColor"
-                        className="bi bi-camera-reels-fill"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                        <path d="M9 6a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-                        <path d="M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h7z" />
-                      </svg>{" "}
-                      {rec.name}
-                    </span>
-                  </Col>
-                ))}
+                {recs.map((rec) => {
+                  console.log(rec);
+                  let newTo = {
+                    pathname: "/",
+                    directorIdx: rec.unsortedIndex,
+                  };
+                  console.log("hi", newTo.directorIdx);
+
+                  return (
+                    <Col key={rec.name}>
+                      <Link to={newTo}>
+                        <span className="rec__name">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            style={detailsSvgParams}
+                            fill="currentColor"
+                            className="bi bi-camera-reels-fill"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                            <path d="M9 6a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                            <path d="M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h7z" />
+                          </svg>{" "}
+                          {rec.name}
+                        </span>
+                      </Link>
+                    </Col>
+                  );
+                })}
               </Row>
             </Container>
           </div>

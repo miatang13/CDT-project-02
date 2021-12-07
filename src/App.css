@@ -4,7 +4,21 @@
   font-style: normal;
   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
   scroll-behavior: smooth;
-  margin: 0.5vw;
+}
+
+body {
+  animation: fadeInAnimation ease 2s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 h1 {
@@ -28,6 +42,7 @@ p {
 button {
   font-family: halyard-display, sans-serif;
   padding: 0.5vw;
+  font-size: 1vw;
 }
 
 img {
@@ -63,12 +78,7 @@ a.nav-link.active {
 }
 
 a.nav-link:hover {
-  color: gray;
-}
-
-svg:hover {
-  fill: gray;
-  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  background-color: rgb(147, 117, 255);
 }
 
 .title {

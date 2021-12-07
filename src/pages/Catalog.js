@@ -1,4 +1,5 @@
 import Button from "@restart/ui/esm/Button";
+import anime from "animejs";
 import { useState } from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -17,12 +18,21 @@ export default function Catalog() {
 
   const handleSort = () => {
     const sort = !sortByBO;
-    setSort(sort);
-    if (sort) {
-      setData(sortedData);
-    } else {
-      setData(complete_data);
+    const new_data = sort ? sortedData : complete_data;
+    function callBack() {
+      setSort(sort);
+      setData(new_data);
     }
+
+    anime
+      .timeline({
+        complete: callBack,
+      })
+      .add({
+        targets: "#directors__wrapper",
+        translateY: ["1.5em", 0],
+        duration: 500,
+      });
   };
 
   return (
@@ -55,14 +65,14 @@ export default function Catalog() {
               </Button>
             </Col>
           </Row>
-          <Row>
+          <Row id="directors__wrapper">
             {displayData.map((director, index) => {
               let newTo = {
                 pathname: "/",
                 directorIdx: director.unsortedIndex,
               };
               let nameJsx = (
-                <Col md={4}>
+                <Col md={4} className="director__wrapper">
                   <Link to={newTo} key={director.name + "_name"}>
                     <span className="directorName">
                       <svg
