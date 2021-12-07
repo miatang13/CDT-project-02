@@ -168,7 +168,7 @@ export default function Main(props) {
   }, []);
 
   // toggle NYT articles
-  const [showNYT, setShowNYT] = useState(false);
+  const [showNYT, setShowNYT] = useState(true);
 
   function handleToggleNYT() {
     let orig = showNYT;
@@ -223,35 +223,34 @@ export default function Main(props) {
             <div className="center__container min-vh-90">
               <h1 id="director_name">{complete_data[currentIdx].name}</h1>
 
-              {showNYT &&
-                complete_data[currentIdx].NYT_articles.map((article, index) => (
-                  <div
-                    className="article__snippet"
-                    style={snippetPositions[index]}
-                    key={index}
+              {complete_data[currentIdx].NYT_articles.map((article, index) => (
+                <div
+                  className="article__snippet"
+                  style={snippetPositions[index]}
+                  key={index}
+                >
+                  <p>{article.snippet}</p>
+                  <a
+                    className="btn"
+                    target="_blank"
+                    rel="noreferrer"
+                    href={article.web_url}
                   >
-                    <p>{article.snippet}</p>
-                    <a
-                      className="btn"
-                      target="_blank"
-                      rel="noreferrer"
-                      href={article.web_url}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="rgb(147, 117, 255)"
+                      className="bi bi-link-45deg"
+                      viewBox="0 0 16 16"
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="rgb(147, 117, 255)"
-                        className="bi bi-link-45deg"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
-                        <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z" />
-                      </svg>{" "}
-                      Read More
-                    </a>
-                  </div>
-                ))}
+                      <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z" />
+                      <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z" />
+                    </svg>{" "}
+                    Read More
+                  </a>
+                </div>
+              ))}
             </div>
 
             <div id="footer">
@@ -276,7 +275,7 @@ export default function Main(props) {
                   className="btn btn-light"
                   style={{
                     backgroundColor: showNYT ? "white" : "rgb(165, 119, 240)",
-                    color: !showNYT ? "white" : "rgb(165, 119, 240)"
+                    color: !showNYT ? "white" : "rgb(165, 119, 240)",
                   }}
                   onClick={handleToggleNYT}
                 >
