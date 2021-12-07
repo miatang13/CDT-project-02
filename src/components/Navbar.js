@@ -1,4 +1,6 @@
 import { Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { baseUrl } from "../utility/file";
 
 export default function NavigationBar(props) {
   const handleSelect = (eventKey) => console.log(`selected ${eventKey}`);
@@ -15,7 +17,11 @@ export default function NavigationBar(props) {
       // onSelect={handleSelect}
     >
       <Nav.Item>
-        <Nav.Link style={{ color: props.color }} eventKey="1" href="/">
+        <Nav.Link
+          style={{ color: props.color }}
+          eventKey="1"
+          href={baseUrl + "/"}
+        >
           Gallery
         </Nav.Link>
       </Nav.Item>
@@ -23,14 +29,14 @@ export default function NavigationBar(props) {
         <Nav.Link
           style={{ color: props.activeKey === 2 ? "white" : props.color }}
           eventKey="2"
-          href="/catalog"
+          href={baseUrl + "/catalog"}
         >
           Catalog
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link
-          href="/info"
+        <Link
+          to={baseUrl + "/info"}
           style={{ color: props.activeKey === 3 ? "white" : props.color }}
           eventKey="3"
         >
@@ -46,11 +52,11 @@ export default function NavigationBar(props) {
             <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
           </svg> */}
           Info
-        </Nav.Link>
+        </Link>
       </Nav.Item>
       <Nav.Item>
         <Nav.Link
-          href="/analysis"
+          href={baseUrl + "/analysis"}
           eventKey="4"
           style={{ color: props.activeKey === 4 ? "white" : props.color }}
         >

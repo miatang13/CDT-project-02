@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import NavigationBar from "../components/Navbar";
 import complete_data from "../data/final-data.json";
 import "../styles/catalog.css";
+import { baseUrl } from "../utility/file";
 
 export default function Catalog() {
   const boxOfficeBucket = 20;
@@ -68,7 +69,7 @@ export default function Catalog() {
           <Row id="directors__wrapper">
             {displayData.map((director, index) => {
               let newTo = {
-                pathname: "/",
+                pathname: baseUrl + "/",
                 directorIdx: director.unsortedIndex,
               };
               let nameJsx = (

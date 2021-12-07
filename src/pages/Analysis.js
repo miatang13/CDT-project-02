@@ -14,6 +14,7 @@ import "../styles/analysis.css";
 import complete_data from "../data/final-data.json";
 import { rand } from "../webgl/helper/rand";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../utility/file";
 
 export default function Analysis() {
   let initialCart = JSON.parse(localStorage.getItem("cart"));
@@ -209,7 +210,7 @@ export default function Analysis() {
                 {recs.map((rec) => {
                   console.log(rec);
                   let newTo = {
-                    pathname: "/",
+                    pathname: baseUrl + "/",
                     directorIdx: rec.unsortedIndex,
                   };
 

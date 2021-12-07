@@ -20,7 +20,6 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { CSS3DRenderer } from "three/examples/jsm/renderers/CSS3DRenderer";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
-import helvetiker from "three/examples/fonts/helvetiker_regular.typeface.json";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass";
@@ -35,23 +34,23 @@ const models = [
   "Comedy",
   "Action",
   "Animation",
-  "Crime",
-  "Documentary",
-  "Drama",
-  "Fantasy",
-  "Filmnoir",
-  "History",
-  "Horror",
-  "Knife",
-  "Mountain",
-  "Musical",
-  "Mystery",
-  "Romance",
-  "Short",
-  "Superhero",
-  "Ufo",
-  "Warplan",
-  "Western",
+  // "Crime",
+  // "Documentary",
+  // "Drama",
+  // "Fantasy",
+  // "Filmnoir",
+  // "History",
+  // "Horror",
+  // "Knife",
+  // "Mountain",
+  // "Musical",
+  // "Mystery",
+  // "Romance",
+  // "Short",
+  // "Superhero",
+  // "Ufo",
+  // "Warplan",
+  // "Western",
 ];
 
 export default class WebGLApp {

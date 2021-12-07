@@ -217,9 +217,9 @@ export default function Main(props) {
             height: isLoading || DISPLAY_LOADING ? "100vh" : "0",
           }}
         >
-          <h1 class="load-text">
-            <span class="text-wrapper">
-              <span class="letters">Loading Bech(ideal) ...</span>
+          <h1 className="load-text">
+            <span className="text-wrapper">
+              <span className="letters">Loading Bech(ideal) ...</span>
             </span>
           </h1>
         </div>

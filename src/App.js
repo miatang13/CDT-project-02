@@ -17,10 +17,10 @@ function App() {
       <BrowserRouter>
         <Route>
           <Switch>
-            <Route exact path="/" component={Main} />
-            <Route path="/analysis" component={Analysis} />
-            <Route path="/catalog" component={Catalog} />
-            <Route path="/info" component={Info} />
+            <Route exact path="/CDT-project-02" component={Main} />
+            <Route path="/CDT-project-02/analysis" component={Analysis} />
+            <Route path="/CDT-project-02/catalog" component={Catalog} />
+            <Route path="/CDT-project-02/info" component={Info} />
             <Route path="/data" component={Data} />
             <Route path="/fetch-data" component={FetchData} />
             <Route path="/parse-data" component={ParseData} />
