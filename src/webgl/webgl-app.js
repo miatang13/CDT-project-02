@@ -92,16 +92,16 @@ export default class WebGLApp {
     console.log("Finished set up");
   };
 
-  updateState = (objs) => {
+  updateState = (objs, animateDir) => {
     this.movieObjs = objs;
-    this.clearState();
+    this.clearState(animateDir);
   };
 
   /***
    * PRIVATE
    */
 
-  createNewState = () => {
+  createNewState = (animateDir) => {
     let loaders = {
       textureLoader: this.textureLoader,
     };
@@ -114,43 +114,45 @@ export default class WebGLApp {
     );
     let obj = movieObj.init();
     this.movieObj = obj;
-    this.movieObj.position.y = -30;
+    let animateY = animateDir === "up" ? -25 : 25;
+    this.movieObj.position.y = animateY;
     this.scene.add(obj);
     gsap.to(this.movieObj.position, {
       y: 0,
-      ease: "Power4.easeInOut",
-      duration: 1,
+      ease: animateDir === "up" ? "Power4.easeOut" : "Bounce.easeOut",
+      duration: 0.8,
     });
     console.log("Finished creating new state");
   };
 
-  clearState = () => {
+  clearState = (animateDir) => {
     console.log("Clearing state");
     if (this.movieObj) {
       let that = this;
       const callBack = () => {
         console.log("Complete clear state animation");
         that.scene.remove(that.movieObj);
-        that.createNewState();
+        that.createNewState(animateDir);
       };
 
       let tl = gsap.timeline({
         onComplete: callBack,
       });
       this.movieObj.children.forEach((el, index) => {
-        let target = 50 - el.position.y;
+        let goal = animateDir === "up" ? 50 : -50;
+        let target = goal - el.position.y;
         tl.to(
           el.position,
           {
             y: target,
-            duration: 0.7,
+            duration: 0.5,
             ease: "Power4.easeInOut",
           },
-          index * 0.1
+          index * 0.05
         );
       });
     } else {
-      this.createNewState();
+      this.createNewState(animateDir);
     }
   };
 
@@ -239,9 +241,9 @@ export default class WebGLApp {
         let model = loaded.scenes[0];
         model.scale.set(scl, scl, scl);
         that.movieGenreObjs[fileName] = model;
-        //console.log("Added model", loaded);
         if (Object.keys(that.movieGenreObjs).length === models.length) {
-          that.updateState(that.movieObjs);
+          // init state as we finished loading models
+          that.updateState(that.movieObjs, "up");
           that.hasSetup = true;
           that.onloadCallback(false);
         }

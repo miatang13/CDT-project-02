@@ -121,20 +121,23 @@ export default function Main(props) {
     return movieObjs;
   }
 
-  function handleUpdateState(new_index) {
+  function handleUpdateState(new_index, direction) {
     localStorage.setItem("directorIdx", new_index);
-    webglApp.current.updateState(getWebglParams(new_index));
+    webglApp.current.updateState(getWebglParams(new_index), direction);
   }
 
   function updateDirector(e) {
     let new_index;
     let svg_animate;
     let translate_target;
+    let direction;
     if (e.key === "ArrowDown") {
+      direction = "down";
       new_index = Math.min(directorIdx + 1, max_index);
       svg_animate = document.getElementById("arrow_down");
       translate_target = "1.5em";
     } else if (e.key === "ArrowUp") {
+      direction = "up";
       new_index = Math.max(directorIdx - 1, 0);
       svg_animate = document.getElementById("arrow_up");
       translate_target = "-1.5em";
@@ -153,7 +156,7 @@ export default function Main(props) {
     });
     directorIdx = new_index;
     setIdx(new_index);
-    handleUpdateState(new_index);
+    handleUpdateState(new_index, direction);
   }
 
   useEffect(() => {
