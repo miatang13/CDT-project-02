@@ -1,6 +1,6 @@
 // different positions for different numbers of posters
 const pos_6 = {
-  xPositions: [-18, -12, -5, 0.5, 9, 18],
+  xPositions: [-19, -12, -5, 2, 9, 18],
   yPositions: [-7, -5, -3, 0, 2, 5],
 };
 

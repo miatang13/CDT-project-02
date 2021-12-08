@@ -3,12 +3,6 @@ import { Link } from "react-router-dom";
 import { baseUrl } from "../utility/file";
 
 export default function NavigationBar(props) {
-  const handleSelect = (eventKey) => console.log(`selected ${eventKey}`);
-  const svgParams = {
-    width: 20,
-    height: 20,
-  };
-
   return (
     <Nav
       className="justify-content-end"
@@ -20,7 +14,6 @@ export default function NavigationBar(props) {
         <Link
           style={{ color: props.color }}
           className={props.activeKey === 1 ? "active" : ""}
-          eventKey="1"
           to={baseUrl + "/"}
         >
           Gallery
@@ -29,7 +22,6 @@ export default function NavigationBar(props) {
       <Nav.Item>
         <Link
           style={{ color: props.activeKey === 2 ? "white" : props.color }}
-          eventKey="2"
           to={baseUrl + "/catalog"}
           className={props.activeKey === 2 ? "active" : ""}
         >
@@ -41,7 +33,6 @@ export default function NavigationBar(props) {
           to={baseUrl + "/info"}
           className={props.activeKey === 3 ? "active" : ""}
           style={{ color: props.activeKey === 3 ? "white" : props.color }}
-          eventKey="3"
         >
           Info
         </Link>
@@ -50,7 +41,6 @@ export default function NavigationBar(props) {
         <Link
           to={baseUrl + "/analysis"}
           className={props.activeKey === 4 ? "active" : ""}
-          eventKey="4"
           style={{ color: props.activeKey === 4 ? "white" : props.color }}
         >
           Analysis

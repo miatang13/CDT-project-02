@@ -12,8 +12,6 @@ import {
   Clock,
   MeshNormalMaterial,
   TextGeometry,
-  MeshBasicMaterial,
-  DoubleSide,
   Group,
 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -28,7 +26,6 @@ import { LuminosityShader } from "three/examples/jsm/shaders/LuminosityShader.js
 import Movie from "./class/Movie";
 import gsap from "gsap/all";
 import movie_genres_data from "../data/movie-genres.json";
-// import BiographyModel from "assets/Biography.gltf";
 
 const models = movie_genres_data.finalGenres;
 
@@ -265,7 +262,6 @@ export default class WebGLApp {
     });
     this.cube = new Mesh(geometry, material);
     this.scene.add(this.cube);
-    console.log("created cube", this.cube);
   };
 
   createLights = () => {

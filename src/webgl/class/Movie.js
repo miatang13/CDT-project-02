@@ -1,12 +1,8 @@
 import {
-  BoxGeometry,
   Color,
   DoubleSide,
   Mesh,
-  MeshBasicMaterial,
   MeshNormalMaterial,
-  MeshPhongMaterial,
-  NoBlending,
   Object3D,
   PlaneGeometry,
   ShaderMaterial,
@@ -18,17 +14,10 @@ import { rated_colors } from "../constants/colors";
 import { rand } from "../helper/rand";
 import { vshader, fshader } from "../glsl/bg.glsl";
 import { box_fshader, box_vshader } from "../glsl/box.glsl";
-import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
 import { posterPositions } from "../constants/positions";
 
 const w = 5.5;
 const h = w * 1.5;
-const xOffset = -w * 4.5;
-const padding = w * 1.5;
-const yOffset_bot = -6.5;
-const yOffset_top = 6.5;
-
-const displaceRand = [-1, 1];
 
 /**
  * Class for the entire movie object
@@ -71,14 +60,11 @@ export default class Movie {
     const yPositions = curPos.yPositions;
 
     this.movieObjs.forEach((movie, index) => {
-      let randX = Math.random() * 2;
-      let randY = Math.random() * 2;
-
       let yIndex = sortByBoxOffice.findIndex((el) => el.name === movie.name);
       let xIndex = sortByTime.findIndex((el) => el.name === movie.name);
 
-      let x = xPositions[xIndex] + randX;
-      let y = yPositions[yIndex] + randY;
+      let x = xPositions[xIndex];
+      let y = yPositions[yIndex];
 
       let posterMesh = this.initPoster(movie, x, y);
       this.posterObjs.add(posterMesh);
@@ -90,14 +76,8 @@ export default class Movie {
       this.posterObjs.add(plane);
       this.posterObjs.planes.push(plane);
 
-      let genreObj = this.genreObjs[movie.genre].clone(); // TO CHANGE
-      let displaceX = rand(displaceRand);
-      let displaceY = rand(displaceRand);
-      genreObj.position.set(
-        x - (w / 2) * displaceX,
-        y - (h / 2) * displaceY,
-        0.5
-      );
+      let genreObj = this.genreObjs[movie.genre].clone();
+      genreObj.position.set(x - w / 2, y - h / 2, 1);
       this.posterObjs.add(genreObj);
     });
 
