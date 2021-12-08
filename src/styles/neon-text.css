@@ -18,6 +18,13 @@
   -webkit-animation: firstname 4s ease infinite;
 }
 
+.lastname {
+  animation: lastname 2s linear infinite;
+  -moz-animation: lastname 3s linear infinite;
+  -webkit-animation: lastname 5s linear infinite;
+  -o-animation: lastname 2s linear infinite;
+}
+
 @keyframes firstname {
   0%,
   100% {
@@ -32,23 +39,16 @@
   }
 }
 
-.lastname {
-  animation: lastname 2s linear infinite;
-  -moz-animation: lastname 3s linear infinite;
-  -webkit-animation: lastname 5s linear infinite;
-  -o-animation: lastname 2s linear infinite;
-}
-
 @keyframes lastname {
   0%,
   100% {
-    text-shadow: 0 0 1vw #1041ff, 0 0 3vw #1041ff, 0 0 10vw #1041ff,
-      0 0 10vw #1041ff, 0 0 0.4vw #8bfdfe, 0.5vw 0.5vw 0.1vw #147280;
-    color: #28d7fe;
+    text-shadow: 0 0 1vw #2848b4, 0 0 3vw #0f2a81, 0 0 10vw #2848b4,
+      0 0 10vw #2848b4, 0 0 0.4vw #2848b4, 0.5vw 0.5vw 0.1vw #234bcc;
+    color: #09d2ff;
   }
   50% {
-    text-shadow: 0 0 0.5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180,
-      0 0 5vw #082180, 0 0 0.2vw #082180, 0.5vw 0.5vw 0.1vw #0a3940;
-    color: #146c80;
+    text-shadow: 0 0 0.5vw #2848b4, 0 0 1.5vw #2648b8, 0 0 5vw #2c38dd,
+      0 0 5vw #2c38dd, 0 0 0.2vw #2c38dd, 0.5vw 0.5vw 0.1vw #2848b4;
+    color: #09d2ff5d;
   }
 }
