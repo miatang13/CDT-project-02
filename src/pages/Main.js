@@ -237,7 +237,7 @@ export default function Main(props) {
         >
           <h1 className="load-text">
             <span className="text-wrapper">
-              <span className="letters">Loading Bech(ideal) ...</span>
+              <span className="letters">Loading the (bech)ideal ...</span>
             </span>
           </h1>
         </div>
