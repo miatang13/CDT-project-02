@@ -15,6 +15,7 @@ import {
   Group,
 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { CSS3DRenderer } from "three/examples/jsm/renderers/CSS3DRenderer";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
@@ -79,13 +80,19 @@ export default class WebGLApp {
     this.cssRenderer.domElement.style.top = 0;
     this.cssElem.appendChild(this.cssRenderer.domElement);
     this.htmlElem.appendChild(this.renderer.domElement);
-    this.loader = new GLTFLoader();
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.update();
     this.textureLoader = new TextureLoader();
     this.clock = new Clock();
     this.createCube();
     this.createLights();
+
+    this.loader = new GLTFLoader();
+    // Optional: Provide a DRACOLoader instance to decode compressed mesh data
+    this.DRACOLoader = new DRACOLoader();
+    this.DRACOLoader.setDecoderPath("decoder/");
+    this.loader.setDRACOLoader(this.DRACOLoader);
+
     this.loadMovieGenreObjs();
     this.initPostprocessing();
     //this.test();

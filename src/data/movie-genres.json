@@ -27,16 +27,5 @@
     "Fantasy": { "count": 3 },
     "Sci-Fi": { "count": 2 }
   },
-  "finalGenres": [
-    "Horror",
-    "Action",
-    "Adventure",
-    "Crime",
-    "Comedy",
-    "Drama",
-    "Animation",
-    "Biography",
-    "Fantasy",
-    "Sci-Fi"
-  ]
+  "finalGenres": ["ActionDraco"]
 }
