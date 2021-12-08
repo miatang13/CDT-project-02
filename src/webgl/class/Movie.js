@@ -76,7 +76,7 @@ export default class Movie {
       this.posterObjs.add(plane);
       this.posterObjs.planes.push(plane);
 
-      let genreObj = this.genreObjs["ActionDraco"].clone();
+      let genreObj = this.genreObjs[movie.genre].clone();
       genreObj.position.set(x - w / 2, y - h / 2, 1);
       this.posterObjs.add(genreObj);
     });
