@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/CDT-project-02/static/css/main.7a44f6a7.chunk.css",
-    "main.js": "/CDT-project-02/static/js/main.c151d670.chunk.js",
-    "main.js.map": "/CDT-project-02/static/js/main.c151d670.chunk.js.map",
+    "main.js": "/CDT-project-02/static/js/main.73b241e5.chunk.js",
+    "main.js.map": "/CDT-project-02/static/js/main.73b241e5.chunk.js.map",
     "runtime-main.js": "/CDT-project-02/static/js/runtime-main.1de895dc.js",
     "runtime-main.js.map": "/CDT-project-02/static/js/runtime-main.1de895dc.js.map",
-    "static/js/2.08a431ca.chunk.js": "/CDT-project-02/static/js/2.08a431ca.chunk.js",
-    "static/js/2.08a431ca.chunk.js.map": "/CDT-project-02/static/js/2.08a431ca.chunk.js.map",
+    "static/js/2.b0f2804c.chunk.js": "/CDT-project-02/static/js/2.b0f2804c.chunk.js",
+    "static/js/2.b0f2804c.chunk.js.map": "/CDT-project-02/static/js/2.b0f2804c.chunk.js.map",
     "index.html": "/CDT-project-02/index.html",
     "static/css/main.7a44f6a7.chunk.css.map": "/CDT-project-02/static/css/main.7a44f6a7.chunk.css.map",
-    "static/js/2.08a431ca.chunk.js.LICENSE.txt": "/CDT-project-02/static/js/2.08a431ca.chunk.js.LICENSE.txt",
+    "static/js/2.b0f2804c.chunk.js.LICENSE.txt": "/CDT-project-02/static/js/2.b0f2804c.chunk.js.LICENSE.txt",
     "static/media/typeface.css": "/CDT-project-02/static/media/neon.3cdac083.ttf"
   },
   "entrypoints": [
     "static/js/runtime-main.1de895dc.js",
-    "static/js/2.08a431ca.chunk.js",
+    "static/js/2.b0f2804c.chunk.js",
     "static/css/main.7a44f6a7.chunk.css",
-    "static/js/main.c151d670.chunk.js"
+    "static/js/main.73b241e5.chunk.js"
   ]
 }
