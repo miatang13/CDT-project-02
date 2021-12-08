@@ -171,6 +171,8 @@ export default function ParseData() {
       });
     });
     console.log(genres);
+    let finalGenres = Object.keys(genres);
+    genres.finalGenres = finalGenres;
     setOutputJson(genres);
   }
 

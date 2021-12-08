@@ -26,33 +26,11 @@ import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass";
 import { FXAAShader } from "three/examples/jsm/shaders/FXAAShader";
 import { LuminosityShader } from "three/examples/jsm/shaders/LuminosityShader.js";
 import Movie from "./class/Movie";
-import anime from "animejs";
 import gsap from "gsap/all";
+import movie_genres_data from "../data/movie-genres.json";
 // import BiographyModel from "assets/Biography.gltf";
 
-const models = [
-  "Biography",
-  "Comedy",
-  "Action",
-  "Animation",
-  "Crime",
-  "Documentary",
-  "Drama",
-  "Fantasy",
-  "Filmnoir",
-  "History",
-  "Horror",
-  "Knife",
-  "Mountain",
-  "Musical",
-  "Mystery",
-  "Romance",
-  "Short",
-  "Superhero",
-  "Ufo",
-  "Warplan",
-  "Western",
-];
+const models = movie_genres_data.finalGenres;
 
 export default class WebGLApp {
   constructor(container, cssContainer, nameSpan, callback) {
