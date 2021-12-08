@@ -1,0 +1,54 @@
+.firstname {
+  font-family: neon;
+  color: #ffffff;
+  font-size: 5vw;
+  text-shadow: 0 0 3vw #9227ff;
+}
+
+.lastname {
+  font-family: neon;
+  color: #426dfb;
+  font-size: 5vw;
+  text-shadow: 0 0 3vw #2356ff;
+}
+
+.firstname {
+  animation: firstname 4s ease infinite;
+  -moz-animation: firstname 4s ease infinite;
+  -webkit-animation: firstname 4s ease infinite;
+}
+
+@keyframes firstname {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #952efc, 0 0 3vw #6e02dc, 0 0 10vw #6e02dc,
+      0 0 10vw #6e02dc, 0 0 0.4vw #ffffff, 0.5vw 0.5vw 0.1vw #8912ff;
+    color: #ffffff;
+  }
+  50% {
+    text-shadow: 0 0 0.5vw #b18cff, 0 0 1.5vw #b18cff, 0 0 5vw #4f039b,
+      0 0 5vw #4f039b, 0 0 0.2vw #4f039b, 0.5vw 0.5vw 0.1vw #b18cff;
+    color: #cfcfcf;
+  }
+}
+
+.lastname {
+  animation: lastname 2s linear infinite;
+  -moz-animation: lastname 3s linear infinite;
+  -webkit-animation: lastname 5s linear infinite;
+  -o-animation: lastname 2s linear infinite;
+}
+
+@keyframes lastname {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #1041ff, 0 0 3vw #1041ff, 0 0 10vw #1041ff,
+      0 0 10vw #1041ff, 0 0 0.4vw #8bfdfe, 0.5vw 0.5vw 0.1vw #147280;
+    color: #28d7fe;
+  }
+  50% {
+    text-shadow: 0 0 0.5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180,
+      0 0 5vw #082180, 0 0 0.2vw #082180, 0.5vw 0.5vw 0.1vw #0a3940;
+    color: #146c80;
+  }
+}

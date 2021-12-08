@@ -3,6 +3,7 @@ import WebGLApp from "../webgl/webgl-app";
 import "../styles/main.css";
 import complete_data from "../data/final-data.json";
 import anime from "animejs";
+import "../styles/neon-text.css";
 
 // redux
 import NavigationBar from "../components/Navbar";
@@ -247,9 +248,19 @@ export default function Main(props) {
               <span>Box Office</span>
             </div>
             <hr id="x__axis" />
-            <span id="x__axis__label"> Time </span>
+            <span id="x__axis__label"> Release Year </span>
             <div className="center__container min-vh-90">
-              <h1 id="director_name">{complete_data[currentIdx].name}</h1>
+              <h1 className="firstname">
+                {complete_data[currentIdx].name.substr(
+                  0,
+                  complete_data[currentIdx].name.indexOf(" ")
+                )}
+              </h1>
+              <h1 className="lastname">
+                {complete_data[currentIdx].name.substr(
+                  complete_data[currentIdx].name.indexOf(" ") + 1
+                )}
+              </h1>
 
               {complete_data[currentIdx].NYT_articles.map((article, index) => (
                 <div

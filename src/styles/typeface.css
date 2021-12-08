@@ -7,3 +7,8 @@
   font-family: "GoshaSans-Bold";
   src: url("./fonts/PPGoshaSans-Bold.otf");
 }
+
+@font-face {
+  font-family: neon;
+  src: url("./fonts/neon.ttf");
+}

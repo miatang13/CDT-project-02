@@ -119,7 +119,7 @@ export default class WebGLApp {
     this.scene.add(obj);
     gsap.to(this.movieObj.position, {
       y: 0,
-      ease: animateDir === "up" ? "Power4.easeOut" : "Bounce.easeOut",
+      ease: animateDir === "up" ? "Expo.easeOut" : "Expo.easeOut",
       duration: 0.8,
     });
     console.log("Finished creating new state");
