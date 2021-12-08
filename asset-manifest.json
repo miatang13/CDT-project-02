@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/CDT-project-02/static/css/main.840dbc52.chunk.css",
-    "main.js": "/CDT-project-02/static/js/main.1e87aaa4.chunk.js",
-    "main.js.map": "/CDT-project-02/static/js/main.1e87aaa4.chunk.js.map",
+    "main.js": "/CDT-project-02/static/js/main.f0357efd.chunk.js",
+    "main.js.map": "/CDT-project-02/static/js/main.f0357efd.chunk.js.map",
     "runtime-main.js": "/CDT-project-02/static/js/runtime-main.1de895dc.js",
     "runtime-main.js.map": "/CDT-project-02/static/js/runtime-main.1de895dc.js.map",
     "static/js/2.33c53a62.chunk.js": "/CDT-project-02/static/js/2.33c53a62.chunk.js",
@@ -16,6 +16,6 @@
     "static/js/runtime-main.1de895dc.js",
     "static/js/2.33c53a62.chunk.js",
     "static/css/main.840dbc52.chunk.css",
-    "static/js/main.1e87aaa4.chunk.js"
+    "static/js/main.f0357efd.chunk.js"
   ]
 }
