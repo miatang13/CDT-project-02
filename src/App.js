@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Data from "./pages/Data";
 import FetchData from "./pages/FetchData";
@@ -17,7 +16,7 @@ function App() {
       <BrowserRouter>
         <Route>
           <Switch>
-            <Route exact path="/CDT-project-02" component={Main} />
+            <Route exact path="/CDT-project-02/" component={Main} />
             <Route path="/CDT-project-02/analysis" component={Analysis} />
             <Route path="/CDT-project-02/catalog" component={Catalog} />
             <Route path="/CDT-project-02/info" component={Info} />
