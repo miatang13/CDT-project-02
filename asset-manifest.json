@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/CDT-project-02/static/css/main.86bab4c0.chunk.css",
+    "main.css": "/CDT-project-02/static/css/main.7a44f6a7.chunk.css",
     "main.js": "/CDT-project-02/static/js/main.c151d670.chunk.js",
     "main.js.map": "/CDT-project-02/static/js/main.c151d670.chunk.js.map",
     "runtime-main.js": "/CDT-project-02/static/js/runtime-main.1de895dc.js",
@@ -8,14 +8,14 @@
     "static/js/2.08a431ca.chunk.js": "/CDT-project-02/static/js/2.08a431ca.chunk.js",
     "static/js/2.08a431ca.chunk.js.map": "/CDT-project-02/static/js/2.08a431ca.chunk.js.map",
     "index.html": "/CDT-project-02/index.html",
-    "static/css/main.86bab4c0.chunk.css.map": "/CDT-project-02/static/css/main.86bab4c0.chunk.css.map",
+    "static/css/main.7a44f6a7.chunk.css.map": "/CDT-project-02/static/css/main.7a44f6a7.chunk.css.map",
     "static/js/2.08a431ca.chunk.js.LICENSE.txt": "/CDT-project-02/static/js/2.08a431ca.chunk.js.LICENSE.txt",
     "static/media/typeface.css": "/CDT-project-02/static/media/neon.3cdac083.ttf"
   },
   "entrypoints": [
     "static/js/runtime-main.1de895dc.js",
     "static/js/2.08a431ca.chunk.js",
-    "static/css/main.86bab4c0.chunk.css",
+    "static/css/main.7a44f6a7.chunk.css",
     "static/js/main.c151d670.chunk.js"
   ]
 }
