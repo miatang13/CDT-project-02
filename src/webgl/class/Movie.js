@@ -90,7 +90,7 @@ export default class Movie {
       this.posterObjs.add(plane);
       this.posterObjs.planes.push(plane);
 
-      let genreObj = this.genreObjs["Action"].clone(); // TO CHANGE
+      let genreObj = this.genreObjs[movie.genre].clone(); // TO CHANGE
       let displaceX = rand(displaceRand);
       let displaceY = rand(displaceRand);
       genreObj.position.set(
