@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import movie_data from "../data/not-using/response(all).json";
-import bechdel_data from "../data/not-using/bechdel-test-2010-onwards.json";
+import bechdel_data from "../data/not-using/bechdel-test-all.json";
 import directors_data from "../data/directors-w-NYT.json";
 // merge
 import final_directors from "../data/main-data.json";
@@ -11,6 +11,15 @@ import dir_w_NYT from "../data/directors-w-NYT.json";
 import final_data from "../data/final-data.json";
 
 export default function ParseData() {
+  // print
+  useEffect(() => {
+    let totalMovies = 0;
+    final_data.forEach((director) => {
+      totalMovies += director.movieCnt;
+    });
+    console.log(totalMovies);
+  });
+
   const btnRef = useRef();
   const [downloadHref, setDownloadHref] = useState();
   const [outputJson, setOutputJson] = useState([]);

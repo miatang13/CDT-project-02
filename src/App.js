@@ -20,9 +20,9 @@ function App() {
             <Route path="/CDT-project-02/analysis" component={Analysis} />
             <Route path="/CDT-project-02/catalog" component={Catalog} />
             <Route path="/CDT-project-02/info" component={Info} />
-            <Route path="/data" component={Data} />
-            <Route path="/fetch-data" component={FetchData} />
-            <Route path="/parse-data" component={ParseData} />
+            <Route path="/CDT-project-02/data" component={Data} />
+            <Route path="/CDT-project-02/fetch-data" component={FetchData} />
+            <Route path="/CDT-project-02/parse-data" component={ParseData} />
           </Switch>
         </Route>
       </BrowserRouter>
